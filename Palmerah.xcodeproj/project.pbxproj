@@ -1,0 +1,556 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */; };
+		A72A23CE1F0DBA6100D1F4CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CD1F0DBA6100D1F4CB /* ViewController.swift */; };
+		A72A23D11F0DBA6100D1F4CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72A23CF1F0DBA6100D1F4CB /* Main.storyboard */; };
+		A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */; };
+		A72A23D61F0DBA6100D1F4CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */; };
+		A72A23D91F0DBA6100D1F4CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */; };
+		A72A23E41F0DBA6100D1F4CB /* PalmerahTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23E31F0DBA6100D1F4CB /* PalmerahTests.swift */; };
+		A72A23EF1F0DBA6100D1F4CB /* PalmerahUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23EE1F0DBA6100D1F4CB /* PalmerahUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A72A23E01F0DBA6100D1F4CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A72A23C01F0DBA6000D1F4CB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A72A23C71F0DBA6000D1F4CB;
+			remoteInfo = Palmerah;
+		};
+		A72A23EB1F0DBA6100D1F4CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A72A23C01F0DBA6000D1F4CB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A72A23C71F0DBA6000D1F4CB;
+			remoteInfo = Palmerah;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A72A23C81F0DBA6000D1F4CB /* Palmerah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Palmerah.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A72A23CD1F0DBA6100D1F4CB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A72A23D01F0DBA6100D1F4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A72A23D31F0DBA6100D1F4CB /* Palmerah.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Palmerah.xcdatamodel; sourceTree = "<group>"; };
+		A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A72A23D81F0DBA6100D1F4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A72A23DA1F0DBA6100D1F4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A72A23DF1F0DBA6100D1F4CB /* PalmerahTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PalmerahTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A72A23E31F0DBA6100D1F4CB /* PalmerahTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalmerahTests.swift; sourceTree = "<group>"; };
+		A72A23E51F0DBA6100D1F4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A72A23EA1F0DBA6100D1F4CB /* PalmerahUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PalmerahUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A72A23EE1F0DBA6100D1F4CB /* PalmerahUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalmerahUITests.swift; sourceTree = "<group>"; };
+		A72A23F01F0DBA6100D1F4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A72A23C51F0DBA6000D1F4CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A72A23DC1F0DBA6100D1F4CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A72A23E71F0DBA6100D1F4CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A72A23BF1F0DBA6000D1F4CB = {
+			isa = PBXGroup;
+			children = (
+				A72A23CA1F0DBA6000D1F4CB /* Palmerah */,
+				A72A23E21F0DBA6100D1F4CB /* PalmerahTests */,
+				A72A23ED1F0DBA6100D1F4CB /* PalmerahUITests */,
+				A72A23C91F0DBA6000D1F4CB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A72A23C91F0DBA6000D1F4CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A72A23C81F0DBA6000D1F4CB /* Palmerah.app */,
+				A72A23DF1F0DBA6100D1F4CB /* PalmerahTests.xctest */,
+				A72A23EA1F0DBA6100D1F4CB /* PalmerahUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A72A23CA1F0DBA6000D1F4CB /* Palmerah */ = {
+			isa = PBXGroup;
+			children = (
+				A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */,
+				A72A23CD1F0DBA6100D1F4CB /* ViewController.swift */,
+				A72A23CF1F0DBA6100D1F4CB /* Main.storyboard */,
+				A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */,
+				A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */,
+				A72A23DA1F0DBA6100D1F4CB /* Info.plist */,
+				A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */,
+			);
+			path = Palmerah;
+			sourceTree = "<group>";
+		};
+		A72A23E21F0DBA6100D1F4CB /* PalmerahTests */ = {
+			isa = PBXGroup;
+			children = (
+				A72A23E31F0DBA6100D1F4CB /* PalmerahTests.swift */,
+				A72A23E51F0DBA6100D1F4CB /* Info.plist */,
+			);
+			path = PalmerahTests;
+			sourceTree = "<group>";
+		};
+		A72A23ED1F0DBA6100D1F4CB /* PalmerahUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A72A23EE1F0DBA6100D1F4CB /* PalmerahUITests.swift */,
+				A72A23F01F0DBA6100D1F4CB /* Info.plist */,
+			);
+			path = PalmerahUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A72A23C71F0DBA6000D1F4CB /* Palmerah */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A72A23F31F0DBA6100D1F4CB /* Build configuration list for PBXNativeTarget "Palmerah" */;
+			buildPhases = (
+				A72A23C41F0DBA6000D1F4CB /* Sources */,
+				A72A23C51F0DBA6000D1F4CB /* Frameworks */,
+				A72A23C61F0DBA6000D1F4CB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Palmerah;
+			productName = Palmerah;
+			productReference = A72A23C81F0DBA6000D1F4CB /* Palmerah.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A72A23DE1F0DBA6100D1F4CB /* PalmerahTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A72A23F61F0DBA6100D1F4CB /* Build configuration list for PBXNativeTarget "PalmerahTests" */;
+			buildPhases = (
+				A72A23DB1F0DBA6100D1F4CB /* Sources */,
+				A72A23DC1F0DBA6100D1F4CB /* Frameworks */,
+				A72A23DD1F0DBA6100D1F4CB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A72A23E11F0DBA6100D1F4CB /* PBXTargetDependency */,
+			);
+			name = PalmerahTests;
+			productName = PalmerahTests;
+			productReference = A72A23DF1F0DBA6100D1F4CB /* PalmerahTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A72A23E91F0DBA6100D1F4CB /* PalmerahUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A72A23F91F0DBA6100D1F4CB /* Build configuration list for PBXNativeTarget "PalmerahUITests" */;
+			buildPhases = (
+				A72A23E61F0DBA6100D1F4CB /* Sources */,
+				A72A23E71F0DBA6100D1F4CB /* Frameworks */,
+				A72A23E81F0DBA6100D1F4CB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A72A23EC1F0DBA6100D1F4CB /* PBXTargetDependency */,
+			);
+			name = PalmerahUITests;
+			productName = PalmerahUITests;
+			productReference = A72A23EA1F0DBA6100D1F4CB /* PalmerahUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A72A23C01F0DBA6000D1F4CB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Bobby Adi Prabowo";
+				TargetAttributes = {
+					A72A23C71F0DBA6000D1F4CB = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 3T7K23P798;
+						ProvisioningStyle = Automatic;
+					};
+					A72A23DE1F0DBA6100D1F4CB = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 3T7K23P798;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A72A23C71F0DBA6000D1F4CB;
+					};
+					A72A23E91F0DBA6100D1F4CB = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 3T7K23P798;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A72A23C71F0DBA6000D1F4CB;
+					};
+				};
+			};
+			buildConfigurationList = A72A23C31F0DBA6000D1F4CB /* Build configuration list for PBXProject "Palmerah" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A72A23BF1F0DBA6000D1F4CB;
+			productRefGroup = A72A23C91F0DBA6000D1F4CB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A72A23C71F0DBA6000D1F4CB /* Palmerah */,
+				A72A23DE1F0DBA6100D1F4CB /* PalmerahTests */,
+				A72A23E91F0DBA6100D1F4CB /* PalmerahUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A72A23C61F0DBA6000D1F4CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A72A23D91F0DBA6100D1F4CB /* LaunchScreen.storyboard in Resources */,
+				A72A23D61F0DBA6100D1F4CB /* Assets.xcassets in Resources */,
+				A72A23D11F0DBA6100D1F4CB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A72A23DD1F0DBA6100D1F4CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A72A23E81F0DBA6100D1F4CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A72A23C41F0DBA6000D1F4CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A72A23CE1F0DBA6100D1F4CB /* ViewController.swift in Sources */,
+				A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */,
+				A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A72A23DB1F0DBA6100D1F4CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A72A23E41F0DBA6100D1F4CB /* PalmerahTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A72A23E61F0DBA6100D1F4CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A72A23EF1F0DBA6100D1F4CB /* PalmerahUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A72A23E11F0DBA6100D1F4CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A72A23C71F0DBA6000D1F4CB /* Palmerah */;
+			targetProxy = A72A23E01F0DBA6100D1F4CB /* PBXContainerItemProxy */;
+		};
+		A72A23EC1F0DBA6100D1F4CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A72A23C71F0DBA6000D1F4CB /* Palmerah */;
+			targetProxy = A72A23EB1F0DBA6100D1F4CB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A72A23CF1F0DBA6100D1F4CB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A72A23D01F0DBA6100D1F4CB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A72A23D81F0DBA6100D1F4CB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A72A23F11F0DBA6100D1F4CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A72A23F21F0DBA6100D1F4CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A72A23F41F0DBA6100D1F4CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3T7K23P798;
+				INFOPLIST_FILE = Palmerah/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.Palmerah;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		A72A23F51F0DBA6100D1F4CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3T7K23P798;
+				INFOPLIST_FILE = Palmerah/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.Palmerah;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		A72A23F71F0DBA6100D1F4CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 3T7K23P798;
+				INFOPLIST_FILE = PalmerahTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Palmerah.app/Palmerah";
+			};
+			name = Debug;
+		};
+		A72A23F81F0DBA6100D1F4CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 3T7K23P798;
+				INFOPLIST_FILE = PalmerahTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Palmerah.app/Palmerah";
+			};
+			name = Release;
+		};
+		A72A23FA1F0DBA6100D1F4CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 3T7K23P798;
+				INFOPLIST_FILE = PalmerahUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Palmerah;
+			};
+			name = Debug;
+		};
+		A72A23FB1F0DBA6100D1F4CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 3T7K23P798;
+				INFOPLIST_FILE = PalmerahUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Palmerah;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A72A23C31F0DBA6000D1F4CB /* Build configuration list for PBXProject "Palmerah" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A72A23F11F0DBA6100D1F4CB /* Debug */,
+				A72A23F21F0DBA6100D1F4CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A72A23F31F0DBA6100D1F4CB /* Build configuration list for PBXNativeTarget "Palmerah" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A72A23F41F0DBA6100D1F4CB /* Debug */,
+				A72A23F51F0DBA6100D1F4CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A72A23F61F0DBA6100D1F4CB /* Build configuration list for PBXNativeTarget "PalmerahTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A72A23F71F0DBA6100D1F4CB /* Debug */,
+				A72A23F81F0DBA6100D1F4CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A72A23F91F0DBA6100D1F4CB /* Build configuration list for PBXNativeTarget "PalmerahUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A72A23FA1F0DBA6100D1F4CB /* Debug */,
+				A72A23FB1F0DBA6100D1F4CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A72A23D31F0DBA6100D1F4CB /* Palmerah.xcdatamodel */,
+			);
+			currentVersion = A72A23D31F0DBA6100D1F4CB /* Palmerah.xcdatamodel */;
+			path = Palmerah.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = A72A23C01F0DBA6000D1F4CB /* Project object */;
+}
