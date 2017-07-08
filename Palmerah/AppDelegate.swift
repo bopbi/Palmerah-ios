@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        
+        let layout = UICollectionViewFlowLayout()
+        let friendViewController = FriendViewController(collectionViewLayout: layout)
+        window?.rootViewController = UINavigationController(rootViewController: friendViewController)
+        
         return true
     }
 

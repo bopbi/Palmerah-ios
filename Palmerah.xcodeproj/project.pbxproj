@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */; };
-		A72A23CE1F0DBA6100D1F4CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CD1F0DBA6100D1F4CB /* ViewController.swift */; };
-		A72A23D11F0DBA6100D1F4CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72A23CF1F0DBA6100D1F4CB /* Main.storyboard */; };
+		A72A23CE1F0DBA6100D1F4CB /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CD1F0DBA6100D1F4CB /* FriendViewController.swift */; };
 		A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */; };
 		A72A23D61F0DBA6100D1F4CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */; };
 		A72A23D91F0DBA6100D1F4CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */; };
@@ -37,8 +36,7 @@
 /* Begin PBXFileReference section */
 		A72A23C81F0DBA6000D1F4CB /* Palmerah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Palmerah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A72A23CD1F0DBA6100D1F4CB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A72A23D01F0DBA6100D1F4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A72A23CD1F0DBA6100D1F4CB /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		A72A23D31F0DBA6100D1F4CB /* Palmerah.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Palmerah.xcdatamodel; sourceTree = "<group>"; };
 		A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A72A23D81F0DBA6100D1F4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -100,8 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */,
-				A72A23CD1F0DBA6100D1F4CB /* ViewController.swift */,
-				A72A23CF1F0DBA6100D1F4CB /* Main.storyboard */,
+				A72A23CD1F0DBA6100D1F4CB /* FriendViewController.swift */,
 				A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */,
 				A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */,
 				A72A23DA1F0DBA6100D1F4CB /* Info.plist */,
@@ -240,7 +237,6 @@
 			files = (
 				A72A23D91F0DBA6100D1F4CB /* LaunchScreen.storyboard in Resources */,
 				A72A23D61F0DBA6100D1F4CB /* Assets.xcassets in Resources */,
-				A72A23D11F0DBA6100D1F4CB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A72A23CE1F0DBA6100D1F4CB /* ViewController.swift in Sources */,
+				A72A23CE1F0DBA6100D1F4CB /* FriendViewController.swift in Sources */,
 				A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */,
 				A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */,
 			);
@@ -303,14 +299,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A72A23CF1F0DBA6100D1F4CB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A72A23D01F0DBA6100D1F4CB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -366,6 +354,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -410,6 +399,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -520,6 +510,7 @@
 				A72A23F51F0DBA6100D1F4CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A72A23F61F0DBA6100D1F4CB /* Build configuration list for PBXNativeTarget "PalmerahTests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +519,7 @@
 				A72A23F81F0DBA6100D1F4CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A72A23F91F0DBA6100D1F4CB /* Build configuration list for PBXNativeTarget "PalmerahUITests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +528,7 @@
 				A72A23FB1F0DBA6100D1F4CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
