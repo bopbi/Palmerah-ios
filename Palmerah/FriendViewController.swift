@@ -15,7 +15,7 @@ class FriendViewController: UICollectionViewController, UICollectionViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.title = "Friend"
+        navigationItem.title = "Recents"
         collectionView?.backgroundColor = UIColor.white
         collectionView?.alwaysBounceVertical = true
         collectionView?.register(FriendCell.self, forCellWithReuseIdentifier: cellId)
@@ -52,6 +52,37 @@ class FriendCell : UICollectionViewCell {
         view.backgroundColor = UIColor.lightGray
         return view
     }()
+    
+    let nameLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Friend Name That is very long long that depend on the last name"
+        label.font = UIFont.systemFont(ofSize: 18)
+        return label
+    }()
+    
+    let messageLabel : UILabel = {
+        let label = UILabel()
+        label.text = "Message and maybe something else"
+        label.textColor = UIColor.darkGray
+        label.font = UIFont.systemFont(ofSize: 14)
+        return label
+    }()
+    
+    let timeLabel : UILabel = {
+        let label = UILabel()
+        label.text = "13:00 pm"
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textAlignment = .right
+        return label
+    }()
+    
+    let readMessageStatusImageView : UIImageView = {
+        let imageView : UIImageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 6
+        imageView.layer.masksToBounds = true
+        return imageView
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,14 +97,32 @@ class FriendCell : UICollectionViewCell {
         addSubview(profileImageView)
         
         profileImageView.image = UIImage(named:"sample_user_1")
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-12-[v0(68)]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0" : profileImageView]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-12-[v0(68)]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0" : profileImageView]))
+        addConstraintWithFormat(format: "H:|-12-[v0(68)]", views: profileImageView)
+        addConstraintWithFormat(format: "V:[v0(68)]", views: profileImageView)
+        addCenterYConstraintToParent(view: profileImageView)
         
         addSubview(dividerLine)
-        dividerLine.translatesAutoresizingMaskIntoConstraints = false
+        addConstraintWithFormat(format: "H:|-82-[v0]|", views: dividerLine)
+        addConstraintWithFormat(format: "V:[v0(1)]|", views: dividerLine)
         
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-82-[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0" : dividerLine]))
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[v0(1)]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0" : dividerLine]))
+        let containerView = UIView()
+        
+        addSubview(containerView)
+        addConstraintWithFormat(format: "H:|-90-[v0]|", views: containerView)
+        addConstraintWithFormat(format: "V:[v0(50)]", views: containerView)
+        addCenterYConstraintToParent(view: containerView)
+        
+        containerView.addSubview(nameLabel)
+        containerView.addSubview(messageLabel)
+        containerView.addSubview(timeLabel)
+        
+        readMessageStatusImageView.image = UIImage(named: "status_pending")
+        containerView.addSubview(readMessageStatusImageView)
+        
+        addConstraintWithFormat(format: "H:|[v0]-4-[v1(80)]-12-|", views: nameLabel, timeLabel)
+        addConstraintWithFormat(format: "V:|[v0][v1(24)]|", views: nameLabel, messageLabel)
+        addConstraintWithFormat(format: "H:|[v0][v1(12)]-12-|", views: messageLabel, readMessageStatusImageView)
+        addConstraintWithFormat(format: "V:|[v0(24)]", views: timeLabel)
+        addConstraintWithFormat(format: "V:[v0(12)]|", views: readMessageStatusImageView)
     }
 }

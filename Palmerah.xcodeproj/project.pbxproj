@@ -14,6 +14,7 @@
 		A72A23D91F0DBA6100D1F4CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */; };
 		A72A23E41F0DBA6100D1F4CB /* PalmerahTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23E31F0DBA6100D1F4CB /* PalmerahTests.swift */; };
 		A72A23EF1F0DBA6100D1F4CB /* PalmerahUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23EE1F0DBA6100D1F4CB /* PalmerahUITests.swift */; };
+		A7FD2F271F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		A72A23EA1F0DBA6100D1F4CB /* PalmerahUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PalmerahUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72A23EE1F0DBA6100D1F4CB /* PalmerahUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalmerahUITests.swift; sourceTree = "<group>"; };
 		A72A23F01F0DBA6100D1F4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintWithFormat.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,9 +80,9 @@
 			isa = PBXGroup;
 			children = (
 				A72A23CA1F0DBA6000D1F4CB /* Palmerah */,
-				A72A23E21F0DBA6100D1F4CB /* PalmerahTests */,
 				A72A23ED1F0DBA6100D1F4CB /* PalmerahUITests */,
 				A72A23C91F0DBA6000D1F4CB /* Products */,
+				A72A23E21F0DBA6100D1F4CB /* PalmerahTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +105,7 @@
 				A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */,
 				A72A23DA1F0DBA6100D1F4CB /* Info.plist */,
 				A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */,
+				A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */,
 			);
 			path = Palmerah;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			files = (
 				A72A23CE1F0DBA6100D1F4CB /* FriendViewController.swift in Sources */,
 				A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */,
+				A7FD2F271F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift in Sources */,
 				A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
