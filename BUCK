@@ -1,7 +1,7 @@
 apple_resource(
     name = 'AppResources',
     dirs = [],
-    files = glob(['Palmerah/*.png']),
+    files = glob(['Palmerah/*.png','Palmerah/*.xib','Palmerah/*.storyboard']),
 )
 
 apple_asset_catalog(
