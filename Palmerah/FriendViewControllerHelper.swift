@@ -19,22 +19,22 @@ extension FriendViewController {
         
         if let context = delegate?.persistentContainer.viewContext {
             
-            let friend = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
+            let friend = Friend(context: context)
             friend.name = "Jesse Doe"
             friend.profileImageNamed = "sample_user_1"
             
-            let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
+            let message = Message(context: context)
             message.text = "Hello, this is just a test message, sorry to bother you"
             message.date = NSDate()
             message.friend = friend
             
-            let friend2 = NSEntityDescription.insertNewObject(forEntityName: "Friend", into: context) as! Friend
+            let friend2 = Friend(context: context)
             friend2.name = "Jack Doe"
             friend2.profileImageNamed = "sample_user_2"
             
-            let message2 = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
+            let message2 = Message(context: context)
             message2.text = "Hello, this is just a test message, sorry to bother you"
-            message2.date = NSDate()
+            message2.date = NSDate().addingTimeInterval(-1 * 60)
             message2.friend = friend2
             
             do {
@@ -74,6 +74,9 @@ extension FriendViewController {
         if let context = delegate?.persistentContainer.viewContext {
             
             let messageFetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
+            messageFetchRequest.sortDescriptors =   [
+                                                    NSSortDescriptor(key: "date", ascending: false)
+                                                    ]
             do {
                 messages = try context.fetch(messageFetchRequest)
             } catch let err {
