@@ -10,12 +10,18 @@ apple_asset_catalog(
   app_icon = 'AppIcon',
 )
 
+
+core_data_model(
+    name = 'DataModel',
+    path = 'Palmerah/Palmerah.xcdatamodeld',
+)
+
 apple_binary(
     name = 'AppBinary',
     srcs = glob([
         'Palmerah/*.swift',
       ]),
-    deps = [':AppResources', ':AppAsset'],
+    deps = [':AppResources', ':AppAsset',':DataModel'],
     frameworks = [
         '$SDKROOT/System/Library/Frameworks/Foundation.framework',
         '$SDKROOT/System/Library/Frameworks/UIKit.framework',
