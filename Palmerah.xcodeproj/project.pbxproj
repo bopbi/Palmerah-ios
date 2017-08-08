@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */; };
+		A70A416E1F38C0C200CB4A93 /* UIFont+SizeOfString.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70A416D1F38C0C200CB4A93 /* UIFont+SizeOfString.swift */; };
 		A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */; };
-		A72A23CE1F0DBA6100D1F4CB /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CD1F0DBA6100D1F4CB /* FriendViewController.swift */; };
+		A72A23CE1F0DBA6100D1F4CB /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */; };
 		A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */; };
 		A72A23D61F0DBA6100D1F4CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */; };
 		A72A23D91F0DBA6100D1F4CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */; };
 		A72A23E41F0DBA6100D1F4CB /* PalmerahTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23E31F0DBA6100D1F4CB /* PalmerahTests.swift */; };
 		A72A23EF1F0DBA6100D1F4CB /* PalmerahUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23EE1F0DBA6100D1F4CB /* PalmerahUITests.swift */; };
-		A7B3B87C1F144C36000BB5FD /* FriendViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B3B87B1F144C36000BB5FD /* FriendViewControllerHelper.swift */; };
+		A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751E68F1F361A2B0080DD35 /* MainTabBarController.swift */; };
+		A780844F1F2D0C7100EF07F9 /* FriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */; };
+		A78084511F2E340A00EF07F9 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78084501F2E340A00EF07F9 /* ChatViewController.swift */; };
+		A7B3B87C1F144C36000BB5FD /* RecentsViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */; };
 		A7FD2F271F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */; };
 		A7FE26421F2CF31200F3010E /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */; };
 		A7FE26431F2CF31200F3010E /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE263F1F2CF31200F3010E /* Message+CoreDataProperties.swift */; };
@@ -40,9 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		A70A416D1F38C0C200CB4A93 /* UIFont+SizeOfString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+SizeOfString.swift"; sourceTree = "<group>"; };
 		A72A23C81F0DBA6000D1F4CB /* Palmerah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Palmerah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A72A23CD1F0DBA6100D1F4CB /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
+		A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
 		A72A23D31F0DBA6100D1F4CB /* Palmerah.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Palmerah.xcdatamodel; sourceTree = "<group>"; };
 		A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A72A23D81F0DBA6100D1F4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -53,7 +60,10 @@
 		A72A23EA1F0DBA6100D1F4CB /* PalmerahUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PalmerahUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72A23EE1F0DBA6100D1F4CB /* PalmerahUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalmerahUITests.swift; sourceTree = "<group>"; };
 		A72A23F01F0DBA6100D1F4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7B3B87B1F144C36000BB5FD /* FriendViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendViewControllerHelper.swift; sourceTree = "<group>"; };
+		A751E68F1F361A2B0080DD35 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRepository.swift; sourceTree = "<group>"; };
+		A78084501F2E340A00EF07F9 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsViewControllerHelper.swift; sourceTree = "<group>"; };
 		A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintWithFormat.swift"; sourceTree = "<group>"; };
 		A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A7FE263F1F2CF31200F3010E /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -114,13 +124,18 @@
 				A7FE26401F2CF31200F3010E /* Friend+CoreDataClass.swift */,
 				A7FE26411F2CF31200F3010E /* Friend+CoreDataProperties.swift */,
 				A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */,
-				A72A23CD1F0DBA6100D1F4CB /* FriendViewController.swift */,
 				A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */,
-				A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */,
 				A72A23DA1F0DBA6100D1F4CB /* Info.plist */,
 				A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */,
 				A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */,
-				A7B3B87B1F144C36000BB5FD /* FriendViewControllerHelper.swift */,
+				A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */,
+				A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */,
+				A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */,
+				A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */,
+				A78084501F2E340A00EF07F9 /* ChatViewController.swift */,
+				A751E68F1F361A2B0080DD35 /* MainTabBarController.swift */,
+				A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */,
+				A70A416D1F38C0C200CB4A93 /* UIFont+SizeOfString.swift */,
 			);
 			path = Palmerah;
 			sourceTree = "<group>";
@@ -279,14 +294,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A72A23CE1F0DBA6100D1F4CB /* FriendViewController.swift in Sources */,
+				A72A23CE1F0DBA6100D1F4CB /* RecentsViewController.swift in Sources */,
+				A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */,
 				A7FE26441F2CF31200F3010E /* Friend+CoreDataClass.swift in Sources */,
+				A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */,
+				A78084511F2E340A00EF07F9 /* ChatViewController.swift in Sources */,
 				A7FE26451F2CF31200F3010E /* Friend+CoreDataProperties.swift in Sources */,
+				A780844F1F2D0C7100EF07F9 /* FriendRepository.swift in Sources */,
 				A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */,
 				A7FD2F271F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift in Sources */,
+				A70A416E1F38C0C200CB4A93 /* UIFont+SizeOfString.swift in Sources */,
 				A7FE26421F2CF31200F3010E /* Message+CoreDataClass.swift in Sources */,
 				A7FE26431F2CF31200F3010E /* Message+CoreDataProperties.swift in Sources */,
-				A7B3B87C1F144C36000BB5FD /* FriendViewControllerHelper.swift in Sources */,
+				A7B3B87C1F144C36000BB5FD /* RecentsViewControllerHelper.swift in Sources */,
 				A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

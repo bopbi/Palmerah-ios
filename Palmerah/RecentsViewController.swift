@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class RecentsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let cellId = "cellId"
     
@@ -20,8 +20,7 @@ class FriendViewController: UICollectionViewController, UICollectionViewDelegate
         navigationItem.title = "Recents"
         collectionView?.backgroundColor = UIColor.white
         collectionView?.alwaysBounceVertical = true
-        collectionView?.register(MessageCell.self, forCellWithReuseIdentifier: cellId)
-        
+        collectionView?.register(LastMessageCell.self, forCellWithReuseIdentifier: cellId)
         setupData()
     }
     
@@ -33,7 +32,7 @@ class FriendViewController: UICollectionViewController, UICollectionViewDelegate
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MessageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LastMessageCell
         
         if let message = messages?[indexPath.item] {
             cell.message = message
@@ -43,12 +42,20 @@ class FriendViewController: UICollectionViewController, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 100)
+        return CGSize(width: view.frame.width, height: 86)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let layout = UICollectionViewFlowLayout()
+        let controller = ChatViewController(collectionViewLayout: layout)
+        controller.friend = messages?[indexPath.item].friend
+        navigationController?.pushViewController(controller, animated: true)
+        
     }
 
 }
 
-class MessageCell : UICollectionViewCell {
+class LastMessageCell : UICollectionViewCell {
     
     var message: Message? {
         didSet {
@@ -64,8 +71,25 @@ class MessageCell : UICollectionViewCell {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "h:mm a"
                 
+                let elapsedTimeInSecond : TimeInterval = NSDate().timeIntervalSince(date as Date)
+                let oneDayInSeconds : TimeInterval = 60 * 60 * 24
+                let oneWeekInSeconds : TimeInterval = 7 * oneDayInSeconds
+                
+                if elapsedTimeInSecond > oneDayInSeconds {
+                    dateFormatter.dateFormat = "EEE"
+                } else if elapsedTimeInSecond > oneWeekInSeconds {
+                    dateFormatter.dateFormat = "DD:MM"
+                }
+                
+                
                 timeLabel.text = dateFormatter.string(from: date as Date)
             }
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        didSet {
+            backgroundColor = isHighlighted ? .lightGray : .white
         }
     }
 
@@ -86,7 +110,7 @@ class MessageCell : UICollectionViewCell {
     let nameLabel : UILabel = {
         let label = UILabel()
         label.text = "Friend Name That is very long long that depend on the last name"
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.preferredFont(forTextStyle: .headline)
         return label
     }()
     
@@ -94,14 +118,14 @@ class MessageCell : UICollectionViewCell {
         let label = UILabel()
         label.text = "Message and maybe something else"
         label.textColor = UIColor.darkGray
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
         return label
     }()
     
     let timeLabel : UILabel = {
         let label = UILabel()
         label.text = "13:00 pm"
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.textAlignment = .right
         return label
     }()
@@ -133,7 +157,7 @@ class MessageCell : UICollectionViewCell {
         
         addSubview(dividerLine)
         addConstraintWithFormat(format: "H:|-82-[v0]|", views: dividerLine)
-        addConstraintWithFormat(format: "V:[v0(1)]|", views: dividerLine)
+        addConstraintWithFormat(format: "V:[v0(0.5)]|", views: dividerLine)
         
         let containerView = UIView()
         

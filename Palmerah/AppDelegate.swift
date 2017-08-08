@@ -20,9 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        let layout = UICollectionViewFlowLayout()
-        let friendViewController = FriendViewController(collectionViewLayout: layout)
-        window?.rootViewController = UINavigationController(rootViewController: friendViewController)
+        window?.rootViewController = MainTabBarController()
         
         return true
     }
