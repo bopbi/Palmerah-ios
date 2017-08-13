@@ -23,22 +23,27 @@ extension RecentsViewController {
             friend1.name = "Jesse Doe"
             friend1.profileImageNamed = "sample_user_1"
             
-            createMessageForFriend(messageText: "Hello, this is just a test message, sorry to bother you", friend: friend1, date: NSDate().addingTimeInterval(-1 * 60), context: context)
+            createMessageForFriend(messageText: "Hello, this is just a test message, sorry to bother you", friend: friend1, date: NSDate().addingTimeInterval(-2 * 60), isSender: false, context: context)
+            createMessageForFriend(messageText: "No worries, i understand your position 😊", friend: friend1, date: NSDate().addingTimeInterval(-1 * 60), isSender: true, context: context)
+            createMessageForFriend(messageText: "So lets have a talk, shall we", friend: friend1, date: NSDate().addingTimeInterval(-1 * 60), isSender: true, context: context)
             
             let friend2 = Friend(context: context)
             friend2.name = "Jack Doe"
             friend2.profileImageNamed = "sample_user_2"
             
             
-            createMessageForFriend(messageText: "Hello, this is just a test message, sorry to bother you", friend: friend2, date: NSDate().addingTimeInterval(-12 * 60 * 60 * 24), context: context)
-            createMessageForFriend(messageText: "Next sample for creating text message", friend: friend2, date: NSDate().addingTimeInterval(-1 * 60 * 60 * 24), context: context)
+            createMessageForFriend(messageText: "Hello, this is just a test message, sorry to bother you", friend: friend2, date: NSDate().addingTimeInterval(-12 * 60 * 60 * 24), isSender: false, context: context)
+            createMessageForFriend(messageText: "Next sample for creating text message", friend: friend2, date: NSDate().addingTimeInterval(-3 * 60 * 60 * 24), isSender: false, context: context)
+            createMessageForFriend(messageText: "Please dont disturb me", friend: friend2, date: NSDate().addingTimeInterval(-2 * 60 * 60 * 24), isSender: true, context: context)
+            createMessageForFriend(messageText: "Why are you using production setting anyway? its get sent to a real user", friend: friend2, date: NSDate().addingTimeInterval(-1 * 60 * 60 * 24), isSender: true, context: context)
             
             let friend3 = Friend(context: context)
             friend3.name = "Ujang Siang"
             friend3.profileImageNamed = "sample_user_2"
             
             
-            createMessageForFriend(messageText: "All by myself", friend: friend3, date: NSDate().addingTimeInterval(-2 * 60 * 60 * 24), context: context)
+            createMessageForFriend(messageText: "All by myself", friend: friend3, date: NSDate().addingTimeInterval(-2 * 60 * 60 * 24), isSender: false, context: context)
+            createMessageForFriend(messageText: "Galau eh?", friend: friend3, date: NSDate().addingTimeInterval(-2 * 60 * 60 * 24), isSender: true, context: context)
             
             do {
                 try context.save()
@@ -82,11 +87,12 @@ extension RecentsViewController {
         }
     }
     
-    func createMessageForFriend(messageText: String, friend: Friend, date: NSDate, context: NSManagedObjectContext) {
+    func createMessageForFriend(messageText: String, friend: Friend, date: NSDate, isSender: Bool, context: NSManagedObjectContext) {
         let message = Message(context: context)
         message.text = messageText
         message.date = date
         message.friend = friend
+        message.isSender = isSender
         
         do {
             try context.save()
@@ -107,7 +113,7 @@ extension RecentsViewController {
                 for friend in friends {
                     let messageFetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
                     messageFetchRequest.sortDescriptors =   [
-                        NSSortDescriptor(key: "date", ascending: true)
+                        NSSortDescriptor(key: "date", ascending: false)
                     ]
                     messageFetchRequest.predicate = NSPredicate(format: "friend.name = %@ ", friend.name!)
                     messageFetchRequest.fetchLimit = 1

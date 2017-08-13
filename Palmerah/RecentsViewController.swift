@@ -42,7 +42,8 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 86)
+        let cellheight = 86 * (UIFont.preferredFont(forTextStyle: .headline).pointSize / 17)
+        return CGSize(width: view.frame.width, height: cellheight)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -11,7 +11,14 @@ import CoreData
 
 class ChatViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    let maxBubbleContentWidth = 250
+    let textPadding = CGFloat(10)
+    let bubblePadding = CGFloat(10)
+    let senderBubbleColor = UIColor.appleBlue()
+    let receiverBubbleColor = UIColor(white: 0.95, alpha: 1)
+    
     private let cellId  = "cellId"
+    
     var friend: Friend? {
         didSet {
             navigationItem.title = friend?.name
@@ -30,7 +37,7 @@ class ChatViewController: UICollectionViewController, UICollectionViewDelegateFl
                 
             let messageFetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
             messageFetchRequest.sortDescriptors =   [
-                NSSortDescriptor(key: "date", ascending: false)
+                NSSortDescriptor(key: "date", ascending: true)
             ]
             messageFetchRequest.predicate = NSPredicate(format: "friend.name = %@ ", (friend?.name)!)
             do {
@@ -49,6 +56,7 @@ class ChatViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func viewDidLoad() {
         collectionView?.backgroundColor = .white
+        collectionView?.alwaysBounceVertical = true
         collectionView?.register(ChatCell.self, forCellWithReuseIdentifier: cellId)
     }
     
@@ -61,17 +69,45 @@ class ChatViewController: UICollectionViewController, UICollectionViewDelegateFl
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ChatCell
-        cell?.messageLabel.text = messages?[indexPath.item].text
+        
+        if let textMessage = messages?[indexPath.item].text {
+            cell?.messageLabel.text = messages?[indexPath.item].text
+            
+            let textBoundingRect = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body).sizeOfString(string: textMessage, constrainedToWidth: CGFloat(maxBubbleContentWidth))
+            
+            let totalHeight = textBoundingRect.height + (2 * textPadding)
+            let totalWidth = textBoundingRect.width + (2 * textPadding)
+            var startBubble : CGFloat?;
+            
+            if (messages?[indexPath.item].isSender)! {
+                cell?.bubbleBackgroundView.backgroundColor = senderBubbleColor
+                cell?.messageLabel.textColor = UIColor.white
+                startBubble = view.frame.width - (textBoundingRect.width + ( 2 * textPadding ) + bubblePadding)
+            } else {
+                cell?.bubbleBackgroundView.backgroundColor = receiverBubbleColor
+                cell?.messageLabel.textColor = UIColor.black
+                startBubble = bubblePadding
+            }
+            
+            cell?.messageLabel.frame = CGRect(x: startBubble! + textPadding, y: textPadding, width: textBoundingRect.width, height: textBoundingRect.height)
+            cell?.bubbleBackgroundView.frame = CGRect(x: startBubble!, y: 0, width: totalWidth, height: totalHeight)
+        }
+        
         return cell!
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let message = messages?[indexPath.item]
+        if let textMessage = messages?[indexPath.item].text {
+            
+            let textBoundingRect = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body).sizeOfString(string: textMessage, constrainedToWidth: CGFloat(maxBubbleContentWidth))
+            
+            let totalHeight = textBoundingRect.height + (2 * textPadding)
+            
+            return CGSize(width: view.frame.width, height: totalHeight)
+        }
         
-        let boundingRect = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body).sizeOfString(string: (message?.text)!, constrainedToWidth: Double(view.frame.width))
-        
-        return CGSize(width: view.frame.width, height: boundingRect.height)
+        return CGSize(width: view.frame.width, height: 0)
     }
 }
 
@@ -80,8 +116,16 @@ class ChatCell : UICollectionViewCell {
     let messageLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
+        label.textColor = UIColor.black
         label.numberOfLines = 0
         return label
+    }()
+    
+    let bubbleBackgroundView : UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 15
+        view.layer.masksToBounds = true
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -95,8 +139,8 @@ class ChatCell : UICollectionViewCell {
 
     func setupViews() {
         
+        addSubview(bubbleBackgroundView)
         addSubview(messageLabel)
-        addConstraintWithFormat(format: "H:|[v0]|", views: messageLabel)
-        addConstraintWithFormat(format: "V:|[v0]|", views: messageLabel)
+        
     }
 }
