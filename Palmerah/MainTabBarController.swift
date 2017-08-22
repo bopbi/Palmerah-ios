@@ -23,6 +23,10 @@ class MainTabBarController: UITabBarController {
         let contactsNavigationController = UINavigationController(rootViewController: contactsViewController)
         contactsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.contacts, tag: 1)
         
-        viewControllers = [recentsNavigationController, contactsNavigationController]
+        let moreSettingsViewController = MoreSettingsViewController()
+        let moreSettingsNavigationController = UINavigationController(rootViewController: moreSettingsViewController)
+        moreSettingsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.more, tag: 2)
+        
+        viewControllers = [recentsNavigationController, contactsNavigationController, moreSettingsNavigationController]
     }
 }

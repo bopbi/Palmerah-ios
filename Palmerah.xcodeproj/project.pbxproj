@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002350721F4BE1C80035FD6E /* MoreSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */; };
+		002350741F4C21230035FD6E /* UIView+BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002350731F4C21230035FD6E /* UIView+BlurEffect.swift */; };
 		003F24391F40A49D000F7F0F /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */; };
 		003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */; };
 		A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreSettingsViewController.swift; sourceTree = "<group>"; };
+		002350731F4C21230035FD6E /* UIView+BlurEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BlurEffect.swift"; sourceTree = "<group>"; };
 		003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ChatColor.swift"; sourceTree = "<group>"; };
 		A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 				A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */,
 				A70A416D1F38C0C200CB4A93 /* UIFont+SizeOfString.swift */,
 				003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */,
+				002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */,
+				002350731F4C21230035FD6E /* UIView+BlurEffect.swift */,
 			);
 			path = Palmerah;
 			sourceTree = "<group>";
@@ -309,6 +315,8 @@
 				A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */,
 				A7FD2F271F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift in Sources */,
 				A70A416E1F38C0C200CB4A93 /* UIFont+SizeOfString.swift in Sources */,
+				002350721F4BE1C80035FD6E /* MoreSettingsViewController.swift in Sources */,
+				002350741F4C21230035FD6E /* UIView+BlurEffect.swift in Sources */,
 				A7FE26421F2CF31200F3010E /* Message+CoreDataClass.swift in Sources */,
 				A7B3B87C1F144C36000BB5FD /* RecentsViewControllerHelper.swift in Sources */,
 				A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */,

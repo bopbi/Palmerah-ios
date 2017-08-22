@@ -14,8 +14,8 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     let maxBubbleContentWidth = 250
     let textPadding = CGFloat(10)
     let sideBubblePadding = CGFloat(10)
-    let topBubblePadding = CGFloat(10)
-    let bottomBubblePadding = CGFloat(5)
+    let topBubblePadding = CGFloat(5)
+    let bottomBubblePadding = CGFloat(10)
     let senderBubbleColor = UIColor.appleBlue()
     let receiverBubbleColor = UIColor(white: 0.95, alpha: 1)
     var messageTextHeight :[String:CGSize] = [:]
@@ -46,6 +46,11 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             do {
                 let messageResult = try context.fetch(messageFetchRequest)
                 messages?.append(contentsOf: messageResult)
+                
+                DispatchQueue.main.async(execute: { 
+                    let lastMessageIndexPath = IndexPath(item: (self.messages?.count)! - 1, section: 0)
+                    self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: false)
+                })
             } catch let err {
                 print(err)
             }
@@ -59,22 +64,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     
     let messageInputContainerView : UIView = {
         let view = UIView()
-        
-        //only apply the blur if the user hasn't disabled transparency effects
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
-            view.backgroundColor = UIColor.clear
-            
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            //always fill the view
-            blurEffectView.frame = view.bounds
-            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            
-            view.addSubview(blurEffectView) //if you have more UIViews, use an insertSubview API to place it where needed
-        } else {
-            view.backgroundColor = .white
-        }
-        
+        view.addBlurBackgroundLayer(blurStyle: .extraLight, colorIfBlurIsDisable: .white)
         return view
     }()
     
@@ -96,7 +86,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     func setupInputComponents() {
         
         let topBorderView = UIView()
-        topBorderView.backgroundColor = UIColor.init(white: 0.6, alpha: 1)
+        topBorderView.backgroundColor = UIColor.init(white: 0.69, alpha: 1)
         
         messageInputContainerView.addSubview(inputTextField)
         messageInputContainerView.addSubview(sendMessageButton)
@@ -121,29 +111,51 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         view.addConstraintWithFormat(format: "V:[v0(48)]", views: messageInputContainerView)
         
         bottomMessageInputContainerViewConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        
         view.addConstraint(bottomMessageInputContainerViewConstraint!)
         
         setupInputComponents()
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: .UIKeyboardWillHide, object: nil)
+        
+        
     }
     
     func handleKeyboard(notification: Notification) {
         
         if let userInfo = notification.userInfo {
-            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as! CGRect
             
             let isKeyboardShowing = notification.name == Notification.Name.UIKeyboardWillShow
             
             bottomMessageInputContainerViewConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height : 0
             
-            UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: { 
+            var bottomInset : CGFloat = 0.0
+            let topInset : CGFloat = (self.collectionView?.contentInset.top)!
+            
+            if (isKeyboardShowing) {
+                bottomInset = keyboardFrame.size.height + self.messageInputContainerView.bounds.height
+            } else {
+                bottomInset = self.messageInputContainerView.bounds.height
+            }
+            
+            DispatchQueue.main.async(execute: {
+                self.collectionView?.contentInset = UIEdgeInsetsMake(topInset, 0, bottomInset, 0);
+                self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(topInset, 0, bottomInset, 0)
+            })
+            
+            UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
             }, completion: { (completed) in
-                
+                if (isKeyboardShowing) {
+                    self.scrollToBottom()
+                }
             })
+            
+            
         }
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -197,8 +209,8 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if let textMessage = messages?[indexPath.item].text {
+        let currentMessage = messages?[indexPath.item]
+        if let textMessage = currentMessage?.text {
             if (self.messageTextHeight[textMessage] == nil) {
                 let textBoundingRect = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body).sizeOfString(string: textMessage, constrainedToWidth: CGFloat(maxBubbleContentWidth))
                 
@@ -206,13 +218,27 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             }
             
             let messageTextSize = self.messageTextHeight[textMessage]
+            var bubbleSpace = bottomBubblePadding;
+            if (indexPath.item < (self.messages?.count)! - 1) {
+                let currentBubbleSender = currentMessage?.isSender
+                let nextMessage = self.messages?[indexPath.item + 1]
+                if (currentBubbleSender == nextMessage?.isSender) {
+                    bubbleSpace = 0
+                }
+                
+            }
             
-            let totalHeight = messageTextSize!.height + (2 * textPadding) + topBubblePadding + bottomBubblePadding;
+            let totalHeight = messageTextSize!.height + (2 * textPadding) + topBubblePadding + bubbleSpace;
             
             return CGSize(width: view.frame.width, height: totalHeight)
         }
         
         return CGSize(width: view.frame.width, height: 0)
+    }
+    
+    func scrollToBottom() {
+        let lastMessageIndexPath = IndexPath(item: (self.messages?.count)! - 1, section: 0)
+        self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: true)
     }
 }
 
@@ -228,7 +254,7 @@ class ChatCell : UICollectionViewCell {
     
     let bubbleBackgroundView : UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 15
+        view.layer.cornerRadius = 13
         view.layer.masksToBounds = true
         return view
     }()
