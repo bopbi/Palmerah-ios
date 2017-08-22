@@ -20,8 +20,13 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
         navigationItem.title = "Recents"
         collectionView?.backgroundColor = UIColor.white
         collectionView?.alwaysBounceVertical = true
+        
         collectionView?.register(LastMessageCell.self, forCellWithReuseIdentifier: cellId)
         setupData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -48,7 +53,9 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let layout = UICollectionViewFlowLayout()
-        let controller = ChatViewController(collectionViewLayout: layout)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        let controller = ChatRoomViewController(collectionViewLayout: layout)
         controller.friend = messages?[indexPath.item].friend
         navigationController?.pushViewController(controller, animated: true)
         

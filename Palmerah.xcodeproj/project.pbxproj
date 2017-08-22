@@ -20,7 +20,7 @@
 		A72A23EF1F0DBA6100D1F4CB /* PalmerahUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23EE1F0DBA6100D1F4CB /* PalmerahUITests.swift */; };
 		A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751E68F1F361A2B0080DD35 /* MainTabBarController.swift */; };
 		A780844F1F2D0C7100EF07F9 /* FriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */; };
-		A78084511F2E340A00EF07F9 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78084501F2E340A00EF07F9 /* ChatViewController.swift */; };
+		A78084511F2E340A00EF07F9 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */; };
 		A7B3B87C1F144C36000BB5FD /* RecentsViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */; };
 		A7FD2F271F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */; };
 		A7FE26421F2CF31200F3010E /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */; };
@@ -65,7 +65,7 @@
 		A72A23F01F0DBA6100D1F4CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A751E68F1F361A2B0080DD35 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRepository.swift; sourceTree = "<group>"; };
-		A78084501F2E340A00EF07F9 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsViewControllerHelper.swift; sourceTree = "<group>"; };
 		A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintWithFormat.swift"; sourceTree = "<group>"; };
 		A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 				A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */,
 				A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */,
 				A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */,
-				A78084501F2E340A00EF07F9 /* ChatViewController.swift */,
+				A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */,
 				A751E68F1F361A2B0080DD35 /* MainTabBarController.swift */,
 				A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */,
 				A70A416D1F38C0C200CB4A93 /* UIFont+SizeOfString.swift */,
@@ -303,7 +303,7 @@
 				A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */,
 				003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */,
 				003F24391F40A49D000F7F0F /* Message+CoreDataProperties.swift in Sources */,
-				A78084511F2E340A00EF07F9 /* ChatViewController.swift in Sources */,
+				A78084511F2E340A00EF07F9 /* ChatRoomViewController.swift in Sources */,
 				A7FE26451F2CF31200F3010E /* Friend+CoreDataProperties.swift in Sources */,
 				A780844F1F2D0C7100EF07F9 /* FriendRepository.swift in Sources */,
 				A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */,

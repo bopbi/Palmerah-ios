@@ -23,9 +23,13 @@ extension RecentsViewController {
             friend1.name = "Jesse Doe"
             friend1.profileImageNamed = "sample_user_1"
             
-            createMessageForFriend(messageText: "Hello, this is just a test message, sorry to bother you", friend: friend1, date: NSDate().addingTimeInterval(-2 * 60), isSender: false, context: context)
-            createMessageForFriend(messageText: "No worries, i understand your position 😊", friend: friend1, date: NSDate().addingTimeInterval(-1 * 60), isSender: true, context: context)
-            createMessageForFriend(messageText: "So lets have a talk, shall we", friend: friend1, date: NSDate().addingTimeInterval(-1 * 60), isSender: true, context: context)
+            createMessageForFriend(messageText: "Hello, this is just a test message, sorry to bother you", friend: friend1, date: NSDate().addingTimeInterval(-12 * 60), isSender: false, context: context)
+            createMessageForFriend(messageText: "No worries, i understand your position 😊", friend: friend1, date: NSDate().addingTimeInterval(-11 * 60), isSender: true, context: context)
+            createMessageForFriend(messageText: "So lets have a talk, shall we", friend: friend1, date: NSDate().addingTimeInterval(-10 * 60), isSender: true, context: context)
+            createMessageForFriend(messageText: "Ok lets talk about some lorem", friend: friend1, date: NSDate().addingTimeInterval(-9 * 60), isSender: false, context: context)
+            createMessageForFriend(messageText: "Oh not about the lorem, i kinda bored to see that, how about change the topic to ipsum then", friend: friend1, date: NSDate().addingTimeInterval(-8 * 60), isSender: true, context: context)
+            createMessageForFriend(messageText: " ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.", friend: friend1, date: NSDate().addingTimeInterval(-7 * 60), isSender: false, context: context)
+            createMessageForFriend(messageText: "Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. Nam nulla quam, gravida non, commodo a, sodales sit amet, nisi.", friend: friend1, date: NSDate().addingTimeInterval(-6 * 60), isSender: true, context: context)
             
             let friend2 = Friend(context: context)
             friend2.name = "Jack Doe"

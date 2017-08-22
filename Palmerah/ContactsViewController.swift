@@ -14,4 +14,8 @@ class ContactsViewController: UICollectionViewController {
         navigationItem.title = "Contacts"
         collectionView?.backgroundColor = .white
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
 }
