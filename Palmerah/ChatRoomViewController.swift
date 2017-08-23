@@ -108,17 +108,21 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         let insetNewBottom = collectionView?.convert(frameNew, to: nil).height
         
         // Inset `collectionView` with keyboard
-//         let contentOffsetY = collectionView!.contentOffset.y
+        let contentOffsetY = collectionView!.contentOffset.y
         
         DispatchQueue.main.async { 
             self.collectionView?.contentInset.bottom = insetNewBottom!
             self.collectionView?.scrollIndicatorInsets.bottom = insetNewBottom!
             // Prevents jump after keyboard dismissal
-//            if (self.collectionView?.isTracking)! || (self.collectionView?.isDecelerating)! {
-//                self.collectionView?.contentOffset.y = contentOffsetY
-//            }
             
-            self.scrollToBottom()
+            if (frameNew.height > self.messageInputContainerView.bounds.height) {
+                
+                if (self.collectionView?.isTracking)! || (self.collectionView?.isDecelerating)! {
+                    self.collectionView?.contentOffset.y = contentOffsetY
+                }
+                
+                self.scrollToBottom()
+            }
         }
         
     }
