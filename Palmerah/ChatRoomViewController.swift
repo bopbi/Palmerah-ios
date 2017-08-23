@@ -62,108 +62,79 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     
     var messages:[Message]?
     
-    let messageInputContainerView : UIView = {
-        let view = UIView()
-        view.addBlurBackgroundLayer(blurStyle: .extraLight, colorIfBlurIsDisable: .white)
-        return view
-    }()
-    
-    let inputTextField : UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter message..."
-        return textField
-    }()
-    
-    let sendMessageButton : UIButton = {
-       let button = UIButton(type: .system)
-        button.setTitle("Send", for: .normal)
-        let titleColor = UIColor.appleBlue()
-        button.setTitleColor(titleColor, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        return button
-    }()
-    
-    func setupInputComponents() {
+    lazy var messageInputContainerView : UIView = {
+        let containerView = UIView()
+        containerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50)
+        containerView.addBlurBackgroundLayer(blurStyle: .extraLight, colorIfBlurIsDisable: .white)
         
+        let inputTextField = UITextField()
+        inputTextField.placeholder = "Enter message..."
+        
+        let sendMessageButton = UIButton(type: .system)
+        sendMessageButton.setTitle("Send", for: .normal)
+        let titleColor = UIColor.appleBlue()
+        sendMessageButton.setTitleColor(titleColor, for: .normal)
+        sendMessageButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+
         let topBorderView = UIView()
         topBorderView.backgroundColor = UIColor.init(white: 0.69, alpha: 1)
         
-        messageInputContainerView.addSubview(inputTextField)
-        messageInputContainerView.addSubview(sendMessageButton)
-        messageInputContainerView.addSubview(topBorderView)
+        containerView.addSubview(inputTextField)
+        containerView.addSubview(sendMessageButton)
+        containerView.addSubview(topBorderView)
         
-        messageInputContainerView.addConstraintWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, sendMessageButton)
-        messageInputContainerView.addConstraintWithFormat(format: "V:|[v0]|", views: inputTextField)
-        messageInputContainerView.addConstraintWithFormat(format: "V:|[v0]|", views: sendMessageButton)
-        messageInputContainerView.addConstraintWithFormat(format: "H:|[v0]|", views: topBorderView)
-        messageInputContainerView.addConstraintWithFormat(format: "V:|[v0(0.3)]", views: topBorderView)
-    }
-    
-    var bottomMessageInputContainerViewConstraint : NSLayoutConstraint?
+        containerView.addConstraintWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, sendMessageButton)
+        containerView.addConstraintWithFormat(format: "V:|[v0]|", views: inputTextField)
+        containerView.addConstraintWithFormat(format: "V:|[v0]|", views: sendMessageButton)
+        containerView.addConstraintWithFormat(format: "H:|[v0]|", views: topBorderView)
+        containerView.addConstraintWithFormat(format: "V:|[v0(0.3)]", views: topBorderView)
+        
+        return containerView
+    }()
     
     override func viewDidLoad() {
         collectionView?.backgroundColor = .white
         collectionView?.alwaysBounceVertical = true
         collectionView?.register(ChatCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.keyboardDismissMode = .interactive
         
-        view.addSubview(messageInputContainerView)
-        view.addConstraintWithFormat(format: "H:|[v0]|", views: messageInputContainerView)
-        view.addConstraintWithFormat(format: "V:[v0(48)]", views: messageInputContainerView)
-        
-        bottomMessageInputContainerViewConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
-        
-        view.addConstraint(bottomMessageInputContainerViewConstraint!)
-        
-        setupInputComponents()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: .UIKeyboardWillHide, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         
     }
     
-    func handleKeyboard(notification: Notification) {
+    func handleKeyboardDidShow(notification: Notification) {
+        let userInfo = notification.userInfo as NSDictionary!
+        let frameNew = (userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let insetNewBottom = collectionView?.convert(frameNew, to: nil).height
         
-        if let userInfo = notification.userInfo {
-            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as! CGRect
+        // Inset `collectionView` with keyboard
+//         let contentOffsetY = collectionView!.contentOffset.y
+        
+        DispatchQueue.main.async { 
+            self.collectionView?.contentInset.bottom = insetNewBottom!
+            self.collectionView?.scrollIndicatorInsets.bottom = insetNewBottom!
+            // Prevents jump after keyboard dismissal
+//            if (self.collectionView?.isTracking)! || (self.collectionView?.isDecelerating)! {
+//                self.collectionView?.contentOffset.y = contentOffsetY
+//            }
             
-            let isKeyboardShowing = notification.name == Notification.Name.UIKeyboardWillShow
-            
-            bottomMessageInputContainerViewConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height : 0
-            
-            var bottomInset : CGFloat = 0.0
-            let topInset : CGFloat = (self.collectionView?.contentInset.top)!
-            
-            if (isKeyboardShowing) {
-                bottomInset = keyboardFrame.size.height + self.messageInputContainerView.bounds.height
-            } else {
-                bottomInset = self.messageInputContainerView.bounds.height
-            }
-            
-            DispatchQueue.main.async(execute: {
-                self.collectionView?.contentInset = UIEdgeInsetsMake(topInset, 0, bottomInset, 0);
-                self.collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(topInset, 0, bottomInset, 0)
-            })
-            
-            UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: { (completed) in
-                if (isKeyboardShowing) {
-                    self.scrollToBottom()
-                }
-            })
-            
-            
+            self.scrollToBottom()
         }
         
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        inputTextField.endEditing(true)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        collectionView?.collectionViewLayout.invalidateLayout()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -234,6 +205,16 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         }
         
         return CGSize(width: view.frame.width, height: 0)
+    }
+    
+    override var inputAccessoryView: UIView? {
+        get {
+            return messageInputContainerView
+        }
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
     }
     
     func scrollToBottom() {
