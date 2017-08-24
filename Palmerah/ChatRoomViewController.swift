@@ -93,6 +93,8 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         collectionView?.backgroundColor = .white
         collectionView?.alwaysBounceVertical = true
         collectionView?.register(ChatCell.self, forCellWithReuseIdentifier: cellId)
@@ -103,31 +105,15 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     func handleKeyboardDidShow(notification: Notification) {
-        let userInfo = notification.userInfo as NSDictionary!
-        let frameNew = (userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let insetNewBottom = collectionView?.convert(frameNew, to: nil).height
-        
-        // Inset `collectionView` with keyboard
-        let contentOffsetY = collectionView!.contentOffset.y
-        
-        DispatchQueue.main.async { 
-            self.collectionView?.contentInset.bottom = insetNewBottom!
-            self.collectionView?.scrollIndicatorInsets.bottom = insetNewBottom!
-            // Prevents jump after keyboard dismissal
-            
-            if (frameNew.height > self.messageInputContainerView.bounds.height) {
-                
-                if (self.collectionView?.isTracking)! || (self.collectionView?.isDecelerating)! {
-                    self.collectionView?.contentOffset.y = contentOffsetY
-                }
-                
-                self.scrollToBottom()
-            }
+        if (self.messages?.count)! > 0 {
+            self.scrollToBottom()
         }
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         tabBarController?.tabBar.isHidden = true
     }
     
