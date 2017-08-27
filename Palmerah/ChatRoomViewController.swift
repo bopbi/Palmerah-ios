@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ChatRoomViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UITextViewDelegate {
+class ChatRoomViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UITextViewDelegate, NSFetchedResultsControllerDelegate {
     
     let maxBubbleContentWidth = 250
     let textPadding = CGFloat(10)
@@ -25,37 +25,58 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     var friend: Friend? {
         didSet {
             navigationItem.title = friend?.name
-            
-            loadData()
         }
     }
     
-    func loadData() {
-        
+    lazy var chatMessagesFetchResultController : NSFetchedResultsController<Message> = {
         let delegate = UIApplication.shared.delegate as? AppDelegate
         
-        if let context = delegate?.persistentContainer.viewContext {
-            
-            messages = [Message]()
-                
-            let messageFetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
-            messageFetchRequest.sortDescriptors =   [
-                NSSortDescriptor(key: "date", ascending: true)
-            ]
-            messageFetchRequest.predicate = NSPredicate(format: "friend.name = %@ ", (friend?.name)!)
-            do {
-                let messageResult = try context.fetch(messageFetchRequest)
-                messages?.append(contentsOf: messageResult)
-            } catch let err {
-                print(err)
-            }
+        let messageFetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
+        messageFetchRequest.sortDescriptors =   [
+            NSSortDescriptor(key: "date", ascending: true)
+        ]
+        messageFetchRequest.predicate = NSPredicate(format: "friend.name = %@ ", (self.friend?.name)!)
         
-            
+        let context = delegate?.persistentContainer.viewContext
+        
+        let fetchResultController = NSFetchedResultsController(fetchRequest: messageFetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
+        fetchResultController.delegate = self
+        return fetchResultController
+    }()
+    
+    var blockOperations = [BlockOperation]()
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            blockOperations.append(BlockOperation(block: { 
+                self.collectionView?.insertItems(at: [newIndexPath!])
+            }))
+            break
+        case .delete:
+            blockOperations.append(BlockOperation(block: {
+                self.collectionView?.deleteItems(at: [newIndexPath!])
+            }))
+            break
+        case .update:
+            blockOperations.append(BlockOperation(block: {
+                self.collectionView?.reloadItems(at: [newIndexPath!])
+            }))
+            break
+        default:
+            break
         }
-        
     }
     
-    var messages:[Message]?
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.collectionView?.performBatchUpdates({ 
+            for operation in self.blockOperations {
+                operation.start()
+            }
+        }, completion: { (completed) in
+            self.scrollToBottom()
+        })
+    }
     
     lazy var messageInputContainerView : InputAccessoryView = {
         let inputAccessoryView = InputAccessoryView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
@@ -64,7 +85,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }()
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if (self.messages?.count)! > 0 {
+        if (self.messagesCount() > 0) {
             DispatchQueue.main.async(execute: {
                 self.scrollToBottom()
             })
@@ -102,10 +123,15 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             print(err)
         }
     }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        do {
+            try self.chatMessagesFetchResultController.performFetch()
+        } catch let err {
+            print(err)
+        }
         
         collectionView?.showsHorizontalScrollIndicator = false;
         collectionView?.backgroundColor = .white
@@ -130,9 +156,13 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: (currentScrollInset?.top)!, left: 0, bottom: self.messageInputContainerView.bounds.height, right: 0)
             
             self.collectionView?.reloadData()
-            let lastMessageIndexPath = IndexPath(item: (self.messages?.count)! - 1, section: 0)
+            let lastMessageIndexPath = IndexPath(item: self.messagesCount() - 1, section: 0)
             self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: false)
         })
+    }
+    
+    func messagesCount() -> Int {
+        return self.chatMessagesFetchResultController.sections![0].numberOfObjects
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -146,7 +176,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = messages?.count {
+        if let count = self.chatMessagesFetchResultController.sections?[0].numberOfObjects {
             return count
         }
         return 0
@@ -154,9 +184,9 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ChatCell
-        
-        if let textMessage = messages?[indexPath.item].text {
-            cell?.messageLabel.text = messages?[indexPath.item].text
+        let message = self.chatMessagesFetchResultController.object(at: indexPath)
+        if let textMessage = message.text {
+            cell?.messageLabel.text = message.text
             
             if (self.messageTextHeight[textMessage] == nil) {
                 let textBoundingRect = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body).sizeOfString(string: textMessage, constrainedToWidth: CGFloat(maxBubbleContentWidth))
@@ -170,7 +200,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             let totalWidth = (messageTextSize?.width)! + (2 * textPadding)
             var startBubble : CGFloat?;
             
-            if (messages?[indexPath.item].isSender)! {
+            if (message.isSender) {
                 cell?.bubbleBackgroundView.backgroundColor = senderBubbleColor
                 cell?.messageLabel.textColor = UIColor.white
                 startBubble = view.frame.width - ((messageTextSize?.width)! + ( 2 * textPadding ) + sideBubblePadding)
@@ -188,8 +218,8 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let currentMessage = messages?[indexPath.item]
-        if let textMessage = currentMessage?.text {
+        let currentMessage = self.chatMessagesFetchResultController.object(at: indexPath)
+        if let textMessage = currentMessage.text {
             if (self.messageTextHeight[textMessage] == nil) {
                 let textBoundingRect = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body).sizeOfString(string: textMessage, constrainedToWidth: CGFloat(maxBubbleContentWidth))
                 
@@ -198,10 +228,11 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             
             let messageTextSize = self.messageTextHeight[textMessage]
             var bubbleSpace = bottomBubblePadding;
-            if (indexPath.item < (self.messages?.count)! - 1) {
-                let currentBubbleSender = currentMessage?.isSender
-                let nextMessage = self.messages?[indexPath.item + 1]
-                if (currentBubbleSender == nextMessage?.isSender) {
+            if (indexPath.item < (self.messagesCount() - 1)) {
+                let currentBubbleSender = currentMessage.isSender
+                let nextIndex = IndexPath(item: indexPath.item + 1, section: indexPath.section)
+                let nextMessage = self.chatMessagesFetchResultController.object(at: nextIndex)
+                if (currentBubbleSender == nextMessage.isSender) {
                     bubbleSpace = 0
                 }
                 
@@ -230,7 +261,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     func scrollToBottom() {
-        let lastMessageIndexPath = IndexPath(item: (self.messages?.count)! - 1, section: 0)
+        let lastMessageIndexPath = IndexPath(item: self.messagesCount() - 1, section: 0)
         self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: true)
     }
 }
@@ -290,7 +321,6 @@ class InputAccessoryView: UIView, UITextViewDelegate {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         return button
     }()
-    
     
     override var intrinsicContentSize: CGSize {
         // Calculate intrinsicContentSize that will fit all the text
