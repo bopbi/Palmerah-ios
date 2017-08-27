@@ -106,7 +106,6 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             }
             
             self.messageInputContainerView.inputTextView.text = nil
-            scrollToBottom()
         }
     }
     
