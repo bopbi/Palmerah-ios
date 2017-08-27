@@ -11,6 +11,7 @@
 		002350741F4C21230035FD6E /* UIView+BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002350731F4C21230035FD6E /* UIView+BlurEffect.swift */; };
 		003F24391F40A49D000F7F0F /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */; };
 		003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */; };
+		00C26E861F5150400070F474 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 00C26E851F5150400070F474 /* Cartfile */; };
 		A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */; };
 		A70A416E1F38C0C200CB4A93 /* UIFont+SizeOfString.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70A416D1F38C0C200CB4A93 /* UIFont+SizeOfString.swift */; };
 		A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */; };
@@ -52,6 +53,7 @@
 		002350731F4C21230035FD6E /* UIView+BlurEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BlurEffect.swift"; sourceTree = "<group>"; };
 		003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ChatColor.swift"; sourceTree = "<group>"; };
+		00C26E851F5150400070F474 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A70A416D1F38C0C200CB4A93 /* UIFont+SizeOfString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+SizeOfString.swift"; sourceTree = "<group>"; };
 		A72A23C81F0DBA6000D1F4CB /* Palmerah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Palmerah.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +107,7 @@
 		A72A23BF1F0DBA6000D1F4CB = {
 			isa = PBXGroup;
 			children = (
+				00C26E851F5150400070F474 /* Cartfile */,
 				A72A23CA1F0DBA6000D1F4CB /* Palmerah */,
 				A72A23ED1F0DBA6100D1F4CB /* PalmerahUITests */,
 				A72A23C91F0DBA6000D1F4CB /* Products */,
@@ -278,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A72A23D91F0DBA6100D1F4CB /* LaunchScreen.storyboard in Resources */,
+				00C26E861F5150400070F474 /* Cartfile in Resources */,
 				A72A23D61F0DBA6100D1F4CB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

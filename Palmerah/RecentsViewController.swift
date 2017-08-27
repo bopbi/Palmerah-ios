@@ -26,7 +26,10 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadData()
         tabBarController?.tabBar.isHidden = false
+        collectionView?.reloadData()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
