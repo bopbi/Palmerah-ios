@@ -189,7 +189,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             if (indexPath.item < ((self.viewModel?.messagesCount())! - 1)) {
                 let currentBubbleSender = currentMessage?.isSender
                 let nextIndex = IndexPath(item: indexPath.item + 1, section: indexPath.section)
-                let nextMessage = self.viewModel?.messageAt(indexPath: indexPath)
+                let nextMessage = self.viewModel?.messageAt(indexPath: nextIndex)
                 if (currentBubbleSender == nextMessage?.isSender) {
                     bubbleSpace = 0
                 }
