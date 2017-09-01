@@ -67,10 +67,20 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
         }
     }
     
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.collectionView?.performBatchUpdates({
+            for operation in self.blockOperations {
+                operation.start()
+            }
+        }, completion: { (completed) in
+            
+        })
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
-        collectionView?.reloadData()
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
