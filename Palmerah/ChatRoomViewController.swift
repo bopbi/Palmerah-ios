@@ -28,27 +28,11 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         didSet {
             let delegate = UIApplication.shared.delegate as? AppDelegate
             let context = delegate?.persistentContainer.viewContext
-            let friendRepository = FriendRepository(context: context!)
-            viewModel = ChatRoomViewModel(friend: friend!, friendRepository: friendRepository)
+            let messageRepository = MessageRepository(context: context!)
+            viewModel = ChatRoomViewModel(friend: friend!, messageRepository: messageRepository)
             navigationItem.title = viewModel?.title
         }
     }
-    
-    lazy var chatMessagesFetchResultController : NSFetchedResultsController<Message> = {
-        let delegate = UIApplication.shared.delegate as? AppDelegate
-        
-        let messageFetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
-        messageFetchRequest.sortDescriptors =   [
-            NSSortDescriptor(key: "date", ascending: true)
-        ]
-        messageFetchRequest.predicate = NSPredicate(format: "friend.name = %@ ", (self.friend?.name)!)
-        
-        let context = delegate?.persistentContainer.viewContext
-        
-        let fetchResultController = NSFetchedResultsController(fetchRequest: messageFetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
-        fetchResultController.delegate = self
-        return fetchResultController
-    }()
     
     var blockOperations = [BlockOperation]()
     
@@ -75,13 +59,16 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.collectionView?.performBatchUpdates({ 
-            for operation in self.blockOperations {
-                operation.start()
-            }
-        }, completion: { (completed) in
-            self.scrollToBottom()
-        })
+        DispatchQueue.main.async {
+            self.collectionView?.performBatchUpdates({
+                for operation in self.blockOperations {
+                    operation.start()
+                }
+            }, completion: { (completed) in
+                self.scrollToBottom()
+            })
+        }
+        
     }
     
     lazy var messageInputView : MessageInputView = {
@@ -91,7 +78,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }()
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if (self.messagesCount() > 0) {
+        if ((self.viewModel?.messagesCount())! > 0) {
             DispatchQueue.main.async(execute: {
                 self.scrollToBottom()
             })
@@ -109,12 +96,6 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        do {
-            try self.chatMessagesFetchResultController.performFetch()
-        } catch let err {
-            print(err)
-        }
-        
         collectionView?.showsHorizontalScrollIndicator = false;
         collectionView?.backgroundColor = .white
         collectionView?.alwaysBounceVertical = true
@@ -123,6 +104,8 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         
         self.messageInputView.inputTextView.delegate = self
         
+        self.viewModel?.bindToDelegate(delegate: self)
+        self.viewModel?.performFetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,13 +121,9 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: (currentScrollInset?.top)!, left: 0, bottom: self.messageInputView.bounds.height, right: 0)
             
             self.collectionView?.reloadData()
-            let lastMessageIndexPath = IndexPath(item: self.messagesCount() - 1, section: 0)
+            let lastMessageIndexPath = IndexPath(item: (self.viewModel?.messagesCount())! - 1, section: 0)
             self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: false)
         })
-    }
-    
-    func messagesCount() -> Int {
-        return self.chatMessagesFetchResultController.sections![0].numberOfObjects
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -158,17 +137,14 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = self.chatMessagesFetchResultController.sections?[0].numberOfObjects {
-            return count
-        }
-        return 0
+        return (self.viewModel?.messagesCount())!
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ChatCell
-        let message = self.chatMessagesFetchResultController.object(at: indexPath)
-        if let textMessage = message.text {
-            cell?.messageLabel.text = message.text
+        let message = self.viewModel?.messageAt(indexPath: indexPath)
+        if let textMessage = message?.text {
+            cell?.messageLabel.text = message?.text
             
             if (self.messageTextHeight[textMessage] == nil) {
                 let textBoundingRect = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body).sizeOfString(string: textMessage, constrainedToWidth: CGFloat(maxBubbleContentWidth))
@@ -182,7 +158,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             let totalWidth = (messageTextSize?.width)! + (2 * textPadding)
             var startBubble : CGFloat?;
             
-            if (message.isSender) {
+            if (message?.isSender)! {
                 cell?.bubbleBackgroundView.backgroundColor = senderBubbleColor
                 cell?.messageLabel.textColor = UIColor.white
                 startBubble = view.frame.width - ((messageTextSize?.width)! + ( 2 * textPadding ) + sideBubblePadding)
@@ -200,8 +176,8 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let currentMessage = self.chatMessagesFetchResultController.object(at: indexPath)
-        if let textMessage = currentMessage.text {
+        let currentMessage = self.viewModel?.messageAt(indexPath: indexPath)
+        if let textMessage = currentMessage?.text {
             if (self.messageTextHeight[textMessage] == nil) {
                 let textBoundingRect = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body).sizeOfString(string: textMessage, constrainedToWidth: CGFloat(maxBubbleContentWidth))
                 
@@ -210,11 +186,11 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             
             let messageTextSize = self.messageTextHeight[textMessage]
             var bubbleSpace = bottomBubblePadding;
-            if (indexPath.item < (self.messagesCount() - 1)) {
-                let currentBubbleSender = currentMessage.isSender
+            if (indexPath.item < ((self.viewModel?.messagesCount())! - 1)) {
+                let currentBubbleSender = currentMessage?.isSender
                 let nextIndex = IndexPath(item: indexPath.item + 1, section: indexPath.section)
-                let nextMessage = self.chatMessagesFetchResultController.object(at: nextIndex)
-                if (currentBubbleSender == nextMessage.isSender) {
+                let nextMessage = self.viewModel?.messageAt(indexPath: indexPath)
+                if (currentBubbleSender == nextMessage?.isSender) {
                     bubbleSpace = 0
                 }
                 
@@ -243,7 +219,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     func scrollToBottom() {
-        let lastMessageIndexPath = IndexPath(item: self.messagesCount() - 1, section: 0)
+        let lastMessageIndexPath = IndexPath(item: (self.viewModel?.messagesCount())! - 1, section: 0)
         self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: true)
     }
 }

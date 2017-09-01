@@ -17,22 +17,15 @@ class FriendRepository {
         self.context = context
     }
     
-    func createMessageForFriend(messageText: String, friend: Friend, date: NSDate, isSender: Bool) -> Bool {
-        let message = Message(context: self.context)
-        message.text = messageText
-        message.date = date
-        message.friend = friend
-        message.isSender = isSender
+    func getRecentsFetchResultController() -> NSFetchedResultsController<Friend> {
+        let friendFetchRequest : NSFetchRequest<Friend> = Friend.fetchRequest()
+        friendFetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "lastMessage.date", ascending: false)
+        ]
+        friendFetchRequest.predicate = NSPredicate(format: "lastMessage != nil")
         
-        friend.lastMessage = message
-        
-        do {
-            try context.save()
-        } catch let err {
-            print(err)
-            return false
-        }
-        return true
+        let fetchRequestController = NSFetchedResultsController(fetchRequest: friendFetchRequest, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchRequestController
     }
     
 }

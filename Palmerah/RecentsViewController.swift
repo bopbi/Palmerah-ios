@@ -12,6 +12,7 @@ import CoreData
 class RecentsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
     
     private let cellId = "cellId"
+    private var viewModel : RecentsViewModel? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,27 +22,12 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
         collectionView?.alwaysBounceVertical = true
         
         collectionView?.register(LastMessageCell.self, forCellWithReuseIdentifier: cellId)
-        
-        do {
-            try self.recentsFetchController.performFetch()
-        } catch let err {
-            print(err)
-        }
-    }
-    
-    lazy var recentsFetchController : NSFetchedResultsController<Friend> = {
         let delegate = UIApplication.shared.delegate as? AppDelegate
         let context = delegate?.persistentContainer.viewContext
-        let friendFetchRequest : NSFetchRequest<Friend> = Friend.fetchRequest()
-        friendFetchRequest.sortDescriptors = [
-            NSSortDescriptor(key: "lastMessage.date", ascending: false)
-        ]
-        friendFetchRequest.predicate = NSPredicate(format: "lastMessage != nil")
-        
-        let fetchRequestController = NSFetchedResultsController(fetchRequest: friendFetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
-        fetchRequestController.delegate = self
-        return fetchRequestController
-    }()
+        let friendRepository = FriendRepository(context: context!)
+        self.viewModel = RecentsViewModel(friendRepository: friendRepository, delegate: self)
+        self.viewModel?.performFetch()
+    }
     
     var blockOperations = [BlockOperation]()
     
@@ -68,13 +54,15 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.collectionView?.performBatchUpdates({
-            for operation in self.blockOperations {
-                operation.start()
-            }
-        }, completion: { (completed) in
-            
-        })
+        DispatchQueue.main.async {
+            self.collectionView?.performBatchUpdates({
+                for operation in self.blockOperations {
+                    operation.start()
+                }
+            }, completion: { (completed) in
+                
+            })
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,17 +72,13 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        if let count = self.recentsFetchController.sections?[0].numberOfObjects {
-            return count
-        }
-        return 0
+        return (self.viewModel?.numberOfItemInSection())!
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LastMessageCell
         
-        if let message = self.recentsFetchController.object(at: indexPath).lastMessage {
+        if let message = self.viewModel?.lastMessageAt(indexPath: indexPath) {
             cell.message = message
         }
         
@@ -111,7 +95,7 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         let controller = ChatRoomViewController(collectionViewLayout: layout)
-        controller.friend = recentsFetchController.object(at: indexPath)
+        controller.friend = self.viewModel?.friendAt(indexPath: indexPath)
         navigationController?.pushViewController(controller, animated: true)
         
     }

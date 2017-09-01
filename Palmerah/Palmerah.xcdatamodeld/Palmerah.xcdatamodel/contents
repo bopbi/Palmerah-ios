@@ -13,7 +13,7 @@
         <relationship name="friend" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Friend" inverseName="message" inverseEntity="Friend" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Friend" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Message" positionX="205" positionY="56" width="128" height="105"/>
+        <element name="Friend" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Message" positionX="205" positionY="56" width="128" height="103"/>
     </elements>
 </model>
