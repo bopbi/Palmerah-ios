@@ -56,8 +56,6 @@ extension RecentsViewController {
             }
         }
         
-        loadData()
-        
     }
     
     func clearData() {
@@ -98,40 +96,13 @@ extension RecentsViewController {
         message.friend = friend
         message.isSender = isSender
         
+        friend.lastMessage = message
+        
         do {
             try context.save()
         } catch let err {
             print(err)
         }
-    }
-    
-    func loadData() {
-        
-        let delegate = UIApplication.shared.delegate as? AppDelegate
-        
-        if let context = delegate?.persistentContainer.viewContext {
-            
-            if let friends = fetchFriends() {
-                messages = [Message]()
-                
-                for friend in friends {
-                    let messageFetchRequest : NSFetchRequest<Message> = Message.fetchRequest()
-                    messageFetchRequest.sortDescriptors =   [
-                        NSSortDescriptor(key: "date", ascending: false)
-                    ]
-                    messageFetchRequest.predicate = NSPredicate(format: "friend.name = %@ ", friend.name!)
-                    messageFetchRequest.fetchLimit = 1
-                    do {
-                        let messageResult = try context.fetch(messageFetchRequest)
-                        messages?.append(contentsOf: messageResult)
-                    } catch let err {
-                        print(err)
-                    }
-                }
-            }
-            
-        }
-        
     }
     
     func fetchFriends() -> [Friend]? {

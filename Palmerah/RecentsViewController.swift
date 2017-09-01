@@ -7,12 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
-class RecentsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class RecentsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
     
     private let cellId = "cellId"
-    
-    var messages : [Message]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,17 +22,61 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
         
         collectionView?.register(LastMessageCell.self, forCellWithReuseIdentifier: cellId)
         setupData()
+        
+        do {
+            try self.recentsFetchController.performFetch()
+        } catch let err {
+            print(err)
+        }
+    }
+    
+    lazy var recentsFetchController : NSFetchedResultsController<Friend> = {
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        let context = delegate?.persistentContainer.viewContext
+        let friendFetchRequest : NSFetchRequest<Friend> = Friend.fetchRequest()
+        friendFetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "lastMessage.date", ascending: false)
+        ]
+        friendFetchRequest.predicate = NSPredicate(format: "lastMessage != nil")
+        
+        let fetchRequestController = NSFetchedResultsController(fetchRequest: friendFetchRequest, managedObjectContext: context!, sectionNameKeyPath: nil, cacheName: nil)
+        fetchRequestController.delegate = self
+        return fetchRequestController
+    }()
+    
+    var blockOperations = [BlockOperation]()
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            blockOperations.append(BlockOperation(block: {
+                self.collectionView?.insertItems(at: [newIndexPath!])
+            }))
+            break
+        case .delete:
+            blockOperations.append(BlockOperation(block: {
+                self.collectionView?.deleteItems(at: [newIndexPath!])
+            }))
+            break
+        case .update:
+            blockOperations.append(BlockOperation(block: {
+                self.collectionView?.reloadItems(at: [newIndexPath!])
+            }))
+            break
+        default:
+            break
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadData()
         tabBarController?.tabBar.isHidden = false
         collectionView?.reloadData()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = messages?.count {
+        
+        if let count = self.recentsFetchController.sections?[0].numberOfObjects {
             return count
         }
         return 0
@@ -42,7 +85,7 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LastMessageCell
         
-        if let message = messages?[indexPath.item] {
+        if let message = self.recentsFetchController.object(at: indexPath).lastMessage {
             cell.message = message
         }
         
@@ -59,7 +102,7 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         let controller = ChatRoomViewController(collectionViewLayout: layout)
-        controller.friend = messages?[indexPath.item].friend
+        controller.friend = recentsFetchController.object(at: indexPath)
         navigationController?.pushViewController(controller, animated: true)
         
     }

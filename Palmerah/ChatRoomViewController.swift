@@ -116,6 +116,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         message.friend = friend
         message.isSender = isSender
         
+        friend.lastMessage = message
         do {
             try context.save()
         } catch let err {

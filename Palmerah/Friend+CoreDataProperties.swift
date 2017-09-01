@@ -2,7 +2,7 @@
 //  Friend+CoreDataProperties.swift
 //  Palmerah
 //
-//  Created by Bobby Adi Prabowo on 7/29/17.
+//  Created by Bobby Prabowo on 9/1/17.
 //  Copyright © 2017 Bobby Adi Prabowo. All rights reserved.
 //
 
@@ -19,6 +19,7 @@ extension Friend {
     @NSManaged public var name: String?
     @NSManaged public var profileImageNamed: String?
     @NSManaged public var message: NSSet?
+    @NSManaged public var lastMessage: Message?
 
 }
 
