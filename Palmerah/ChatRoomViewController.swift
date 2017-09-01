@@ -20,11 +20,17 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     let receiverBubbleColor = UIColor(white: 0.95, alpha: 1)
     var messageTextHeight :[String:CGSize] = [:]
     
+    var viewModel : ChatRoomViewModel? = nil
+    
     private let cellId  = "cellId"
     
     var friend: Friend? {
         didSet {
-            navigationItem.title = friend?.name
+            let delegate = UIApplication.shared.delegate as? AppDelegate
+            let context = delegate?.persistentContainer.viewContext
+            let friendRepository = FriendRepository(context: context!)
+            viewModel = ChatRoomViewModel(friend: friend!, friendRepository: friendRepository)
+            navigationItem.title = viewModel?.title
         }
     }
     
@@ -78,8 +84,8 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         })
     }
     
-    lazy var messageInputContainerView : InputAccessoryView = {
-        let inputAccessoryView = InputAccessoryView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
+    lazy var messageInputView : MessageInputView = {
+        let inputAccessoryView = MessageInputView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
         inputAccessoryView.sendMessageButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         return inputAccessoryView
     }()
@@ -94,33 +100,9 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     func handleSend() {
-        let delegate = UIApplication.shared.delegate as? AppDelegate
         
-        if let context = delegate?.persistentContainer.viewContext {
-            createMessageForFriend(messageText: self.messageInputContainerView.inputTextView.text!, friend: self.friend!, date: NSDate(), isSender: true, context: context)
-            
-            do {
-                try context.save()
-            } catch let err {
-                print(err)
-            }
-            
-            self.messageInputContainerView.inputTextView.text = nil
-        }
-    }
-    
-    func createMessageForFriend(messageText: String, friend: Friend, date: NSDate, isSender: Bool, context: NSManagedObjectContext) {
-        let message = Message(context: context)
-        message.text = messageText
-        message.date = date
-        message.friend = friend
-        message.isSender = isSender
-        
-        friend.lastMessage = message
-        do {
-            try context.save()
-        } catch let err {
-            print(err)
+        if (self.viewModel?.insertMessage(textMessage: self.messageInputView.inputTextView.text!))! {
+            self.messageInputView.inputTextView.text = nil
         }
     }
     
@@ -139,7 +121,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         collectionView?.register(ChatCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.keyboardDismissMode = .interactive
         
-        self.messageInputContainerView.inputTextView.delegate = self
+        self.messageInputView.inputTextView.delegate = self
         
     }
     
@@ -152,8 +134,8 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
             
             let currentContentInset = self.collectionView?.contentInset
             let currentScrollInset = self.collectionView?.scrollIndicatorInsets
-            self.collectionView?.contentInset = UIEdgeInsets(top: (currentContentInset?.top)!, left: 0, bottom: self.messageInputContainerView.bounds.height, right: 0)
-            self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: (currentScrollInset?.top)!, left: 0, bottom: self.messageInputContainerView.bounds.height, right: 0)
+            self.collectionView?.contentInset = UIEdgeInsets(top: (currentContentInset?.top)!, left: 0, bottom: self.messageInputView.bounds.height, right: 0)
+            self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: (currentScrollInset?.top)!, left: 0, bottom: self.messageInputView.bounds.height, right: 0)
             
             self.collectionView?.reloadData()
             let lastMessageIndexPath = IndexPath(item: self.messagesCount() - 1, section: 0)
@@ -252,7 +234,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     
     override var inputAccessoryView: UIView? {
         get {
-            return messageInputContainerView
+            return messageInputView
         }
     }
     
@@ -263,118 +245,5 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     func scrollToBottom() {
         let lastMessageIndexPath = IndexPath(item: self.messagesCount() - 1, section: 0)
         self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: true)
-    }
-}
-
-class ChatCell : UICollectionViewCell {
-    
-    let messageLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-        label.textColor = UIColor.black
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    let bubbleBackgroundView : UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 13
-        view.layer.masksToBounds = true
-        return view
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("NSCoder is not implemented")
-    }
-
-    func setupViews() {
-        
-        addSubview(bubbleBackgroundView)
-        addSubview(messageLabel)
-        
-    }
-}
-
-class InputAccessoryView: UIView, UITextViewDelegate {
-    
-    let inputTextView : UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 16)
-        textView.layer.cornerRadius = 8.0
-        textView.layer.masksToBounds = true
-        textView.layer.borderColor = UIColor.lightGray.cgColor
-        textView.layer.backgroundColor = UIColor.white.cgColor
-        textView.layer.borderWidth = 0.5
-        return textView
-    }()
-    
-    let sendMessageButton : UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Send", for: .normal)
-        let titleColor = UIColor.appleBlue()
-        button.setTitleColor(titleColor, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        return button
-    }()
-    
-    override var intrinsicContentSize: CGSize {
-        // Calculate intrinsicContentSize that will fit all the text
-        var textSize = inputTextView.font?.sizeOfString(string: inputTextView.text, constrainedToWidth: bounds.width)
-        if (textSize?.height == 0) {
-            textSize = inputTextView.sizeThatFits(CGSize(width: inputTextView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        }
-        return CGSize(width: bounds.width, height: textSize!.height)
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        addBlurBackgroundLayer(blurStyle: .extraLight, colorIfBlurIsDisable: .white)
-        
-        // This is required to make the view grow vertically
-        autoresizingMask = .flexibleHeight
-        
-        // Setup textView as needed
-        
-        //sendMessageButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
-
-        let topBorderView = UIView()
-        topBorderView.backgroundColor = UIColor.init(white: 0.69, alpha: 1)
-
-        addSubview(inputTextView)
-        inputTextView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(sendMessageButton)
-        addSubview(topBorderView)
-
-        addConstraintWithFormat(format: "H:|-8-[v0][v1(60)]|", views: self.inputTextView, sendMessageButton)
-        addConstraintWithFormat(format: "V:|-4-[v0]-4-|", views: inputTextView)
-        addConstraintWithFormat(format: "V:|[v0]|", views: sendMessageButton)
-        addConstraintWithFormat(format: "H:|[v0]|", views: topBorderView)
-        addConstraintWithFormat(format: "V:|[v0(0.3)]", views: topBorderView)
-        
-        inputTextView.delegate = self
-        
-        // Disabling textView scrolling prevents some undesired effects,
-        // like incorrect contentOffset when adding new line,
-        // and makes the textView behave similar to Apple's Messages app
-        inputTextView.isScrollEnabled = false
-        
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: UITextViewDelegate
-    
-    func textViewDidChange(_ textView: UITextView) {
-        // Re-calculate intrinsicContentSize when text changes
-        invalidateIntrinsicContentSize()
     }
 }

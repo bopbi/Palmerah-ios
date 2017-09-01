@@ -12,6 +12,10 @@ class MainTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         
+        // add data seeder
+        let seeder = Seeder()
+        seeder.setupData()
+        
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0

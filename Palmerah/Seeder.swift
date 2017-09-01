@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-extension RecentsViewController {
+class Seeder {
    
     func setupData() {
         
@@ -103,23 +103,6 @@ extension RecentsViewController {
         } catch let err {
             print(err)
         }
-    }
-    
-    func fetchFriends() -> [Friend]? {
-        let delegate = UIApplication.shared.delegate as? AppDelegate
-        
-        if let context = delegate?.persistentContainer.viewContext {
-            
-            let friendFetchRequest : NSFetchRequest<Friend> = Friend.fetchRequest()
-            
-            do {
-                return try context.fetch(friendFetchRequest)
-            } catch let err {
-                print(err)
-            }
-            
-        }
-        return nil
     }
     
 }

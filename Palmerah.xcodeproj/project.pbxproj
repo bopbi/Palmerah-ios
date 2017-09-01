@@ -10,6 +10,10 @@
 		002350721F4BE1C80035FD6E /* MoreSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */; };
 		002350741F4C21230035FD6E /* UIView+BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002350731F4C21230035FD6E /* UIView+BlurEffect.swift */; };
 		0032F05D1F58F5C700043E08 /* Friend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F05C1F58F5C700043E08 /* Friend+CoreDataProperties.swift */; };
+		0032F0651F59822500043E08 /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F0641F59822500043E08 /* ChatRoomViewModel.swift */; };
+		0032F0671F59826200043E08 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F0661F59826200043E08 /* ChatCell.swift */; };
+		0032F0691F59954C00043E08 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F0681F59954C00043E08 /* MessageInputView.swift */; };
+		0032F06B1F59A3C000043E08 /* LastMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06A1F59A3C000043E08 /* LastMessageCell.swift */; };
 		003F24391F40A49D000F7F0F /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */; };
 		003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */; };
 		00C26E861F5150400070F474 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 00C26E851F5150400070F474 /* Cartfile */; };
@@ -25,7 +29,7 @@
 		A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751E68F1F361A2B0080DD35 /* MainTabBarController.swift */; };
 		A780844F1F2D0C7100EF07F9 /* FriendRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */; };
 		A78084511F2E340A00EF07F9 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */; };
-		A7B3B87C1F144C36000BB5FD /* RecentsViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */; };
+		A7B3B87C1F144C36000BB5FD /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B3B87B1F144C36000BB5FD /* Seeder.swift */; };
 		A7FD2F271F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */; };
 		A7FE26421F2CF31200F3010E /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */; };
 		A7FE26441F2CF31200F3010E /* Friend+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE26401F2CF31200F3010E /* Friend+CoreDataClass.swift */; };
@@ -52,6 +56,10 @@
 		002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreSettingsViewController.swift; sourceTree = "<group>"; };
 		002350731F4C21230035FD6E /* UIView+BlurEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BlurEffect.swift"; sourceTree = "<group>"; };
 		0032F05C1F58F5C700043E08 /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0032F0641F59822500043E08 /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
+		0032F0661F59826200043E08 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		0032F0681F59954C00043E08 /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
+		0032F06A1F59A3C000043E08 /* LastMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastMessageCell.swift; sourceTree = "<group>"; };
 		003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ChatColor.swift"; sourceTree = "<group>"; };
 		00C26E851F5150400070F474 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
@@ -73,7 +81,7 @@
 		A751E68F1F361A2B0080DD35 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendRepository.swift; sourceTree = "<group>"; };
 		A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
-		A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsViewControllerHelper.swift; sourceTree = "<group>"; };
+		A7B3B87B1F144C36000BB5FD /* Seeder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintWithFormat.swift"; sourceTree = "<group>"; };
 		A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A7FE26401F2CF31200F3010E /* Friend+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -107,8 +115,8 @@
 		0032F05E1F59814C00043E08 /* Recents */ = {
 			isa = PBXGroup;
 			children = (
-				A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */,
 				A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */,
+				0032F06A1F59A3C000043E08 /* LastMessageCell.swift */,
 			);
 			name = Recents;
 			sourceTree = "<group>";
@@ -117,6 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */,
+				0032F0641F59822500043E08 /* ChatRoomViewModel.swift */,
+				0032F0661F59826200043E08 /* ChatCell.swift */,
+				0032F0681F59954C00043E08 /* MessageInputView.swift */,
 			);
 			name = ChatRoom;
 			sourceTree = "<group>";
@@ -140,6 +151,7 @@
 		0032F0621F59818B00043E08 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */,
 				0032F05C1F58F5C700043E08 /* Friend+CoreDataProperties.swift */,
 				003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */,
 				A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */,
@@ -194,7 +206,7 @@
 				A72A23DA1F0DBA6100D1F4CB /* Info.plist */,
 				A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */,
 				A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */,
-				A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */,
+				A7B3B87B1F144C36000BB5FD /* Seeder.swift */,
 				A751E68F1F361A2B0080DD35 /* MainTabBarController.swift */,
 			);
 			path = Palmerah;
@@ -356,7 +368,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A72A23CE1F0DBA6100D1F4CB /* RecentsViewController.swift in Sources */,
+				0032F0651F59822500043E08 /* ChatRoomViewModel.swift in Sources */,
 				A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */,
+				0032F0671F59826200043E08 /* ChatCell.swift in Sources */,
 				A7FE26441F2CF31200F3010E /* Friend+CoreDataClass.swift in Sources */,
 				A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */,
 				003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */,
@@ -370,7 +384,9 @@
 				002350721F4BE1C80035FD6E /* MoreSettingsViewController.swift in Sources */,
 				002350741F4C21230035FD6E /* UIView+BlurEffect.swift in Sources */,
 				A7FE26421F2CF31200F3010E /* Message+CoreDataClass.swift in Sources */,
-				A7B3B87C1F144C36000BB5FD /* RecentsViewControllerHelper.swift in Sources */,
+				0032F0691F59954C00043E08 /* MessageInputView.swift in Sources */,
+				A7B3B87C1F144C36000BB5FD /* Seeder.swift in Sources */,
+				0032F06B1F59A3C000043E08 /* LastMessageCell.swift in Sources */,
 				A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
