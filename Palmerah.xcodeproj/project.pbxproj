@@ -104,6 +104,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0032F05E1F59814C00043E08 /* Recents */ = {
+			isa = PBXGroup;
+			children = (
+				A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */,
+				A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */,
+			);
+			name = Recents;
+			sourceTree = "<group>";
+		};
+		0032F05F1F59816400043E08 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */,
+			);
+			name = ChatRoom;
+			sourceTree = "<group>";
+		};
+		0032F0601F59816D00043E08 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		0032F0611F59817800043E08 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		0032F0621F59818B00043E08 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0032F05C1F58F5C700043E08 /* Friend+CoreDataProperties.swift */,
+				003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */,
+				A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */,
+				A7FE26401F2CF31200F3010E /* Friend+CoreDataClass.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0032F0631F5981BB00043E08 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */,
+				A70A416D1F38C0C200CB4A93 /* UIFont+SizeOfString.swift */,
+				003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */,
+				002350731F4C21230035FD6E /* UIView+BlurEffect.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 		A72A23BF1F0DBA6000D1F4CB = {
 			isa = PBXGroup;
 			children = (
@@ -128,26 +183,19 @@
 		A72A23CA1F0DBA6000D1F4CB /* Palmerah */ = {
 			isa = PBXGroup;
 			children = (
-				0032F05C1F58F5C700043E08 /* Friend+CoreDataProperties.swift */,
-				003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */,
-				A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */,
-				A7FE26401F2CF31200F3010E /* Friend+CoreDataClass.swift */,
+				0032F0631F5981BB00043E08 /* Utility */,
+				0032F0621F59818B00043E08 /* Model */,
+				0032F0611F59817800043E08 /* Settings */,
+				0032F0601F59816D00043E08 /* Contacts */,
+				0032F05F1F59816400043E08 /* ChatRoom */,
+				0032F05E1F59814C00043E08 /* Recents */,
 				A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */,
 				A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */,
 				A72A23DA1F0DBA6100D1F4CB /* Info.plist */,
 				A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */,
-				A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */,
 				A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */,
 				A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */,
-				A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */,
-				A7B3B87B1F144C36000BB5FD /* RecentsViewControllerHelper.swift */,
-				A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */,
 				A751E68F1F361A2B0080DD35 /* MainTabBarController.swift */,
-				A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */,
-				A70A416D1F38C0C200CB4A93 /* UIFont+SizeOfString.swift */,
-				003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */,
-				002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */,
-				002350731F4C21230035FD6E /* UIView+BlurEffect.swift */,
 			);
 			path = Palmerah;
 			sourceTree = "<group>";
