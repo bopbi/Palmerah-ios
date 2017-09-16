@@ -18,7 +18,6 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     let bottomBubblePadding = CGFloat(10)
     let senderBubbleColor = UIColor.appleBlue()
     let receiverBubbleColor = UIColor(white: 0.95, alpha: 1)
-    var messageTextHeight :[String:CGSize] = [:]
     
     var viewModel : ChatRoomViewModel? = nil
     
@@ -86,7 +85,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         }
     }
     
-    func handleSend() {
+    @objc func handleSend() {
         
         if (self.viewModel?.insertMessage(textMessage: self.messageInputView.inputTextView.text!))! {
             self.messageInputView.inputTextView.text = nil
@@ -114,13 +113,6 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         tabBarController?.tabBar.isHidden = true
         
         DispatchQueue.main.async(execute: {
-            
-            let currentContentInset = self.collectionView?.contentInset
-            let currentScrollInset = self.collectionView?.scrollIndicatorInsets
-            self.collectionView?.contentInset = UIEdgeInsets(top: (currentContentInset?.top)!, left: 0, bottom: self.messageInputView.bounds.height, right: 0)
-            self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: (currentScrollInset?.top)!, left: 0, bottom: self.messageInputView.bounds.height, right: 0)
-            
-            self.collectionView?.reloadData()
             let lastMessageIndexPath = IndexPath(item: (self.viewModel?.messagesCount())! - 1, section: 0)
             self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: false)
         })
@@ -146,29 +138,23 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         if let textMessage = message?.text {
             cell?.messageLabel.text = message?.text
             
-            if (self.messageTextHeight[textMessage] == nil) {
-                let textBoundingRect = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body).sizeOfString(string: textMessage, constrainedToWidth: CGFloat(maxBubbleContentWidth))
-                
-                self.messageTextHeight[textMessage] = textBoundingRect
-            }
-            
-            let messageTextSize = self.messageTextHeight[textMessage]
-
-            let totalHeight = (messageTextSize?.height)! + (2 * textPadding)
-            let totalWidth = (messageTextSize?.width)! + (2 * textPadding)
+            let messageTextSize = textMessage.frameSize(maxWidth: CGFloat(maxBubbleContentWidth), font: UIFont.preferredFont(forTextStyle: .body))
+    
+            let totalHeight = messageTextSize.height + (2 * textPadding)
+            let totalWidth = messageTextSize.width + (2 * textPadding)
             var startBubble : CGFloat?;
             
             if (message?.isSender)! {
                 cell?.bubbleBackgroundView.backgroundColor = senderBubbleColor
                 cell?.messageLabel.textColor = UIColor.white
-                startBubble = view.frame.width - ((messageTextSize?.width)! + ( 2 * textPadding ) + sideBubblePadding)
+                startBubble = view.frame.width - (messageTextSize.width + ( 2 * textPadding ) + sideBubblePadding)
             } else {
                 cell?.bubbleBackgroundView.backgroundColor = receiverBubbleColor
                 cell?.messageLabel.textColor = UIColor.black
                 startBubble = sideBubblePadding
             }
             
-            cell?.messageLabel.frame = CGRect(x: startBubble! + textPadding, y: topBubblePadding + textPadding, width: (messageTextSize?.width)!, height: (messageTextSize?.height)!)
+            cell?.messageLabel.frame = CGRect(x: startBubble! + textPadding, y: topBubblePadding + textPadding, width: messageTextSize.width, height: messageTextSize.height)
             cell?.bubbleBackgroundView.frame = CGRect(x: startBubble!, y: topBubblePadding, width: totalWidth, height: totalHeight)
         }
         
@@ -178,13 +164,9 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let currentMessage = self.viewModel?.messageAt(indexPath: indexPath)
         if let textMessage = currentMessage?.text {
-            if (self.messageTextHeight[textMessage] == nil) {
-                let textBoundingRect = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body).sizeOfString(string: textMessage, constrainedToWidth: CGFloat(maxBubbleContentWidth))
-                
-                self.messageTextHeight[textMessage] = textBoundingRect
-            }
             
-            let messageTextSize = self.messageTextHeight[textMessage]
+            let messageTextSize = textMessage.frameSize(maxWidth: CGFloat(maxBubbleContentWidth), font: UIFont.preferredFont(forTextStyle: .body))
+            
             var bubbleSpace = bottomBubblePadding;
             if (indexPath.item < ((self.viewModel?.messagesCount())! - 1)) {
                 let currentBubbleSender = currentMessage?.isSender
@@ -196,7 +178,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
                 
             }
             
-            let totalHeight = messageTextSize!.height + (2 * textPadding) + topBubblePadding + bubbleSpace;
+            let totalHeight = messageTextSize.height + (2 * textPadding) + topBubblePadding + bubbleSpace;
             
             return CGSize(width: view.frame.width, height: totalHeight)
         }

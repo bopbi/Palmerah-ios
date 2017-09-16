@@ -32,11 +32,8 @@ class MessageInputView: UIView, UITextViewDelegate {
     
     override var intrinsicContentSize: CGSize {
         // Calculate intrinsicContentSize that will fit all the text
-        var textSize = inputTextView.font?.sizeOfString(string: inputTextView.text, constrainedToWidth: bounds.width)
-        if (textSize?.height == 0) {
-            textSize = inputTextView.sizeThatFits(CGSize(width: inputTextView.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-        }
-        return CGSize(width: bounds.width, height: textSize!.height)
+        let textSize = inputTextView.text.frameSize(maxWidth: bounds.width, font: inputTextView.font!)
+        return CGSize(width: bounds.width, height: textSize.height)
     }
     
     override init(frame: CGRect) {
@@ -59,7 +56,7 @@ class MessageInputView: UIView, UITextViewDelegate {
         addSubview(sendMessageButton)
         addSubview(topBorderView)
         
-        addConstraintWithFormat(format: "H:|-8-[v0][v1(60)]|", views: self.inputTextView, sendMessageButton)
+        addConstraintWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextView, sendMessageButton)
         addConstraintWithFormat(format: "V:|-4-[v0]-4-|", views: inputTextView)
         addConstraintWithFormat(format: "V:|[v0]|", views: sendMessageButton)
         addConstraintWithFormat(format: "H:|[v0]|", views: topBorderView)
