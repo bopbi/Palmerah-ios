@@ -10,9 +10,17 @@ import UIKit
 
 class MessageInputView: UIView, UITextViewDelegate {
     
+    let inputTextViewLabelPlaceHolder : UILabel = {
+        let placeholderLabel = UILabel()
+        placeholderLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        placeholderLabel.textColor = UIColor.lightGray
+        placeholderLabel.text = "Message"
+        return placeholderLabel
+    }()
+    
     let inputTextView : UITextView = {
         let textView = UITextView()
-        textView.font = UIFont.systemFont(ofSize: 16)
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
         textView.layer.cornerRadius = 8.0
         textView.layer.masksToBounds = true
         textView.layer.borderColor = UIColor.lightGray.cgColor
@@ -47,39 +55,27 @@ class MessageInputView: UIView, UITextViewDelegate {
         // Setup textView as needed
         
         //sendMessageButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
-        
-        let topBorderView = UIView()
-        topBorderView.backgroundColor = UIColor.init(white: 0.69, alpha: 1)
-        
         addSubview(inputTextView)
+        
+        inputTextView.addSubview(inputTextViewLabelPlaceHolder)
+        addConstraintWithFormat(format: "H:|-4-[v0]", views: inputTextViewLabelPlaceHolder)
+        addConstraintWithFormat(format: "V:|-[v0]-|", views: inputTextViewLabelPlaceHolder)
+        
         inputTextView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(sendMessageButton)
-        addSubview(topBorderView)
         
         addConstraintWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextView, sendMessageButton)
-        addConstraintWithFormat(format: "V:|-4-[v0]-4-|", views: inputTextView)
+        addConstraintWithFormat(format: "V:|-6-[v0]-6-|", views: inputTextView)
         addConstraintWithFormat(format: "V:|[v0]|", views: sendMessageButton)
-        addConstraintWithFormat(format: "H:|[v0]|", views: topBorderView)
-        addConstraintWithFormat(format: "V:|[v0(0.3)]", views: topBorderView)
-        
-        inputTextView.delegate = self
         
         // Disabling textView scrolling prevents some undesired effects,
         // like incorrect contentOffset when adding new line,
         // and makes the textView behave similar to Apple's Messages app
         inputTextView.isScrollEnabled = false
         
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: UITextViewDelegate
-    
-    func textViewDidChange(_ textView: UITextView) {
-        // Re-calculate intrinsicContentSize when text changes
-        invalidateIntrinsicContentSize()
     }
 }

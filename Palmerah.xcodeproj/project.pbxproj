@@ -10,16 +10,18 @@
 		00003B1E1F6C2C2C00583354 /* String+FrameSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00003B1D1F6C2C2C00583354 /* String+FrameSize.swift */; };
 		002350721F4BE1C80035FD6E /* MoreSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */; };
 		002350741F4C21230035FD6E /* UIView+BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002350731F4C21230035FD6E /* UIView+BlurEffect.swift */; };
-		0032F05D1F58F5C700043E08 /* Friend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F05C1F58F5C700043E08 /* Friend+CoreDataProperties.swift */; };
 		0032F0651F59822500043E08 /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F0641F59822500043E08 /* ChatRoomViewModel.swift */; };
 		0032F0671F59826200043E08 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F0661F59826200043E08 /* ChatCell.swift */; };
 		0032F0691F59954C00043E08 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F0681F59954C00043E08 /* MessageInputView.swift */; };
 		0032F06B1F59A3C000043E08 /* LastMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06A1F59A3C000043E08 /* LastMessageCell.swift */; };
 		0032F06D1F59AD1500043E08 /* RecentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06C1F59AD1500043E08 /* RecentsViewModel.swift */; };
 		0032F06F1F59B56F00043E08 /* MessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06E1F59B56E00043E08 /* MessageRepository.swift */; };
-		003F24391F40A49D000F7F0F /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */; };
 		003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */; };
 		00C26E861F5150400070F474 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 00C26E851F5150400070F474 /* Cartfile */; };
+		00DAC8EC1F6D971300A07930 /* Friend+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DAC8E81F6D971300A07930 /* Friend+CoreDataClass.swift */; };
+		00DAC8ED1F6D971300A07930 /* Friend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DAC8E91F6D971300A07930 /* Friend+CoreDataProperties.swift */; };
+		00DAC8EE1F6D971300A07930 /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DAC8EA1F6D971300A07930 /* Message+CoreDataClass.swift */; };
+		00DAC8EF1F6D971300A07930 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DAC8EB1F6D971300A07930 /* Message+CoreDataProperties.swift */; };
 		A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */; };
 		A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */; };
 		A72A23CE1F0DBA6100D1F4CB /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */; };
@@ -33,8 +35,6 @@
 		A78084511F2E340A00EF07F9 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */; };
 		A7B3B87C1F144C36000BB5FD /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B3B87B1F144C36000BB5FD /* Seeder.swift */; };
 		A7FD2F271F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */; };
-		A7FE26421F2CF31200F3010E /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */; };
-		A7FE26441F2CF31200F3010E /* Friend+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FE26401F2CF31200F3010E /* Friend+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,16 +58,18 @@
 		00003B1D1F6C2C2C00583354 /* String+FrameSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FrameSize.swift"; sourceTree = "<group>"; };
 		002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreSettingsViewController.swift; sourceTree = "<group>"; };
 		002350731F4C21230035FD6E /* UIView+BlurEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BlurEffect.swift"; sourceTree = "<group>"; };
-		0032F05C1F58F5C700043E08 /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0032F0641F59822500043E08 /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
 		0032F0661F59826200043E08 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		0032F0681F59954C00043E08 /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		0032F06A1F59A3C000043E08 /* LastMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastMessageCell.swift; sourceTree = "<group>"; };
 		0032F06C1F59AD1500043E08 /* RecentsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsViewModel.swift; sourceTree = "<group>"; };
 		0032F06E1F59B56E00043E08 /* MessageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRepository.swift; sourceTree = "<group>"; };
-		003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ChatColor.swift"; sourceTree = "<group>"; };
 		00C26E851F5150400070F474 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		00DAC8E81F6D971300A07930 /* Friend+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataClass.swift"; sourceTree = "<group>"; };
+		00DAC8E91F6D971300A07930 /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		00DAC8EA1F6D971300A07930 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
+		00DAC8EB1F6D971300A07930 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A72A23C81F0DBA6000D1F4CB /* Palmerah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Palmerah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,8 +89,6 @@
 		A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		A7B3B87B1F144C36000BB5FD /* Seeder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		A7FD2F261F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+ConstraintWithFormat.swift"; sourceTree = "<group>"; };
-		A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A7FE26401F2CF31200F3010E /* Friend+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,11 +156,11 @@
 		0032F0621F59818B00043E08 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				00DAC8E81F6D971300A07930 /* Friend+CoreDataClass.swift */,
+				00DAC8E91F6D971300A07930 /* Friend+CoreDataProperties.swift */,
+				00DAC8EA1F6D971300A07930 /* Message+CoreDataClass.swift */,
+				00DAC8EB1F6D971300A07930 /* Message+CoreDataProperties.swift */,
 				A780844E1F2D0C7100EF07F9 /* FriendRepository.swift */,
-				0032F05C1F58F5C700043E08 /* Friend+CoreDataProperties.swift */,
-				003F24381F40A49D000F7F0F /* Message+CoreDataProperties.swift */,
-				A7FE263E1F2CF31200F3010E /* Message+CoreDataClass.swift */,
-				A7FE26401F2CF31200F3010E /* Friend+CoreDataClass.swift */,
 				0032F06E1F59B56E00043E08 /* MessageRepository.swift */,
 			);
 			name = Model;
@@ -377,28 +377,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				A72A23CE1F0DBA6100D1F4CB /* RecentsViewController.swift in Sources */,
+				00DAC8EC1F6D971300A07930 /* Friend+CoreDataClass.swift in Sources */,
 				0032F0651F59822500043E08 /* ChatRoomViewModel.swift in Sources */,
 				A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */,
 				0032F06D1F59AD1500043E08 /* RecentsViewModel.swift in Sources */,
 				0032F0671F59826200043E08 /* ChatCell.swift in Sources */,
-				A7FE26441F2CF31200F3010E /* Friend+CoreDataClass.swift in Sources */,
 				A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */,
 				003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */,
-				003F24391F40A49D000F7F0F /* Message+CoreDataProperties.swift in Sources */,
 				A78084511F2E340A00EF07F9 /* ChatRoomViewController.swift in Sources */,
+				00DAC8EE1F6D971300A07930 /* Message+CoreDataClass.swift in Sources */,
 				A780844F1F2D0C7100EF07F9 /* FriendRepository.swift in Sources */,
 				A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */,
 				A7FD2F271F10FD2D0024CA5A /* UIView+ConstraintWithFormat.swift in Sources */,
-				0032F05D1F58F5C700043E08 /* Friend+CoreDataProperties.swift in Sources */,
 				002350721F4BE1C80035FD6E /* MoreSettingsViewController.swift in Sources */,
 				00003B1E1F6C2C2C00583354 /* String+FrameSize.swift in Sources */,
 				002350741F4C21230035FD6E /* UIView+BlurEffect.swift in Sources */,
 				0032F06F1F59B56F00043E08 /* MessageRepository.swift in Sources */,
-				A7FE26421F2CF31200F3010E /* Message+CoreDataClass.swift in Sources */,
 				0032F0691F59954C00043E08 /* MessageInputView.swift in Sources */,
 				A7B3B87C1F144C36000BB5FD /* Seeder.swift in Sources */,
 				0032F06B1F59A3C000043E08 /* LastMessageCell.swift in Sources */,
 				A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */,
+				00DAC8EF1F6D971300A07930 /* Message+CoreDataProperties.swift in Sources */,
+				00DAC8ED1F6D971300A07930 /* Friend+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,7 +564,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.Palmerah;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -579,7 +579,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.Palmerah;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -594,7 +594,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Palmerah.app/Palmerah";
 			};
@@ -610,7 +610,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Palmerah.app/Palmerah";
 			};
@@ -625,7 +625,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Palmerah;
 			};
@@ -640,7 +640,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Palmerah;
 			};

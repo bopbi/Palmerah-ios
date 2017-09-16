@@ -77,12 +77,17 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }()
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        messageInputView.inputTextViewLabelPlaceHolder.isHidden = textView.hasText
         if ((self.viewModel?.messagesCount())! > 0) {
             DispatchQueue.main.async(execute: {
                 self.scrollToBottom()
             })
             
         }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        messageInputView.inputTextViewLabelPlaceHolder.isHidden = textView.hasText
     }
     
     @objc func handleSend() {
@@ -186,9 +191,9 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         return CGSize(width: view.frame.width, height: 0)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: 0, height: 0)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+//        return CGSize(width: 0, height: 0)
+//    }
     
     override var inputAccessoryView: UIView? {
         get {
