@@ -64,9 +64,15 @@ class MessageInputView: UIView, UITextViewDelegate {
         inputTextView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(sendMessageButton)
         
+        let bottomBorderView = UIView()
+        bottomBorderView.backgroundColor = UIColor.init(white: 0.69, alpha: 1)
+        
+        addSubview(bottomBorderView)
+        
+        addConstraintWithFormat(format: "H:|[v0]|", views: bottomBorderView)
         addConstraintWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextView, sendMessageButton)
-        addConstraintWithFormat(format: "V:|-6-[v0]-6-|", views: inputTextView)
-        addConstraintWithFormat(format: "V:|[v0]|", views: sendMessageButton)
+        addConstraintWithFormat(format: "V:|-4-[v0]-4-[v1]-|", views: inputTextView, bottomBorderView)
+        addConstraintWithFormat(format: "V:|-4-[v0]-4-[v1]-|", views: sendMessageButton, bottomBorderView)
         
         // Disabling textView scrolling prevents some undesired effects,
         // like incorrect contentOffset when adding new line,

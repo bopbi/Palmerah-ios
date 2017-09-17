@@ -10,7 +10,7 @@ import UIKit
 
 extension UIView {
     
-    func addConstraintWithFormat(format: String, views: UIView...) {
+    func addConstraintWithFormat(format: String, views: UIView...) -> [NSLayoutConstraint] {
         
         var viewsDictionary = [String: UIView]()
         for (index, view) in views.enumerated() {
@@ -22,10 +22,13 @@ extension UIView {
         let constraint = NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary)
         
         NSLayoutConstraint.activate(constraint)
+        return constraint
     }
     
-    func addCenterYConstraintToParent(view: UIView) {
-        NSLayoutConstraint.activate([NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)])
+    func addCenterYConstraintToParent(view: UIView) -> [NSLayoutConstraint] {
+        let constraint = [NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0)]
         
+        NSLayoutConstraint.activate(constraint)
+        return constraint
     }
 }

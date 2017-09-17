@@ -71,12 +71,13 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     lazy var messageInputView : MessageInputView = {
-        let inputAccessoryView = MessageInputView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48))
+        let inputAccessoryView = MessageInputView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44 ))
         inputAccessoryView.sendMessageButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         return inputAccessoryView
     }()
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        
         messageInputView.inputTextViewLabelPlaceHolder.isHidden = textView.hasText
         if ((self.viewModel?.messagesCount())! > 0) {
             DispatchQueue.main.async(execute: {
@@ -116,17 +117,12 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         super.viewWillAppear(animated)
         
         tabBarController?.tabBar.isHidden = true
-        
-        DispatchQueue.main.async(execute: {
-            let lastMessageIndexPath = IndexPath(item: (self.viewModel?.messagesCount())! - 1, section: 0)
-            self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: false)
-        })
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        NotificationCenter.default.removeObserver(self)
+    override func viewDidAppear(_ animated: Bool) {
+        DispatchQueue.main.async(execute: {
+            self.scrollToBottom()
+        })
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
