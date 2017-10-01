@@ -69,6 +69,12 @@ class MessageInputView: UIView, UITextViewDelegate {
         addConstraintWithFormat(format: "V:|-4-[v0]-4-[v1]-|", views: inputTextView, bottomBorderView)
         addConstraintWithFormat(format: "V:|-4-[v0]-4-[v1]-|", views: sendMessageButton, bottomBorderView)
         
+        inputTextView.topAnchor.constraint(equalTo: self.topAnchor, constant: 6).isActive = true
+        inputTextView.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor, constant: -6).isActive = true
+        
+        sendMessageButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        sendMessageButton.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor).isActive = true
+        
         inputTextView.isScrollEnabled = false
         
     }
