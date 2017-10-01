@@ -65,8 +65,12 @@ class MessageInputView: UIView, UITextViewDelegate {
         addSubview(sendMessageButton)
         
         addConstraintWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextView, sendMessageButton)
-        addConstraintWithFormat(format: "V:|-6-[v0]-6-|", views: inputTextView)
-        addConstraintWithFormat(format: "V:|[v0]|", views: sendMessageButton)
+        
+        inputTextView.topAnchor.constraint(equalTo: self.topAnchor, constant: 6).isActive = true
+        inputTextView.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor, constant: -6).isActive = true
+        
+        sendMessageButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        sendMessageButton.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor).isActive = true
         
         // Disabling textView scrolling prevents some undesired effects,
         // like incorrect contentOffset when adding new line,
