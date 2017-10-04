@@ -49,12 +49,7 @@ class MessageInputView: UIView, UITextViewDelegate {
         
         addBlurBackgroundLayer(blurStyle: .extraLight, colorIfBlurIsDisable: .white)
         
-        // This is required to make the view grow vertically
         autoresizingMask = .flexibleHeight
-        
-        // Setup textView as needed
-        
-        //sendMessageButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         addSubview(inputTextView)
         
         inputTextView.addSubview(inputTextViewLabelPlaceHolder)
@@ -74,9 +69,6 @@ class MessageInputView: UIView, UITextViewDelegate {
         addConstraintWithFormat(format: "V:|-4-[v0]-4-[v1]-|", views: inputTextView, bottomBorderView)
         addConstraintWithFormat(format: "V:|-4-[v0]-4-[v1]-|", views: sendMessageButton, bottomBorderView)
         
-        // Disabling textView scrolling prevents some undesired effects,
-        // like incorrect contentOffset when adding new line,
-        // and makes the textView behave similar to Apple's Messages app
         inputTextView.isScrollEnabled = false
         
     }
