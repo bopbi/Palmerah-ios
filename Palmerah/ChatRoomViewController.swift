@@ -64,7 +64,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
                     operation.start()
                 }
             }, completion: { (completed) in
-                self.scrollToBottom()
+                self.scrollToBottom(animated: true)
             })
         }
         
@@ -81,7 +81,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         messageInputView.inputTextViewLabelPlaceHolder.isHidden = textView.hasText
         if ((self.viewModel?.messagesCount())! > 0) {
             DispatchQueue.main.async(execute: {
-                self.scrollToBottom()
+                self.scrollToBottom(animated: true)
             })
             
         }
@@ -101,11 +101,18 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView?.contentInsetAdjustmentBehavior = .never;
         collectionView?.showsHorizontalScrollIndicator = false;
         collectionView?.backgroundColor = .white
         collectionView?.alwaysBounceVertical = true
         collectionView?.register(ChatCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.keyboardDismissMode = .interactive
+        
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            if #available(iOS 11.0, *) {
+                flowLayout.sectionInsetReference = .fromSafeArea
+            }
+        }
         
         self.messageInputView.inputTextView.delegate = self
         
@@ -117,15 +124,14 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         super.viewWillAppear(animated)
         
         tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
+        
         DispatchQueue.main.async(execute: {
-            self.scrollToBottom()
+            self.scrollToBottom(animated: false)
         })
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         collectionView?.collectionViewLayout.invalidateLayout()
     }
     
@@ -187,10 +193,6 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         return CGSize(width: view.frame.width, height: 0)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-//        return CGSize(width: 0, height: 0)
-//    }
-    
     override var inputAccessoryView: UIView? {
         get {
             return messageInputView
@@ -201,8 +203,9 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         return true
     }
     
-    func scrollToBottom() {
+    func scrollToBottom(animated: Bool) {
         let lastMessageIndexPath = IndexPath(item: (self.viewModel?.messagesCount())! - 1, section: 0)
-        self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: true)
+        self.collectionView?.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: animated)
+        
     }
 }
