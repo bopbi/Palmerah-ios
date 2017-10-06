@@ -8,16 +8,20 @@
 
 import UIKit
 import CoreData
+import RxSwift
+import RxCocoa
 
 class ChatRoomViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UITextViewDelegate, NSFetchedResultsControllerDelegate {
     
-    let maxBubbleContentWidth = 250
-    let textPadding = CGFloat(10)
-    let sideBubblePadding = CGFloat(10)
-    let topBubblePadding = CGFloat(5)
-    let bottomBubblePadding = CGFloat(10)
-    let senderBubbleColor = UIColor.appleBlue()
-    let receiverBubbleColor = UIColor(white: 0.95, alpha: 1)
+    private let maxBubbleContentWidth = 250
+    private let textPadding = CGFloat(10)
+    private let sideBubblePadding = CGFloat(10)
+    private let topBubblePadding = CGFloat(5)
+    private let bottomBubblePadding = CGFloat(10)
+    private let senderBubbleColor = UIColor.appleBlue()
+    private let receiverBubbleColor = UIColor(white: 0.95, alpha: 1)
+    
+    private let disposeBag = DisposeBag()
     
     var viewModel : ChatRoomViewModel? = nil
     
@@ -72,7 +76,6 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     
     lazy var messageInputView : MessageInputView = {
         let inputAccessoryView = MessageInputView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44 ))
-        inputAccessoryView.sendMessageButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         return inputAccessoryView
     }()
     
@@ -91,13 +94,6 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         messageInputView.inputTextViewLabelPlaceHolder.isHidden = textView.hasText
     }
     
-    @objc func handleSend() {
-        
-        if (self.viewModel?.insertMessage(textMessage: self.messageInputView.inputTextView.text!))! {
-            self.messageInputView.inputTextView.text = nil
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,13 +104,23 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         collectionView?.register(ChatCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.keyboardDismissMode = .interactive
         
-        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-            if #available(iOS 11.0, *) {
-                flowLayout.sectionInsetReference = .fromSafeArea
-            }
-        }
-        
         self.messageInputView.inputTextView.delegate = self
+        self.messageInputView.sendMessageButton.rx.tap
+        .map({ _ in
+            return self.messageInputView.inputTextView.text
+        }).filter({ (text) -> Bool in
+            return (text.lengthOfBytes(using: String.Encoding.utf8) > 0)
+        }).map({ text in
+            return self.viewModel?.insertMessage(textMessage: text)
+        }).subscribe(onNext: { success in
+            if (success!) {
+                self.messageInputView.inputTextView.text = ""
+            }
+        }, onError: { error in
+            
+        }, onCompleted: {
+            
+        }).addDisposableTo(disposeBag)
         
         self.viewModel?.bindToDelegate(delegate: self)
         self.viewModel?.performFetch()
