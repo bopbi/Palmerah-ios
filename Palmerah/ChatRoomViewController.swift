@@ -75,7 +75,7 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     }
     
     lazy var messageInputView : MessageInputView = {
-        let inputAccessoryView = MessageInputView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44 ))
+        let inputAccessoryView = MessageInputView()
         return inputAccessoryView
     }()
     
@@ -97,7 +97,6 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView?.contentInsetAdjustmentBehavior = .never;
         collectionView?.showsHorizontalScrollIndicator = false;
         collectionView?.backgroundColor = .white
         collectionView?.alwaysBounceVertical = true
@@ -105,23 +104,17 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         collectionView?.keyboardDismissMode = .interactive
         
         self.messageInputView.inputTextView.delegate = self
-        self.messageInputView.sendMessageButton.rx.tap
-        .map({ _ in
-            return self.messageInputView.inputTextView.text
-        }).filter({ (text) -> Bool in
-            return (text.lengthOfBytes(using: String.Encoding.utf8) > 0)
-        }).map({ text in
-            return self.viewModel?.insertMessage(textMessage: text)
-        }).subscribe(onNext: { success in
-            if (success!) {
-                self.messageInputView.inputTextView.text = ""
-            }
-        }, onError: { error in
-            
-        }, onCompleted: {
-            
-        }).addDisposableTo(disposeBag)
+        self.messageInputView.sendMessageButton.rx.tap.asDriver()
+        .map { [weak self] _ in self?.messageInputView.inputTextView.text ?? "" }
+        .filter { text in !text.isEmpty }
+        .filter { [weak self] text in (self?.viewModel?.insertMessage(textMessage: text))! }
+        .map { _ in "" }
+        .drive(self.messageInputView.inputTextView.rx.text)
+        .addDisposableTo(disposeBag)
         
+        self.view.addSubview(messageInputView)
+        self.view.addConstraintWithFormat(format: "H:|[v0]|", views: messageInputView)
+        self.view.addConstraintWithFormat(format: "V:[v0]|", views: messageInputView)
         self.viewModel?.bindToDelegate(delegate: self)
         self.viewModel?.performFetch()
     }
@@ -197,16 +190,6 @@ class ChatRoomViewController: UICollectionViewController, UICollectionViewDelega
         }
         
         return CGSize(width: view.frame.width, height: 0)
-    }
-    
-    override var inputAccessoryView: UIView? {
-        get {
-            return messageInputView
-        }
-    }
-    
-    override var canBecomeFirstResponder: Bool {
-        return true
     }
     
     func scrollToBottom(animated: Bool) {
