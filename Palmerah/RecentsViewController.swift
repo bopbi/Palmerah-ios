@@ -91,10 +91,7 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
-        let controller = ChatRoomViewController(collectionViewLayout: layout)
+        let controller = ChatRoomViewController()
         controller.friend = self.viewModel?.friendAt(indexPath: indexPath)
         navigationController?.pushViewController(controller, animated: true)
         

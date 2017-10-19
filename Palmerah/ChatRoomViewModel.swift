@@ -8,26 +8,32 @@
 
 import Foundation
 import CoreData
+import RxSwift
 
-class ChatRoomViewModel {
+class ChatRoomViewModel : NSObject, NSFetchedResultsControllerDelegate {
     
     private let messageRepository : MessageRepository
     private let chatMesageFetchResultController : NSFetchedResultsController<Message>
-    let friend : Friend
+    private let friend : Friend
     let title : String
+    
+    let rowUpdateSubject = PublishSubject<RowUpdateEvent>()
+    let changeContentSubject = PublishSubject<Bool>()
     
     init(friend : Friend, messageRepository : MessageRepository) {
         self.friend = friend
         self.title = self.friend.name!
         self.messageRepository = messageRepository
-        self.chatMesageFetchResultController = self.messageRepository.getChatMessagesFetchResultController(friend: self.friend)
+        self.chatMesageFetchResultController = self.messageRepository.getChatMessagesFetchResultController(friend: friend)
+        
     }
     
     func insertMessage(textMessage: String) -> Bool {
         return self.messageRepository.createMessageForFriend(messageText: textMessage, friend: self.friend, date: NSDate(), isSender: true)
     }
     
-    func performFetch() {
+    func onBind() {
+        self.chatMesageFetchResultController.delegate = self
         do {
             try self.chatMesageFetchResultController.performFetch()
         } catch let err {
@@ -35,8 +41,8 @@ class ChatRoomViewModel {
         }
     }
     
-    func bindToDelegate(delegate: NSFetchedResultsControllerDelegate) {
-        self.chatMesageFetchResultController.delegate = delegate
+    func unBind() {
+        
     }
     
     func messagesCount() -> Int {
@@ -50,4 +56,17 @@ class ChatRoomViewModel {
         return self.chatMesageFetchResultController.object(at: indexPath)
     }
     
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        rowUpdateSubject.onNext(RowUpdateEvent(indexPath: indexPath, type: type, newIndexPath: newIndexPath))
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        changeContentSubject.onNext(true)
+    }
+    
+    struct RowUpdateEvent {
+        var indexPath: IndexPath?
+        var type: NSFetchedResultsChangeType
+        var newIndexPath: IndexPath?
+    }
 }

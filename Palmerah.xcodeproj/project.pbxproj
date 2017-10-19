@@ -24,6 +24,7 @@
 		00DAC8ED1F6D971300A07930 /* Friend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DAC8E91F6D971300A07930 /* Friend+CoreDataProperties.swift */; };
 		00DAC8EE1F6D971300A07930 /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DAC8EA1F6D971300A07930 /* Message+CoreDataClass.swift */; };
 		00DAC8EF1F6D971300A07930 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DAC8EB1F6D971300A07930 /* Message+CoreDataProperties.swift */; };
+		00E8A2FA1F987A08005866B9 /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8A2F91F987A08005866B9 /* ChatRoomView.swift */; };
 		A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */; };
 		A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */; };
 		A72A23CE1F0DBA6100D1F4CB /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */; };
@@ -77,6 +78,7 @@
 		00DAC8E91F6D971300A07930 /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		00DAC8EA1F6D971300A07930 /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
 		00DAC8EB1F6D971300A07930 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		00E8A2F91F987A08005866B9 /* ChatRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomView.swift; sourceTree = "<group>"; };
 		A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A72A23C81F0DBA6000D1F4CB /* Palmerah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Palmerah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				0032F0641F59822500043E08 /* ChatRoomViewModel.swift */,
 				0032F0661F59826200043E08 /* ChatCell.swift */,
 				0032F0681F59954C00043E08 /* MessageInputView.swift */,
+				00E8A2F91F987A08005866B9 /* ChatRoomView.swift */,
 			);
 			name = ChatRoom;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				0032F0651F59822500043E08 /* ChatRoomViewModel.swift in Sources */,
 				A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */,
 				0032F06D1F59AD1500043E08 /* RecentsViewModel.swift in Sources */,
+				00E8A2FA1F987A08005866B9 /* ChatRoomView.swift in Sources */,
 				0032F0671F59826200043E08 /* ChatCell.swift in Sources */,
 				A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */,
 				003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */,
