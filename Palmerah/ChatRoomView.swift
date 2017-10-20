@@ -146,21 +146,21 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
     }
     
     func onBind() {
-        let rowDisposable = self.viewModel?.rowUpdateSubject.subscribe(onNext: { (event) in
+        let rowDisposable = self.viewModel?.rowUpdateSubject.subscribe(onNext: { [weak self] (event) in
             switch event.type {
             case .insert:
-                self.blockOperations.append(BlockOperation(block: {
-                    self.insertItems(at: [event.newIndexPath!])
+                self?.blockOperations.append(BlockOperation(block: { [weak self] in
+                    self?.insertItems(at: [event.newIndexPath!])
                 }))
                 break
             case .delete:
-                self.blockOperations.append(BlockOperation(block: {
-                    self.deleteItems(at: [event.indexPath!])
+                self?.blockOperations.append(BlockOperation(block: { [weak self] in
+                    self?.deleteItems(at: [event.indexPath!])
                 }))
                 break
             case .update:
-                self.blockOperations.append(BlockOperation(block: {
-                    self.reloadItems(at: [event.indexPath!])
+                self?.blockOperations.append(BlockOperation(block: { [weak self] in
+                    self?.reloadItems(at: [event.indexPath!])
                 }))
                 break
             default:
@@ -176,14 +176,14 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
         
         disposeBag.insert(rowDisposable!)
         
-        let changeDisposable = self.viewModel?.changeContentSubject.subscribe(onNext: { (result) in
+        let changeDisposable = self.viewModel?.changeContentSubject.subscribe(onNext: { [weak self] (result) in
             DispatchQueue.main.async {
-                self.performBatchUpdates({
-                    for operation in self.blockOperations {
+                self?.performBatchUpdates({
+                    for operation in (self?.blockOperations)! {
                         operation.start()
                     }
                 }, completion: { (completed) in
-                    self.scrollToBottom(animated: true)
+                    self?.scrollToBottom(animated: true)
                 })
             }
         }, onError: { (error) in
@@ -195,14 +195,6 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
         })
         
         disposeBag.insert(changeDisposable!)
-        
-    }
-    
-    func unBind() {
-        disposeBag.dispose()
-        self.viewModel = nil
-        self.messageInputView = nil
-        self.blockOperations.removeAll()
         
     }
 

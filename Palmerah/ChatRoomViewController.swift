@@ -56,12 +56,4 @@ class ChatRoomViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         self.chatRoomView?.collectionViewLayout.invalidateLayout()
     }
-    
-    deinit {
-        self.chatRoomView?.unBind()
-        self.viewModel?.unBind()
-        
-        self.chatRoomView = nil
-        self.viewModel = nil
-    }
 }

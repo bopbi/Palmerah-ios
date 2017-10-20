@@ -41,10 +41,6 @@ class ChatRoomViewModel : NSObject, NSFetchedResultsControllerDelegate {
         }
     }
     
-    func unBind() {
-        
-    }
-    
     func messagesCount() -> Int {
         if let count = self.chatMesageFetchResultController.sections?[0].numberOfObjects {
             return count
