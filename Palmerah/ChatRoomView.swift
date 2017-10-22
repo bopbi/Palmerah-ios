@@ -52,6 +52,20 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
         self.keyboardDismissMode = .interactive
         self.dataSource = self
         self.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardEvent), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func handleKeyboardEvent(_ notification: Notification) {
+        let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+        DispatchQueue.main.async {
+            self.contentInset.bottom = (keyboardFrame?.height)!
+            self.scrollToBottom(animated: true);
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
