@@ -63,7 +63,9 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
     @objc func handleKeyboardEvent(_ notification: Notification) {
         let keyboardFrame = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
         DispatchQueue.main.async {
-            self.contentInset.bottom = (keyboardFrame?.height)!
+            UIView.animate(withDuration: 0.2, animations: {
+                self.contentInset.bottom = (keyboardFrame?.height)!
+            })
             self.scrollToBottom(animated: true);
         }
     }
