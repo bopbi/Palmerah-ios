@@ -10,12 +10,9 @@ import UIKit
 
 class ChatCell : UICollectionViewCell {
     
-    let messageLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-        label.textColor = UIColor.black
-        label.numberOfLines = 0
-        return label
+    let messageWithTimestampView: ChatMessageWithTimestampView = {
+        let messageView = ChatMessageWithTimestampView()
+        return messageView
     }()
     
     let bubbleBackgroundView : UIView = {
@@ -37,7 +34,7 @@ class ChatCell : UICollectionViewCell {
     func setupViews() {
         
         addSubview(bubbleBackgroundView)
-        addSubview(messageLabel)
+        addSubview(messageWithTimestampView)
         
     }
 }

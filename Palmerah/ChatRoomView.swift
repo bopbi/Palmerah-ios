@@ -89,34 +89,67 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ChatCell
         let message = self.viewModel?.messageAt(indexPath: indexPath)
+        
         if let textMessage = message?.text {
-            cell?.messageLabel.text = message?.text
+            cell?.messageWithTimestampView.messageLabel.text = message?.text
             
             let messageTextSize = textMessage.frameSize(maxWidth: CGFloat(maxBubbleContentWidth), font: UIFont.preferredFont(forTextStyle: .body))
             
-            let totalHeight = messageTextSize.height + (2 * textPadding)
+            var totalHeight = messageTextSize.height + (2 * textPadding)
             let totalWidth = messageTextSize.width + (2 * textPadding)
             var startBubble : CGFloat?;
             
             if (message?.isSender)! {
-                cell?.bubbleBackgroundView.backgroundColor = senderBubbleColor
-                cell?.messageLabel.textColor = UIColor.white
+                cell?.messageWithTimestampView.messageLabel.textColor = UIColor.white
                 startBubble = self.frame.width - (messageTextSize.width + ( 2 * textPadding ) + sideBubblePadding)
             } else {
-                cell?.bubbleBackgroundView.backgroundColor = receiverBubbleColor
-                cell?.messageLabel.textColor = UIColor.black
+                cell?.messageWithTimestampView.messageLabel.textColor = UIColor.black
                 startBubble = sideBubblePadding
             }
             
-            cell?.messageLabel.frame = CGRect(x: startBubble! + textPadding, y: topBubblePadding + textPadding, width: messageTextSize.width, height: messageTextSize.height)
+            cell?.messageWithTimestampView.messageLabel.frame = CGRect(x: startBubble! + textPadding, y: topBubblePadding + textPadding, width: messageTextSize.width, height: messageTextSize.height)
+            
+            if let timestampMessage = message?.date {
+                
+                let timestampText = formatDate(date: timestampMessage)
+                
+                let timestampTextSize = timestampText.frameSize(maxWidth: CGFloat(maxBubbleContentWidth), font: UIFont.preferredFont(forTextStyle: .footnote))
+                
+                cell?.messageWithTimestampView.timestampLabel.text = timestampText
+                
+                if (message?.isSender)! {
+                    cell?.messageWithTimestampView.timestampLabel.textColor = UIColor.white
+                } else {
+                    cell?.messageWithTimestampView.timestampLabel.textColor = UIColor.black
+                }
+                
+                cell?.messageWithTimestampView.timestampLabel.frame = CGRect(
+                    x: (cell?.messageWithTimestampView.messageLabel.frame.maxX)! - timestampTextSize.width,
+                    y: (cell?.messageWithTimestampView.messageLabel.frame.maxY)! + textPadding,
+                    width: timestampTextSize.width,
+                    height: timestampTextSize.height
+                )
+                
+                totalHeight +=  timestampTextSize.height + textPadding
+            }
+            
+            if (message?.isSender)! {
+                cell?.bubbleBackgroundView.backgroundColor = senderBubbleColor
+            } else {
+                cell?.bubbleBackgroundView.backgroundColor = receiverBubbleColor
+            }
+            
             cell?.bubbleBackgroundView.frame = CGRect(x: startBubble!, y: topBubblePadding, width: totalWidth, height: totalHeight)
+            
         }
         
         return cell!
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var totalHeight : CGFloat = 0.0
         let currentMessage = self.viewModel?.messageAt(indexPath: indexPath)
+        
         if let textMessage = currentMessage?.text {
             
             let messageTextSize = textMessage.frameSize(maxWidth: CGFloat(maxBubbleContentWidth), font: UIFont.preferredFont(forTextStyle: .body))
@@ -129,15 +162,21 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
                 if (currentBubbleSender == nextMessage?.isSender) {
                     bubbleSpace = 0
                 }
+            }
+            totalHeight = messageTextSize.height + (2 * textPadding) + topBubblePadding + bubbleSpace;
+            
+            if let timestampMessage = currentMessage?.date {
                 
+                let timestampText = formatDate(date: timestampMessage)
+                
+                let timestampTextSize = timestampText.frameSize(maxWidth: CGFloat(maxBubbleContentWidth), font: UIFont.preferredFont(forTextStyle: .footnote))
+
+                totalHeight += timestampTextSize.height + textPadding
             }
             
-            let totalHeight = messageTextSize.height + (2 * textPadding) + topBubblePadding + bubbleSpace;
-            
-            return CGSize(width: self.frame.width, height: totalHeight)
         }
         
-        return CGSize(width: self.frame.width, height: 0)
+        return CGSize(width: self.frame.width, height: totalHeight)
     }
     
     func scrollToBottom(animated: Bool) {
@@ -216,5 +255,23 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
 
     func adjustBottomInset() {
         self.contentInset.bottom = (messageInputView?.frame.height)!
+    }
+    
+    func formatDate(date: NSDate) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        
+        let elapsedTimeInSecond : TimeInterval = NSDate().timeIntervalSince(date as Date)
+        let oneDayInSeconds : TimeInterval = 60 * 60 * 24
+        let oneWeekInSeconds : TimeInterval = 7 * oneDayInSeconds
+        
+        if elapsedTimeInSecond > oneDayInSeconds {
+            dateFormatter.dateFormat = "EEE"
+        } else if elapsedTimeInSecond > oneWeekInSeconds {
+            dateFormatter.dateFormat = "DD:MM"
+        }
+        
+        let timestampText = dateFormatter.string(from: date as Date)
+        return timestampText
     }
 }

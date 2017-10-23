@@ -17,8 +17,10 @@
 		0032F06D1F59AD1500043E08 /* RecentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06C1F59AD1500043E08 /* RecentsViewModel.swift */; };
 		0032F06F1F59B56F00043E08 /* MessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06E1F59B56E00043E08 /* MessageRepository.swift */; };
 		003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */; };
+		004369771F9CE7180076CC38 /* ChatMessageWithTimestampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004369761F9CE7180076CC38 /* ChatMessageWithTimestampView.swift */; };
 		007DB36B1F866ECC0077F7A8 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007DB3661F866ECC0077F7A8 /* RxCocoa.framework */; };
 		007DB36C1F866ECC0077F7A8 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007DB3671F866ECC0077F7A8 /* RxSwift.framework */; };
+		00A206481F9E0C510086B4CE /* SwiftyLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A206471F9E0C510086B4CE /* SwiftyLRU.swift */; };
 		00C26E861F5150400070F474 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 00C26E851F5150400070F474 /* Cartfile */; };
 		00DAC8EC1F6D971300A07930 /* Friend+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DAC8E81F6D971300A07930 /* Friend+CoreDataClass.swift */; };
 		00DAC8ED1F6D971300A07930 /* Friend+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DAC8E91F6D971300A07930 /* Friend+CoreDataProperties.swift */; };
@@ -68,11 +70,13 @@
 		0032F06C1F59AD1500043E08 /* RecentsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsViewModel.swift; sourceTree = "<group>"; };
 		0032F06E1F59B56E00043E08 /* MessageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRepository.swift; sourceTree = "<group>"; };
 		003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ChatColor.swift"; sourceTree = "<group>"; };
+		004369761F9CE7180076CC38 /* ChatMessageWithTimestampView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageWithTimestampView.swift; sourceTree = "<group>"; };
 		007DB3631F866ECC0077F7A8 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		007DB3641F866ECC0077F7A8 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		007DB3651F866ECC0077F7A8 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		007DB3661F866ECC0077F7A8 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		007DB3671F866ECC0077F7A8 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		00A206471F9E0C510086B4CE /* SwiftyLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyLRU.swift; sourceTree = "<group>"; };
 		00C26E851F5150400070F474 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		00DAC8E81F6D971300A07930 /* Friend+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataClass.swift"; sourceTree = "<group>"; };
 		00DAC8E91F6D971300A07930 /* Friend+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Friend+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 		0032F05F1F59816400043E08 /* ChatRoom */ = {
 			isa = PBXGroup;
 			children = (
+				004369761F9CE7180076CC38 /* ChatMessageWithTimestampView.swift */,
 				A78084501F2E340A00EF07F9 /* ChatRoomViewController.swift */,
 				0032F0641F59822500043E08 /* ChatRoomViewModel.swift */,
 				0032F0661F59826200043E08 /* ChatCell.swift */,
@@ -185,6 +190,7 @@
 				003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */,
 				002350731F4C21230035FD6E /* UIView+BlurEffect.swift */,
 				00003B1D1F6C2C2C00583354 /* String+FrameSize.swift */,
+				00A206471F9E0C510086B4CE /* SwiftyLRU.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -431,6 +437,7 @@
 				0032F0671F59826200043E08 /* ChatCell.swift in Sources */,
 				A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */,
 				003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */,
+				00A206481F9E0C510086B4CE /* SwiftyLRU.swift in Sources */,
 				A78084511F2E340A00EF07F9 /* ChatRoomViewController.swift in Sources */,
 				00DAC8EE1F6D971300A07930 /* Message+CoreDataClass.swift in Sources */,
 				A780844F1F2D0C7100EF07F9 /* FriendRepository.swift in Sources */,
@@ -445,6 +452,7 @@
 				0032F06B1F59A3C000043E08 /* LastMessageCell.swift in Sources */,
 				A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */,
 				00DAC8EF1F6D971300A07930 /* Message+CoreDataProperties.swift in Sources */,
+				004369771F9CE7180076CC38 /* ChatMessageWithTimestampView.swift in Sources */,
 				00DAC8ED1F6D971300A07930 /* Friend+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
