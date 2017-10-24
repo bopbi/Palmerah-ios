@@ -61,14 +61,14 @@ class ChatCell : UICollectionViewCell {
             messageWithTimestampView.timestampLabel.textColor = UIColor.black
         }
         
-        let textMessage = message.text
+        let textMessage = message.text?.emojiTransform(font: ChatCell.messageFont)
         let timestampMessage = message.date
         let timestampText = ChatCell.formatDate(date: timestampMessage!)
         let timestampTextSize = timestampText.frameSize(maxWidth: ChatCell.maxBubbleContentWidth, font: ChatCell.timestampFont)
         let messageTextSize = textMessage?.frameSize(maxWidth: ChatCell.maxBubbleContentWidth, font: ChatCell.messageFont)
         
         messageWithTimestampView.timestampLabel.text = timestampText
-        messageWithTimestampView.messageLabel.text = message.text
+        messageWithTimestampView.messageLabel.attributedText = textMessage
         
         var totalHeight = (messageTextSize?.height)! + (2 * ChatCell.textPadding)
         var totalWidth = (messageTextSize?.width)! + (2 * ChatCell.textPadding)
@@ -141,7 +141,7 @@ class ChatCell : UICollectionViewCell {
     static func cellHeightForMessage(message: Message, nextMessage: Message?) -> CGFloat {
         if let textMessage = message.text {
             
-            let messageTextSize = textMessage.frameSize(maxWidth: maxBubbleContentWidth, font: ChatCell.messageFont)
+            let messageTextSize = textMessage.emojiTransform(font: ChatCell.messageFont).frameSize(maxWidth: maxBubbleContentWidth, font: ChatCell.messageFont)
             
             var bubbleSpace = ChatCell.bottomBubblePadding;
             if (nextMessage != nil) {
