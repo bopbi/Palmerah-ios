@@ -22,14 +22,14 @@ class LastMessageCell : UICollectionViewCell {
             
             if let date = message?.date {
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "h:mm a"
+                dateFormatter.dateFormat = "H:mm"
                 
                 let elapsedTimeInSecond : TimeInterval = NSDate().timeIntervalSince(date as Date)
                 let oneDayInSeconds : TimeInterval = 60 * 60 * 24
                 let oneWeekInSeconds : TimeInterval = 7 * oneDayInSeconds
                 
                 if elapsedTimeInSecond > oneDayInSeconds {
-                    dateFormatter.dateFormat = "EEE"
+                    dateFormatter.dateFormat = "EEE H:mm"
                 } else if elapsedTimeInSecond > oneWeekInSeconds {
                     dateFormatter.dateFormat = "DD:MM"
                 }
