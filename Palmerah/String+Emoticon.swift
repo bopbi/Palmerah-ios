@@ -10,7 +10,7 @@ import UIKit
 
 extension String {
     
-    func emojiTransform(font: UIFont) -> NSAttributedString {
+    func emojiTransform(emoticonImage: UIImage) -> NSAttributedString {
         
         let stringWithEmoji = NSMutableAttributedString()
         let stringLength = self.characters.count;
@@ -22,8 +22,8 @@ extension String {
             if (prevChar == ":" && currentChar == "D") {
                 let attributedString = NSMutableAttributedString(string: self)
                 let emojiAttachment = NSTextAttachment()
-                emojiAttachment.image = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: font.capHeight, height: font.capHeight))
-                emojiAttachment.bounds = CGRect(x: 0, y: 0, width: font.capHeight, height: font.capHeight)
+                emojiAttachment.image = emoticonImage
+                emojiAttachment.bounds = CGRect(x: 0, y: 0, width: emoticonImage.size.width, height: emoticonImage.size.height)
                 let emojiAttributedString = NSAttributedString(attachment: emojiAttachment)
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = .natural

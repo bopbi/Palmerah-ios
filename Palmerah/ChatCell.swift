@@ -20,6 +20,7 @@ class ChatCell : UICollectionViewCell {
     private let receiverBubbleColor = UIColor(white: 0.95, alpha: 1)
     static private let messageFont = UIFont.preferredFont(forTextStyle: .body)
     static private let timestampFont = UIFont.preferredFont(forTextStyle: .footnote)
+    static let smileEmoji = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: UIFont.preferredFont(forTextStyle: .body).capHeight, height: UIFont.preferredFont(forTextStyle: .body).capHeight))
     
     let messageWithTimestampView: ChatMessageWithTimestampView = {
         let messageView = ChatMessageWithTimestampView()
@@ -61,7 +62,7 @@ class ChatCell : UICollectionViewCell {
             messageWithTimestampView.timestampLabel.textColor = UIColor.black
         }
         
-        let textMessage = message.text?.emojiTransform(font: ChatCell.messageFont)
+        let textMessage = message.text?.emojiTransform(emoticonImage: ChatCell.smileEmoji)
         let timestampMessage = message.date
         let timestampText = ChatCell.formatDate(date: timestampMessage!)
         let timestampTextSize = timestampText.frameSize(maxWidth: ChatCell.maxBubbleContentWidth, font: ChatCell.timestampFont)
@@ -141,7 +142,7 @@ class ChatCell : UICollectionViewCell {
     static func cellHeightForMessage(message: Message, nextMessage: Message?) -> CGFloat {
         if let textMessage = message.text {
             
-            let messageTextSize = textMessage.emojiTransform(font: ChatCell.messageFont).frameSize(maxWidth: maxBubbleContentWidth, font: ChatCell.messageFont)
+            let messageTextSize = textMessage.emojiTransform(emoticonImage: ChatCell.smileEmoji).frameSize(maxWidth: maxBubbleContentWidth, font: ChatCell.messageFont)
             
             var bubbleSpace = ChatCell.bottomBubblePadding;
             if (nextMessage != nil) {
