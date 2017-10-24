@@ -1,6 +1,13 @@
 # Palmerah-ios
-Palmerah ios app (Chat app)
+Palmerah ios app (Chat app), Demo app
 
+
+## Screenshot
+### Recents
+![Chatroom](https://raw.githubusercontent.com/bopbi/Palmerah-ios/master/art/recents.png)
+
+### Chatroom
+![Chatroom](https://raw.githubusercontent.com/bopbi/Palmerah-ios/master/art/chatroom.png)
 
 ## License
 
