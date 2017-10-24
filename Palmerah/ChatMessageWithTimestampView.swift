@@ -15,6 +15,7 @@ class ChatMessageWithTimestampView: UIView {
         label.font = UIFont.preferredFont(forTextStyle: .body)
         label.textColor = UIColor.black
         label.numberOfLines = 0
+        label.textAlignment = .natural
         return label
     }()
     
@@ -22,6 +23,7 @@ class ChatMessageWithTimestampView: UIView {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .footnote)
         label.numberOfLines = 0
+        label.textAlignment = .natural
         return label
     }()
     
