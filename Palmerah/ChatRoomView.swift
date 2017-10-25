@@ -19,7 +19,7 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
     private var messageInputView : MessageInputView? = MessageInputView()
     private var blockOperations = [BlockOperation]()
     
-    static let smileEmoji = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: UIFont.preferredFont(forTextStyle: .body).capHeight, height: UIFont.preferredFont(forTextStyle: .body).capHeight))
+    static let smileEmoji = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: UIFont.preferredFont(forTextStyle: .body).lineHeight, height: UIFont.preferredFont(forTextStyle: .body).lineHeight))
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         

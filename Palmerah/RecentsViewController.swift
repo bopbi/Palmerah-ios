@@ -13,7 +13,7 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
     
     private let cellId = "cellId"
     private var viewModel : RecentsViewModel? = nil
-    static let smileEmoji = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: UIFont.preferredFont(forTextStyle: .body).capHeight, height: UIFont.preferredFont(forTextStyle: .body).capHeight))
+    static let smileEmoji = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: UIFont.preferredFont(forTextStyle: .subheadline).lineHeight, height: UIFont.preferredFont(forTextStyle: .subheadline).lineHeight))
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -20,7 +20,7 @@ extension String {
         
         let emojiAttachment = NSTextAttachment()
         emojiAttachment.image = emoticonImage
-        emojiAttachment.bounds = CGRect(x: 0, y: 0, width: emoticonImage.size.width, height: emoticonImage.size.height)
+        emojiAttachment.bounds = CGRect(x: 0, y: -4, width: emoticonImage.size.width, height: emoticonImage.size.height)
         
         var index = 1
         var buffer : String = ""
@@ -38,18 +38,15 @@ extension String {
                 index += 1
             } else {
                 buffer.append(prevChar)
-                if (index == stringLength - 1) {
-                    buffer.append(currentChar)
-                    let characterAttributed = NSAttributedString(string: buffer)
-                    stringWithEmoji.insert(characterAttributed, at: stringWithEmoji.length)
-                }
+            }
+            if (index == stringLength - 1) {
+                let tailChar = self[self.index(self.startIndex, offsetBy: index)]
+                buffer.append(tailChar)
+                let characterAttributed = NSAttributedString(string: buffer)
+                stringWithEmoji.insert(characterAttributed, at: stringWithEmoji.length)
             }
             index += 1
         }
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .natural
-        paragraphStyle.lineSpacing = 1.0
-        stringWithEmoji.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, stringWithEmoji.length))
         return stringWithEmoji;
     }
  
