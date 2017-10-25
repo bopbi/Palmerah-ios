@@ -10,8 +10,11 @@ import UIKit
 
 extension String {
     
-    func emojiTransform(emoticonImage: UIImage) -> NSAttributedString {
+    func emojiTransform(emojiCode: String, emoticonImage: UIImage) -> NSAttributedString {
         
+        let firstEmojiCode = emojiCode[emojiCode.index(emojiCode.startIndex, offsetBy: 0)]
+        let secondEmojiCode = emojiCode[emojiCode.index(emojiCode.startIndex, offsetBy: 1)]
+
         let stringWithEmoji = NSMutableAttributedString()
         let stringLength = self.characters.count;
         
@@ -20,11 +23,11 @@ extension String {
         emojiAttachment.bounds = CGRect(x: 0, y: 0, width: emoticonImage.size.width, height: emoticonImage.size.height)
         
         var index = 1
-        var buffer = ""
+        var buffer : String = ""
         while (index < stringLength) {
             let prevChar = self[self.index(self.startIndex, offsetBy: index - 1)]
             let currentChar = self[self.index(self.startIndex, offsetBy: index)]
-            if (prevChar == ":" && currentChar == "D") {
+            if (prevChar == firstEmojiCode && currentChar == secondEmojiCode) {
                 if (buffer.characters.count > 0) {
                     let characterAttributed = NSAttributedString(string: buffer)
                     stringWithEmoji.insert(characterAttributed, at: stringWithEmoji.length)
@@ -34,9 +37,9 @@ extension String {
                 stringWithEmoji.insert(emojiAttributedString, at: stringWithEmoji.length)
                 index += 1
             } else {
-                buffer += String(prevChar)
+                buffer.append(prevChar)
                 if (index == stringLength - 1) {
-                    buffer += String(currentChar)
+                    buffer.append(currentChar)
                     let characterAttributed = NSAttributedString(string: buffer)
                     stringWithEmoji.insert(characterAttributed, at: stringWithEmoji.length)
                 }
