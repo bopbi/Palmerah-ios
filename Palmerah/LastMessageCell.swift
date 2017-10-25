@@ -10,33 +10,34 @@ import UIKit
 
 class LastMessageCell : UICollectionViewCell {
     
-    var message: Message? {
-        didSet {
-            nameLabel.text = message?.friend?.name
+    var message: Message?
+    
+    func bindMessage(message: Message, emojiImage: UIImage)  {
+        self.message = message
+        nameLabel.text = message.friend?.name
+        
+        if let profileImageName = message.friend?.profileImageNamed {
+            profileImageView.image = UIImage(named: profileImageName)
+        }
+        
+        messageLabel.attributedText = message.text?.emojiTransform(emojiCode: ":D", emoticonImage: emojiImage)
+        
+        if let date = message.date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "H:mm"
             
-            if let profileImageName = message?.friend?.profileImageNamed {
-                profileImageView.image = UIImage(named: profileImageName)
+            let elapsedTimeInSecond : TimeInterval = NSDate().timeIntervalSince(date as Date)
+            let oneDayInSeconds : TimeInterval = 60 * 60 * 24
+            let oneWeekInSeconds : TimeInterval = 7 * oneDayInSeconds
+            
+            if elapsedTimeInSecond > oneDayInSeconds {
+                dateFormatter.dateFormat = "EEE H:mm"
+            } else if elapsedTimeInSecond > oneWeekInSeconds {
+                dateFormatter.dateFormat = "DD:MM"
             }
             
-            messageLabel.text = message?.text
             
-            if let date = message?.date {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "H:mm"
-                
-                let elapsedTimeInSecond : TimeInterval = NSDate().timeIntervalSince(date as Date)
-                let oneDayInSeconds : TimeInterval = 60 * 60 * 24
-                let oneWeekInSeconds : TimeInterval = 7 * oneDayInSeconds
-                
-                if elapsedTimeInSecond > oneDayInSeconds {
-                    dateFormatter.dateFormat = "EEE H:mm"
-                } else if elapsedTimeInSecond > oneWeekInSeconds {
-                    dateFormatter.dateFormat = "DD:MM"
-                }
-                
-                
-                timeLabel.text = dateFormatter.string(from: date as Date)
-            }
+            timeLabel.text = dateFormatter.string(from: date as Date)
         }
     }
     

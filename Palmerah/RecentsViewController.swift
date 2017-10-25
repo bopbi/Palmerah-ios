@@ -13,6 +13,7 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
     
     private let cellId = "cellId"
     private var viewModel : RecentsViewModel? = nil
+    static let smileEmoji = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: UIFont.preferredFont(forTextStyle: .body).capHeight, height: UIFont.preferredFont(forTextStyle: .body).capHeight))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +80,7 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LastMessageCell
         
         if let message = self.viewModel?.lastMessageAt(indexPath: indexPath) {
-            cell.message = message
+            cell.bindMessage(message: message, emojiImage: RecentsViewController.smileEmoji)
         }
         
         return cell
