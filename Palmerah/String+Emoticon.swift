@@ -15,14 +15,15 @@ extension String {
         let stringWithEmoji = NSMutableAttributedString()
         let stringLength = self.characters.count;
         
+        let emojiAttachment = NSTextAttachment()
+        emojiAttachment.image = emoticonImage
+        emojiAttachment.bounds = CGRect(x: 0, y: 0, width: emoticonImage.size.width, height: emoticonImage.size.height)
+        
         var index = 1
         while (index < stringLength) {
             let prevChar = self[self.index(self.startIndex, offsetBy: index - 1)]
             let currentChar = self[self.index(self.startIndex, offsetBy: index)]
             if (prevChar == ":" && currentChar == "D") {
-                let emojiAttachment = NSTextAttachment()
-                emojiAttachment.image = emoticonImage
-                emojiAttachment.bounds = CGRect(x: 0, y: 0, width: emoticonImage.size.width, height: emoticonImage.size.height)
                 let emojiAttributedString = NSAttributedString(attachment: emojiAttachment)
                 stringWithEmoji.insert(emojiAttributedString, at: stringWithEmoji.length)
                 index += 1
