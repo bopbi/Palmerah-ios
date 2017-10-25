@@ -19,6 +19,8 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
     private var messageInputView : MessageInputView? = MessageInputView()
     private var blockOperations = [BlockOperation]()
     
+    static let smileEmoji = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: UIFont.preferredFont(forTextStyle: .body).capHeight, height: UIFont.preferredFont(forTextStyle: .body).capHeight))
+    
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         
         let layout = UICollectionViewFlowLayout()
@@ -82,7 +84,7 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ChatCell
         let currentMessage = self.viewModel?.messageAt(indexPath: indexPath)
         
-        cell?.drawMessage(message: currentMessage!)
+        cell?.drawMessage(message: currentMessage!, emojiImage: ChatRoomView.smileEmoji)
         
         return cell!
     }
@@ -96,7 +98,7 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
             nextMessage = self.viewModel?.messageAt(indexPath: nextIndex)
             
         }
-        let totalHeight = ChatCell.cellHeightForMessage(message: currentMessage!, nextMessage: nextMessage)
+        let totalHeight = ChatCell.cellHeightForMessage(message: currentMessage!, nextMessage: nextMessage, emojiImage: ChatRoomView.smileEmoji)
         
         return CGSize(width: self.frame.width, height: totalHeight)
     }

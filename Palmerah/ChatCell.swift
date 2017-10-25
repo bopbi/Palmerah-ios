@@ -20,7 +20,6 @@ class ChatCell : UICollectionViewCell {
     private let receiverBubbleColor = UIColor(white: 0.95, alpha: 1)
     static private let messageFont = UIFont.preferredFont(forTextStyle: .body)
     static private let timestampFont = UIFont.preferredFont(forTextStyle: .footnote)
-    static let smileEmoji = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: UIFont.preferredFont(forTextStyle: .body).capHeight, height: UIFont.preferredFont(forTextStyle: .body).capHeight))
     
     let messageWithTimestampView: ChatMessageWithTimestampView = {
         let messageView = ChatMessageWithTimestampView()
@@ -50,7 +49,7 @@ class ChatCell : UICollectionViewCell {
         
     }
     
-    func drawMessage(message: Message) {
+    func drawMessage(message: Message, emojiImage: UIImage) {
         
         if (message.isSender) {
             bubbleBackgroundView.backgroundColor = senderBubbleColor
@@ -62,7 +61,7 @@ class ChatCell : UICollectionViewCell {
             messageWithTimestampView.timestampLabel.textColor = UIColor.black
         }
         
-        let textMessage = message.text?.emojiTransform(emojiCode: ":D", emoticonImage: ChatCell.smileEmoji)
+        let textMessage = message.text?.emojiTransform(emojiCode: ":D", emoticonImage: emojiImage)
         let timestampMessage = message.date
         let timestampText = ChatCell.formatDate(date: timestampMessage!)
         let timestampTextSize = timestampText.frameSize(maxWidth: ChatCell.maxBubbleContentWidth, font: ChatCell.timestampFont)
@@ -139,10 +138,10 @@ class ChatCell : UICollectionViewCell {
         return ( timestampTextSize.width + lastTextFrameSize.width + ChatCell.textToTimestampPadding + ChatCell.textPadding >=  ChatCell.maxBubbleContentWidth )
     }
     
-    static func cellHeightForMessage(message: Message, nextMessage: Message?) -> CGFloat {
+    static func cellHeightForMessage(message: Message, nextMessage: Message?, emojiImage: UIImage) -> CGFloat {
         if let textMessage = message.text {
             
-            let messageTextSize = textMessage.emojiTransform(emojiCode: ":D", emoticonImage: ChatCell.smileEmoji).frameSize(maxWidth: maxBubbleContentWidth, font: ChatCell.messageFont)
+            let messageTextSize = textMessage.emojiTransform(emojiCode: ":D", emoticonImage: emojiImage).frameSize(maxWidth: maxBubbleContentWidth, font: ChatCell.messageFont)
             
             var bubbleSpace = ChatCell.bottomBubblePadding;
             if (nextMessage != nil) {
