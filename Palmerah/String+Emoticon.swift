@@ -20,18 +20,24 @@ extension String {
         emojiAttachment.bounds = CGRect(x: 0, y: 0, width: emoticonImage.size.width, height: emoticonImage.size.height)
         
         var index = 1
+        var buffer = ""
         while (index < stringLength) {
             let prevChar = self[self.index(self.startIndex, offsetBy: index - 1)]
             let currentChar = self[self.index(self.startIndex, offsetBy: index)]
             if (prevChar == ":" && currentChar == "D") {
+                if (buffer.characters.count > 0) {
+                    let characterAttributed = NSAttributedString(string: buffer)
+                    stringWithEmoji.insert(characterAttributed, at: stringWithEmoji.length)
+                    buffer = ""
+                }
                 let emojiAttributedString = NSAttributedString(attachment: emojiAttachment)
                 stringWithEmoji.insert(emojiAttributedString, at: stringWithEmoji.length)
                 index += 1
             } else {
-                let characterAttributed = NSAttributedString(string: String(prevChar))
-                stringWithEmoji.insert(characterAttributed, at: stringWithEmoji.length)
+                buffer += String(prevChar)
                 if (index == stringLength - 1) {
-                    let characterAttributed = NSAttributedString(string: String(currentChar))
+                    buffer += String(currentChar)
+                    let characterAttributed = NSAttributedString(string: buffer)
                     stringWithEmoji.insert(characterAttributed, at: stringWithEmoji.length)
                 }
             }
