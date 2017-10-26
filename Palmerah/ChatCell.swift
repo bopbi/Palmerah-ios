@@ -43,7 +43,7 @@ class ChatCell : UICollectionViewCell {
     }
     
     func setupViews() {
-        
+        self.translatesAutoresizingMaskIntoConstraints = false
         addSubview(bubbleBackgroundView)
         addSubview(messageWithTimestampView)
         
