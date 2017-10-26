@@ -11,6 +11,7 @@ import UIKit
 class ChatCell : UICollectionViewCell {
     
     static private let textPadding = CGFloat(10)
+    static private let timestampTopPadding = CGFloat(5)
     static private let textToTimestampPadding = CGFloat(20)
     static private let maxBubbleContentWidth =  CGFloat(260)
     static private let sideBubblePadding = CGFloat(10)
@@ -74,6 +75,7 @@ class ChatCell : UICollectionViewCell {
         var totalWidth = (messageTextSize?.width)! + (2 * ChatCell.textPadding)
         var startBubble : CGFloat?;
         
+        // multiline
         if ( ChatCell.textAndTimestampLargerThanBubbleWidth(timestampTextSize: timestampTextSize, messageTextSize: messageTextSize!)) {
             
             if (message.isSender) {
@@ -87,34 +89,38 @@ class ChatCell : UICollectionViewCell {
             let lastMessageFrameSize = textMessage?.lastLineFrameSize(maxWidth: ChatCell.maxBubbleContentWidth, font: ChatCell.messageFont)
             
             if ( ChatCell.lastTextSizeAndTimestampLargerThanBubbleWidth(timestampTextSize: timestampTextSize, lastTextFrameSize: lastMessageFrameSize!) ) {
+                
+                totalHeight += timestampTextSize.height + ChatCell.timestampTopPadding
+                bubbleBackgroundView.frame = CGRect(x: startBubble!, y: ChatCell.topBubblePadding, width: totalWidth, height: totalHeight)
+                
                 messageWithTimestampView.timestampLabel.frame = CGRect(
                     x: messageWithTimestampView.messageLabel.frame.maxX - timestampTextSize.width,
-                    y: messageWithTimestampView.messageLabel.frame.maxY + ChatCell.textPadding,
+                    y: (bubbleBackgroundView.frame.maxY - timestampTextSize.height) - ChatCell.bottomBubblePadding,
                     width: timestampTextSize.width,
                     height: timestampTextSize.height
                 )
-                totalHeight += timestampTextSize.height + ChatCell.textPadding
-                bubbleBackgroundView.frame = CGRect(x: startBubble!, y: ChatCell.topBubblePadding, width: totalWidth, height: totalHeight)
-            } else {
                 
+            } else {
+                totalHeight += ChatCell.timestampTopPadding
                 bubbleBackgroundView.frame = CGRect(x: startBubble!, y: ChatCell.topBubblePadding, width: totalWidth, height: totalHeight)
                 messageWithTimestampView.timestampLabel.frame = CGRect(
                     x: (bubbleBackgroundView.frame.maxX - timestampTextSize.width) - ChatCell.textPadding,
-                    y: (bubbleBackgroundView.frame.maxY - timestampTextSize.height) - ChatCell.textPadding,
+                    y: (bubbleBackgroundView.frame.maxY - timestampTextSize.height) - ChatCell.bottomBubblePadding,
                     width: timestampTextSize.width,
                     height: timestampTextSize.height
                 )
             }
             
-        } else {
+        } else { // singleline
             
             if (message.isSender) {
-                startBubble = self.frame.width - ((messageTextSize?.width)! + ChatCell.textPadding + ChatCell.textToTimestampPadding + ChatCell.sideBubblePadding) - timestampTextSize.width
+                startBubble = self.frame.width - ((messageTextSize?.width)! + 2 * ChatCell.textPadding + ChatCell.textToTimestampPadding + ChatCell.sideBubblePadding) - timestampTextSize.width
             } else {
                 startBubble = ChatCell.sideBubblePadding
             }
             
-            totalWidth += timestampTextSize.width + ChatCell.textPadding
+            totalHeight += ChatCell.timestampTopPadding
+            totalWidth += timestampTextSize.width + ChatCell.textToTimestampPadding
             
             bubbleBackgroundView.frame = CGRect(x: startBubble!, y: ChatCell.topBubblePadding, width: totalWidth, height: totalHeight)
             
@@ -122,7 +128,7 @@ class ChatCell : UICollectionViewCell {
             
             messageWithTimestampView.timestampLabel.frame = CGRect(
                 x: (bubbleBackgroundView.frame.maxX - timestampTextSize.width) - ChatCell.textPadding,
-                y: messageWithTimestampView.messageLabel.frame.maxY - timestampTextSize.height,
+                y: (bubbleBackgroundView.frame.maxY - timestampTextSize.height) - ChatCell.textPadding,
                 width: timestampTextSize.width,
                 height: timestampTextSize.height
             )
@@ -157,8 +163,12 @@ class ChatCell : UICollectionViewCell {
             let lastMessageFrameSize = textMessage.lastLineFrameSize(maxWidth: maxBubbleContentWidth, font: self.messageFont)
             if ( ChatCell.textAndTimestampLargerThanBubbleWidth(timestampTextSize: timestampTextSize, messageTextSize: messageTextSize)) {
                 if ( ChatCell.lastTextSizeAndTimestampLargerThanBubbleWidth(timestampTextSize: timestampTextSize, lastTextFrameSize: lastMessageFrameSize) ) {
-                    totalHeight += timestampTextSize.height + ChatCell.textPadding
+                    totalHeight += timestampTextSize.height + ChatCell.timestampTopPadding
+                } else {
+                    totalHeight += ChatCell.timestampTopPadding
                 }
+            } else {
+                totalHeight += ChatCell.timestampTopPadding
             }
             return totalHeight
         }
