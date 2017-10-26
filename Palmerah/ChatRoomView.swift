@@ -81,9 +81,14 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // experimental for label click on certain area
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ChatCell
         let currentMessage = self.viewModel?.messageAt(indexPath: indexPath)
-        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleGesture))
+        tapGesture.numberOfTapsRequired = 1
+        cell?.isUserInteractionEnabled = true
+        cell?.addGestureRecognizer(tapGesture)
+        // end experimental
         cell?.drawMessage(message: currentMessage!, emojiImage: ChatRoomView.smileEmoji)
         
         return cell!
@@ -179,5 +184,36 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
 
     func adjustBottomInset() {
         self.contentInset.bottom = (messageInputView?.frame.height)!
+    }
+    
+    @objc func handleGesture(sender: UITapGestureRecognizer) {
+        let cell = sender.view as! ChatCell
+        let messageLabel = cell.messageWithTimestampView.messageLabel
+        let stringToCheck = messageLabel.attributedText?.string
+        let clickRange = stringToCheck?.range(of: "Click here")
+        if (clickRange == nil) {
+            return
+        }
+        let startPos = stringToCheck?.distance(from: (stringToCheck?.startIndex)!, to: (clickRange?.lowerBound)!).advanced(by: 0)
+        let endPos = stringToCheck?.distance(from: (stringToCheck?.startIndex)!, to: (clickRange?.upperBound)!).advanced(by: 0)
+        
+        let point = sender.location(in: messageLabel)
+        let textStorage = NSTextStorage(attributedString: messageLabel.attributedText!)
+        let textContainer = NSTextContainer(size: CGSize(width: messageLabel.bounds.width, height: messageLabel.bounds.height))
+        let layoutManager = NSLayoutManager()
+        
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+        
+        textStorage.addAttribute(.font, value: messageLabel.font, range: NSMakeRange(0, textStorage.length))
+        textContainer.lineFragmentPadding = 0.0
+        
+        let characterIndex = layoutManager.characterIndex(for: point, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
+        
+        if ((characterIndex >= startPos!) && (characterIndex <= endPos!)) {
+            print(characterIndex)
+            print(messageLabel.attributedText?.string[clickRange!])
+        }
+        
     }
 }
