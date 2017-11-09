@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class RecentsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
+class ChatsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
     
     private let cellId = "cellId"
     private var viewModel : RecentsViewModel? = nil
@@ -80,7 +80,7 @@ class RecentsViewController: UICollectionViewController, UICollectionViewDelegat
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LastMessageCell
         
         if let message = self.viewModel?.lastMessageAt(indexPath: indexPath) {
-            cell.bindMessage(message: message, emojiImage: RecentsViewController.smileEmoji)
+            cell.bindMessage(message: message, emojiImage: ChatsViewController.smileEmoji)
         }
         
         return cell

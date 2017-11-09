@@ -32,7 +32,7 @@
 		00E8A2FA1F987A08005866B9 /* ChatRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E8A2F91F987A08005866B9 /* ChatRoomView.swift */; };
 		A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */; };
 		A72A23CC1F0DBA6000D1F4CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */; };
-		A72A23CE1F0DBA6100D1F4CB /* RecentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */; };
+		A72A23CE1F0DBA6100D1F4CB /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72A23CD1F0DBA6100D1F4CB /* ChatsViewController.swift */; };
 		A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */; };
 		A72A23D61F0DBA6100D1F4CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */; };
 		A72A23D91F0DBA6100D1F4CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72A23D71F0DBA6100D1F4CB /* LaunchScreen.storyboard */; };
@@ -92,7 +92,7 @@
 		A70A41691F370BBC00CB4A93 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A72A23C81F0DBA6000D1F4CB /* Palmerah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Palmerah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsViewController.swift; sourceTree = "<group>"; };
+		A72A23CD1F0DBA6100D1F4CB /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
 		A72A23D31F0DBA6100D1F4CB /* Palmerah.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Palmerah.xcdatamodel; sourceTree = "<group>"; };
 		A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A72A23D81F0DBA6100D1F4CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -137,14 +137,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0032F05E1F59814C00043E08 /* Recents */ = {
+		0032F05E1F59814C00043E08 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
-				A72A23CD1F0DBA6100D1F4CB /* RecentsViewController.swift */,
+				A72A23CD1F0DBA6100D1F4CB /* ChatsViewController.swift */,
 				0032F06A1F59A3C000043E08 /* LastMessageCell.swift */,
 				0032F06C1F59AD1500043E08 /* RecentsViewModel.swift */,
 			);
-			name = Recents;
+			name = Chats;
 			sourceTree = "<group>";
 		};
 		0032F05F1F59816400043E08 /* ChatRoom */ = {
@@ -246,7 +246,7 @@
 				0032F0611F59817800043E08 /* Settings */,
 				0032F0601F59816D00043E08 /* Contacts */,
 				0032F05F1F59816400043E08 /* ChatRoom */,
-				0032F05E1F59814C00043E08 /* Recents */,
+				0032F05E1F59814C00043E08 /* Chats */,
 				A72A23CB1F0DBA6000D1F4CB /* AppDelegate.swift */,
 				A72A23D51F0DBA6100D1F4CB /* Assets.xcassets */,
 				A72A23DA1F0DBA6100D1F4CB /* Info.plist */,
@@ -437,7 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A72A23CE1F0DBA6100D1F4CB /* RecentsViewController.swift in Sources */,
+				A72A23CE1F0DBA6100D1F4CB /* ChatsViewController.swift in Sources */,
 				00DAC8EC1F6D971300A07930 /* Friend+CoreDataClass.swift in Sources */,
 				00A2064C1F9FAAC80086B4CE /* NSAttributedString+FrameSize.swift in Sources */,
 				0032F0651F59822500043E08 /* ChatRoomViewModel.swift in Sources */,

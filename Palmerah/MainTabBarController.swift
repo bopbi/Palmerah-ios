@@ -19,9 +19,9 @@ class MainTabBarController: UITabBarController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        let recentsViewController = RecentsViewController(collectionViewLayout: layout)
-        let recentsNavigationController = UINavigationController(rootViewController: recentsViewController)
-        recentsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.recents, tag: 0)
+        let chatsViewController = ChatsViewController(collectionViewLayout: layout)
+        let chatsNavigationController = UINavigationController(rootViewController: chatsViewController)
+        chatsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.recents, tag: 0)
         
         let contactsViewController = ContactsViewController(collectionViewLayout: layout)
         let contactsNavigationController = UINavigationController(rootViewController: contactsViewController)
@@ -31,6 +31,6 @@ class MainTabBarController: UITabBarController {
         let moreSettingsNavigationController = UINavigationController(rootViewController: moreSettingsViewController)
         moreSettingsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.more, tag: 2)
         
-        viewControllers = [recentsNavigationController, contactsNavigationController, moreSettingsNavigationController]
+        viewControllers = [chatsNavigationController, contactsNavigationController, moreSettingsNavigationController]
     }
 }
