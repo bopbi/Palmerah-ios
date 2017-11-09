@@ -12,13 +12,13 @@ import CoreData
 class ChatsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
     
     private let cellId = "cellId"
-    private var viewModel : RecentsViewModel? = nil
+    private var viewModel : ChatsViewModel? = nil
     static let smileEmoji = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: UIFont.preferredFont(forTextStyle: .subheadline).lineHeight, height: UIFont.preferredFont(forTextStyle: .subheadline).lineHeight))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.title = "Recents"
+        navigationItem.title = "Chats"
         collectionView?.backgroundColor = UIColor.white
         collectionView?.alwaysBounceVertical = true
         
@@ -26,7 +26,7 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         let delegate = UIApplication.shared.delegate as? AppDelegate
         let context = delegate?.persistentContainer.viewContext
         let friendRepository = FriendRepository(context: context!)
-        self.viewModel = RecentsViewModel(friendRepository: friendRepository, delegate: self)
+        self.viewModel = ChatsViewModel(friendRepository: friendRepository, delegate: self)
         self.viewModel?.performFetch()
     }
     

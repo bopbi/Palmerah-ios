@@ -14,7 +14,7 @@
 		0032F0671F59826200043E08 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F0661F59826200043E08 /* ChatCell.swift */; };
 		0032F0691F59954C00043E08 /* MessageInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F0681F59954C00043E08 /* MessageInputView.swift */; };
 		0032F06B1F59A3C000043E08 /* LastMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06A1F59A3C000043E08 /* LastMessageCell.swift */; };
-		0032F06D1F59AD1500043E08 /* RecentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06C1F59AD1500043E08 /* RecentsViewModel.swift */; };
+		0032F06D1F59AD1500043E08 /* ChatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06C1F59AD1500043E08 /* ChatsViewModel.swift */; };
 		0032F06F1F59B56F00043E08 /* MessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06E1F59B56E00043E08 /* MessageRepository.swift */; };
 		003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */; };
 		004369771F9CE7180076CC38 /* ChatMessageWithTimestampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004369761F9CE7180076CC38 /* ChatMessageWithTimestampView.swift */; };
@@ -70,7 +70,7 @@
 		0032F0661F59826200043E08 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		0032F0681F59954C00043E08 /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		0032F06A1F59A3C000043E08 /* LastMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastMessageCell.swift; sourceTree = "<group>"; };
-		0032F06C1F59AD1500043E08 /* RecentsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsViewModel.swift; sourceTree = "<group>"; };
+		0032F06C1F59AD1500043E08 /* ChatsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatsViewModel.swift; sourceTree = "<group>"; };
 		0032F06E1F59B56E00043E08 /* MessageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRepository.swift; sourceTree = "<group>"; };
 		003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ChatColor.swift"; sourceTree = "<group>"; };
 		004369761F9CE7180076CC38 /* ChatMessageWithTimestampView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageWithTimestampView.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 			children = (
 				A72A23CD1F0DBA6100D1F4CB /* ChatsViewController.swift */,
 				0032F06A1F59A3C000043E08 /* LastMessageCell.swift */,
-				0032F06C1F59AD1500043E08 /* RecentsViewModel.swift */,
+				0032F06C1F59AD1500043E08 /* ChatsViewModel.swift */,
 			);
 			name = Chats;
 			sourceTree = "<group>";
@@ -442,7 +442,7 @@
 				00A2064C1F9FAAC80086B4CE /* NSAttributedString+FrameSize.swift in Sources */,
 				0032F0651F59822500043E08 /* ChatRoomViewModel.swift in Sources */,
 				A70A416A1F370BBC00CB4A93 /* ContactsViewController.swift in Sources */,
-				0032F06D1F59AD1500043E08 /* RecentsViewModel.swift in Sources */,
+				0032F06D1F59AD1500043E08 /* ChatsViewModel.swift in Sources */,
 				00E8A2FA1F987A08005866B9 /* ChatRoomView.swift in Sources */,
 				0032F0671F59826200043E08 /* ChatCell.swift in Sources */,
 				A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */,

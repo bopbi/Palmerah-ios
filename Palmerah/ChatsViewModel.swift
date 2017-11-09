@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class RecentsViewModel {
+class ChatsViewModel {
     
     private let recentFetchResultController : NSFetchedResultsController<Friend>
     
