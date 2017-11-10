@@ -23,14 +23,10 @@ class MainTabBarController: UITabBarController {
         let chatsNavigationController = UINavigationController(rootViewController: chatsViewController)
         chatsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.recents, tag: 0)
         
-        let contactsViewController = ContactsViewController(collectionViewLayout: layout)
-        let contactsNavigationController = UINavigationController(rootViewController: contactsViewController)
-        contactsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.contacts, tag: 1)
-        
         let moreSettingsViewController = MoreSettingsViewController()
         let moreSettingsNavigationController = UINavigationController(rootViewController: moreSettingsViewController)
-        moreSettingsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.more, tag: 2)
+        moreSettingsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.more, tag: 1)
         
-        viewControllers = [chatsNavigationController, contactsNavigationController, moreSettingsNavigationController]
+        viewControllers = [chatsNavigationController, moreSettingsNavigationController]
     }
 }

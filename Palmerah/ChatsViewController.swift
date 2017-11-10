@@ -19,6 +19,9 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.title = "Chats"
+        let barButtonItem : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(newChat))
+        navigationItem.rightBarButtonItem = barButtonItem
+        
         collectionView?.backgroundColor = UIColor.white
         collectionView?.alwaysBounceVertical = true
         
@@ -98,4 +101,12 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         
     }
 
+    @objc func newChat(_ sender:UIBarButtonItem!) {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        let composeViewController = ComposeViewController(collectionViewLayout: layout)
+        let composeNavigationController = UINavigationController(rootViewController: composeViewController)
+        present(composeNavigationController, animated: true, completion: nil)
+    }
 }
