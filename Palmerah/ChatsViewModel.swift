@@ -8,17 +8,20 @@
 
 import Foundation
 import CoreData
+import RxSwift
 
-class ChatsViewModel {
+class ChatsViewModel : NSObject, NSFetchedResultsControllerDelegate {
     
     private let recentFetchResultController : NSFetchedResultsController<Friend>
+    let rowUpdateSubject = PublishSubject<ChatsRowUpdateEvent>()
+    let changeContentSubject = PublishSubject<Bool>()
     
-    init(friendRepository : FriendRepository, delegate: NSFetchedResultsControllerDelegate) {
+    init(friendRepository : FriendRepository) {
         self.recentFetchResultController = friendRepository.getRecentsFetchResultController()
-        self.recentFetchResultController.delegate = delegate
     }
     
-    func performFetch() {
+    func bind() {
+        self.recentFetchResultController.delegate = self
         do {
             try self.recentFetchResultController.performFetch()
         } catch let err {
@@ -39,6 +42,21 @@ class ChatsViewModel {
     
     func friendAt(indexPath: IndexPath) -> Friend {
         return self.recentFetchResultController.object(at: indexPath)
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        self.rowUpdateSubject.onNext(ChatsRowUpdateEvent(indexPath: indexPath, type: type, newIndexPath: newIndexPath))
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.changeContentSubject.onNext(true)
+    }
+    
+    struct ChatsRowUpdateEvent {
+        var indexPath: IndexPath?
+        var type: NSFetchedResultsChangeType
+        var newIndexPath: IndexPath?
     }
     
 }

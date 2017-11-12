@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00003B1E1F6C2C2C00583354 /* String+FrameSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00003B1D1F6C2C2C00583354 /* String+FrameSize.swift */; };
+		00135F741FB83389005900F9 /* ComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00135F731FB83389005900F9 /* ComposeViewModel.swift */; };
 		002350721F4BE1C80035FD6E /* MoreSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */; };
 		002350741F4C21230035FD6E /* UIView+BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002350731F4C21230035FD6E /* UIView+BlurEffect.swift */; };
 		0032F0651F59822500043E08 /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F0641F59822500043E08 /* ChatRoomViewModel.swift */; };
@@ -65,6 +66,7 @@
 
 /* Begin PBXFileReference section */
 		00003B1D1F6C2C2C00583354 /* String+FrameSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+FrameSize.swift"; sourceTree = "<group>"; };
+		00135F731FB83389005900F9 /* ComposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewModel.swift; sourceTree = "<group>"; };
 		002350711F4BE1C80035FD6E /* MoreSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreSettingsViewController.swift; sourceTree = "<group>"; };
 		002350731F4C21230035FD6E /* UIView+BlurEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+BlurEffect.swift"; sourceTree = "<group>"; };
 		0032F0641F59822500043E08 /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				0079193B1FB530D7009FFCB6 /* ComposeViewController.swift */,
+				00135F731FB83389005900F9 /* ComposeViewModel.swift */,
 			);
 			name = Compose;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				0032F06F1F59B56F00043E08 /* MessageRepository.swift in Sources */,
 				0032F0691F59954C00043E08 /* MessageInputView.swift in Sources */,
 				A7B3B87C1F144C36000BB5FD /* Seeder.swift in Sources */,
+				00135F741FB83389005900F9 /* ComposeViewModel.swift in Sources */,
 				0032F06B1F59A3C000043E08 /* LastMessageCell.swift in Sources */,
 				00A2064E1F9FAFE00086B4CE /* UIImage+Resize.swift in Sources */,
 				A72A23D41F0DBA6100D1F4CB /* Palmerah.xcdatamodeld in Sources */,

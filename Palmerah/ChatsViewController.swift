@@ -8,12 +8,14 @@
 
 import UIKit
 import CoreData
+import RxSwift
 
-class ChatsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
+class ChatsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let cellId = "cellId"
     private var viewModel : ChatsViewModel? = nil
     static let smileEmoji = #imageLiteral(resourceName: "smile").resizeImage(newSize: CGSize(width: UIFont.preferredFont(forTextStyle: .subheadline).lineHeight, height: UIFont.preferredFont(forTextStyle: .subheadline).lineHeight))
+    private var disposeBag = CompositeDisposable()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,50 +31,61 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         let delegate = UIApplication.shared.delegate as? AppDelegate
         let context = delegate?.persistentContainer.viewContext
         let friendRepository = FriendRepository(context: context!)
-        self.viewModel = ChatsViewModel(friendRepository: friendRepository, delegate: self)
-        self.viewModel?.performFetch()
+        self.viewModel = ChatsViewModel(friendRepository: friendRepository)
+        self.subscribeToRowEvent()
+        self.subscribeToChangeContent()
+        self.viewModel?.bind()
     }
     
     var blockOperations = [BlockOperation]()
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-        case .insert:
-            blockOperations.append(BlockOperation(block: {
-                self.collectionView?.insertItems(at: [newIndexPath!])
-            }))
-            break
-        case .delete:
-            blockOperations.append(BlockOperation(block: {
-                self.collectionView?.deleteItems(at: [newIndexPath!])
-            }))
-            break
-        case .update:
-            blockOperations.append(BlockOperation(block: {
-                self.collectionView?.reloadItems(at: [newIndexPath!])
-            }))
-            break
-        default:
-            break
-        }
+    func subscribeToRowEvent() {
+        let disposable = self.viewModel?.rowUpdateSubject.subscribe(onNext: { [weak self] (event) in
+            switch event.type {
+            case .insert:
+                self?.blockOperations.append(BlockOperation(block: {
+                    (self?.collectionView?.insertItems(at: [event.newIndexPath!]))!
+                }))
+                break
+            case .delete:
+                self?.blockOperations.append(BlockOperation(block: {
+                    (self?.collectionView?.deleteItems(at: [event.newIndexPath!]))!
+                }))
+                break
+            case .update:
+                self?.blockOperations.append(BlockOperation(block: {
+                    (self?.collectionView?.reloadItems(at: [event.newIndexPath!]))!
+                }))
+                break
+            default:
+                break
+            }
+            
+            }, onDisposed: {
+                
+        })
+        disposeBag.insert(disposable!)
+        
     }
     
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        DispatchQueue.main.async {
-            self.collectionView?.performBatchUpdates({
-                for operation in self.blockOperations {
-                    operation.start()
-                }
-            }, completion: { (completed) in
-                
-            })
-        }
+    func subscribeToChangeContent() {
+        let disposable = self.viewModel?.changeContentSubject.subscribe({ [weak self] (event) in
+            DispatchQueue.main.async {
+                self?.collectionView?.performBatchUpdates({
+                    for operation in (self?.blockOperations)! {
+                        operation.start()
+                    }
+                }, completion: { (completed) in
+                    
+                })
+            }
+        })
+        disposeBag.insert(disposable!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
-        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -107,6 +120,6 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         layout.minimumLineSpacing = 0
         let composeViewController = ComposeViewController(collectionViewLayout: layout)
         let composeNavigationController = UINavigationController(rootViewController: composeViewController)
-        present(composeNavigationController, animated: true, completion: nil)
+        navigationController?.present(composeNavigationController, animated: true, completion: nil)
     }
 }

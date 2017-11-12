@@ -130,6 +130,11 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
     }
     
     func onBind() {
+        subscribeToRowEvent()
+        subscribeToChangeContentEvent()
+    }
+    
+    func subscribeToRowEvent() {
         let rowDisposable = self.viewModel?.rowUpdateSubject.subscribe(onNext: { [weak self] (event) in
             switch event.type {
             case .insert:
@@ -160,6 +165,9 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
         
         disposeBag.insert(rowDisposable!)
         
+    }
+    
+    func subscribeToChangeContentEvent() {
         let changeDisposable = self.viewModel?.changeContentSubject.subscribe(onNext: { [weak self] (result) in
             DispatchQueue.main.async {
                 self?.performBatchUpdates({
@@ -170,14 +178,9 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
                     self?.scrollToBottom(animated: true)
                 })
             }
-        }, onError: { (error) in
-            
-        }, onCompleted: {
-            
         }, onDisposed: {
             
         })
-        
         disposeBag.insert(changeDisposable!)
         
     }

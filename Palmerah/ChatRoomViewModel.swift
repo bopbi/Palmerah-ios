@@ -17,7 +17,7 @@ class ChatRoomViewModel : NSObject, NSFetchedResultsControllerDelegate {
     private let friend : Friend
     let title : String
     
-    let rowUpdateSubject = PublishSubject<RowUpdateEvent>()
+    let rowUpdateSubject = PublishSubject<ChatRoomRowUpdateEvent>()
     let changeContentSubject = PublishSubject<Bool>()
     
     init(friend : Friend, messageRepository : MessageRepository) {
@@ -53,14 +53,14 @@ class ChatRoomViewModel : NSObject, NSFetchedResultsControllerDelegate {
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        rowUpdateSubject.onNext(RowUpdateEvent(indexPath: indexPath, type: type, newIndexPath: newIndexPath))
+        rowUpdateSubject.onNext(ChatRoomRowUpdateEvent(indexPath: indexPath, type: type, newIndexPath: newIndexPath))
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         changeContentSubject.onNext(true)
     }
     
-    struct RowUpdateEvent {
+    struct ChatRoomRowUpdateEvent {
         var indexPath: IndexPath?
         var type: NSFetchedResultsChangeType
         var newIndexPath: IndexPath?

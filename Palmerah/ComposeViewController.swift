@@ -10,11 +10,15 @@ import UIKit
 class ComposeViewController: UICollectionViewController {
     
     override func viewDidLoad() {
-        title = "New Chat"
+        title = "Create Chat"
         collectionView?.backgroundColor = .white
         
-        let closeButtonItem : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(close))
+        let closeButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(close))
         navigationItem.leftBarButtonItem = closeButtonItem
+        
+        let createChatButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createChat))
+        // TODO : HANDLE SELECT CONTACT
+        // navigationItem.rightBarButtonItem = createChatButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -22,6 +26,13 @@ class ComposeViewController: UICollectionViewController {
     }
     
     @objc func close() {
-        dismiss(animated: true, completion: nil)
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc
+    func createChat() {
+        let controller = ChatRoomViewController()
+        controller.friend = nil
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
