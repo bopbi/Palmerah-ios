@@ -11,12 +11,12 @@ import CoreData
 import RxSwift
 import RxBlocking
 
-class ChatsViewModel : NSObject, NSFetchedResultsControllerDelegate {
+class ChatsViewModel {
     
-    let rxFetchRecentsResultController : RxFetchResultController<Friend>
+    let rxFetchRecentsResultController : RxFetchResultsController<Friend>
     
     init(friendRepository : FriendRepository) {
-        rxFetchRecentsResultController = RxFetchResultController(fetchResultController: friendRepository.getRecentsFetchResultController())
+        rxFetchRecentsResultController = RxFetchResultsController(fetchResultController: friendRepository.getRecentsFetchResultController())
     }
     
     func bind() {
@@ -24,42 +24,18 @@ class ChatsViewModel : NSObject, NSFetchedResultsControllerDelegate {
     }
     
     func numberOfItemInSection() ->Int {
-        do {
-            return try self.rxFetchRecentsResultController
-                .sectionAt(sectionNumber: 0)
-                .map { (result) -> Int in
-                    result.numberOfObjects
-                }
-                .toBlocking()
-                .single()!
-        } catch let err {
-            print(err)
-        }
-        return 0
+        return self.rxFetchRecentsResultController
+            .sectionAt(sectionNumber: 0)
+            .numberOfObjects
     }
     
     func lastMessageAt(indexPath : IndexPath) -> Message? {
-        do {
-            return try self.rxFetchRecentsResultController.object(at: indexPath)
-                .toBlocking()
-                .single()?
-                .lastMessage
-        } catch let err {
-            print(err)
-        }
-        return nil
+        return self.rxFetchRecentsResultController.object(at: indexPath).lastMessage
     }
     
     func friendAt(indexPath: IndexPath) -> Friend? {
-        do {
-            return try self.rxFetchRecentsResultController
-                .object(at: indexPath)
-                .toBlocking()
-                .single()
-        } catch let err {
-            print(err)
-        }
-        return nil
+        return self.rxFetchRecentsResultController
+            .object(at: indexPath)
     }
     
     

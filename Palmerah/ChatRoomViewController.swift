@@ -37,7 +37,6 @@ class ChatRoomViewController: UIViewController {
         self.chatRoomView?.onBind()
         
         self.view = chatRoomView
-        self.viewModel?.onBind()
     }
     
     override func viewWillAppear(_ animated: Bool) {

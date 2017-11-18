@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import RxSwift
 
-class RxFetchResultController<ResultType>: NSObject, NSFetchedResultsControllerDelegate where ResultType : NSFetchRequestResult {
+class RxFetchResultsController<ResultType>: NSObject, NSFetchedResultsControllerDelegate where ResultType : NSFetchRequestResult {
     
     private let fetchResultController : NSFetchedResultsController<ResultType>
     let rowUpdateSubject = PublishSubject<DataUpdateEvent>()
@@ -38,12 +38,12 @@ class RxFetchResultController<ResultType>: NSObject, NSFetchedResultsControllerD
         self.changeContentSubject.onNext(true)
     }
     
-    func object(at indexPath: IndexPath) -> Observable<ResultType> {
-        return Observable.just(self.fetchResultController.object(at: indexPath))
+    func object(at indexPath: IndexPath) -> ResultType {
+        return self.fetchResultController.object(at: indexPath)
     }
     
-    func sectionAt(sectionNumber: Int) -> Observable<NSFetchedResultsSectionInfo> {
-        return Observable.just(self.fetchResultController.sections![sectionNumber])
+    func sectionAt(sectionNumber: Int) -> NSFetchedResultsSectionInfo {
+        return self.fetchResultController.sections![sectionNumber]
     }
     
     struct DataUpdateEvent {

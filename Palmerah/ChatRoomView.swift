@@ -132,10 +132,15 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
     func onBind() {
         subscribeToRowEvent()
         subscribeToChangeContentEvent()
+        self.viewModel?.bind()
     }
     
     func subscribeToRowEvent() {
-        let rowDisposable = self.viewModel?.rowUpdateSubject.subscribe(onNext: { [weak self] (event) in
+        let rowDisposable = self
+            .viewModel?
+            .rxChatMesageFetchResultController
+            .rowUpdateSubject
+            .subscribe(onNext: { [weak self] (event) in
             switch event.type {
             case .insert:
                 self?.blockOperations.append(BlockOperation(block: { [weak self] in
@@ -155,12 +160,6 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
             default:
                 break
             }
-        }, onError: { (error) in
-            
-        }, onCompleted: {
-            
-        }, onDisposed: {
-            
         })
         
         disposeBag.insert(rowDisposable!)
@@ -168,7 +167,10 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
     }
     
     func subscribeToChangeContentEvent() {
-        let changeDisposable = self.viewModel?.changeContentSubject.subscribe(onNext: { [weak self] (result) in
+        let changeDisposable = self.viewModel?
+            .rxChatMesageFetchResultController
+            .changeContentSubject
+            .subscribe(onNext: { [weak self] (result) in
             DispatchQueue.main.async {
                 self?.performBatchUpdates({
                     for operation in (self?.blockOperations)! {

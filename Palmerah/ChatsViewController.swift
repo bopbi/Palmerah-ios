@@ -40,7 +40,10 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
     var blockOperations = [BlockOperation]()
     
     func subscribeToRowEvent() {
-        let disposable = self.viewModel?.rxFetchRecentsResultController.rowUpdateSubject.subscribe(onNext: { [weak self] (event) in
+        let disposable = self.viewModel?
+            .rxFetchRecentsResultController
+            .rowUpdateSubject
+            .subscribe(onNext: { [weak self] (event) in
             switch event.type {
             case .insert:
                 self?.blockOperations.append(BlockOperation(block: {
@@ -61,15 +64,16 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
                 break
             }
             
-            }, onDisposed: {
-                
-        })
+            })
         disposeBag.insert(disposable!)
         
     }
     
     func subscribeToChangeContent() {
-        let disposable = self.viewModel?.rxFetchRecentsResultController.changeContentSubject.subscribe({ [weak self] (event) in
+        let disposable = self.viewModel?
+            .rxFetchRecentsResultController
+            .changeContentSubject
+            .subscribe({ [weak self] (event) in
             DispatchQueue.main.async {
                 self?.collectionView?.performBatchUpdates({
                     for operation in (self?.blockOperations)! {

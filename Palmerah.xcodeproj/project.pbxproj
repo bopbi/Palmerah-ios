@@ -19,7 +19,7 @@
 		0032F06F1F59B56F00043E08 /* MessageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0032F06E1F59B56E00043E08 /* MessageRepository.swift */; };
 		003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */; };
 		004369771F9CE7180076CC38 /* ChatMessageWithTimestampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004369761F9CE7180076CC38 /* ChatMessageWithTimestampView.swift */; };
-		0056D9E21FC01FAC00E38E30 /* RxFetchResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056D9E11FC01FAC00E38E30 /* RxFetchResultController.swift */; };
+		0056D9E21FC01FAC00E38E30 /* RxFetchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056D9E11FC01FAC00E38E30 /* RxFetchResultsController.swift */; };
 		0056D9E31FC031FD00E38E30 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007DB3631F866ECC0077F7A8 /* RxBlocking.framework */; };
 		0079193C1FB530D7009FFCB6 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079193B1FB530D7009FFCB6 /* ComposeViewController.swift */; };
 		007DB36B1F866ECC0077F7A8 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007DB3661F866ECC0077F7A8 /* RxCocoa.framework */; };
@@ -79,7 +79,7 @@
 		0032F06E1F59B56E00043E08 /* MessageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRepository.swift; sourceTree = "<group>"; };
 		003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ChatColor.swift"; sourceTree = "<group>"; };
 		004369761F9CE7180076CC38 /* ChatMessageWithTimestampView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageWithTimestampView.swift; sourceTree = "<group>"; };
-		0056D9E11FC01FAC00E38E30 /* RxFetchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxFetchResultController.swift; sourceTree = "<group>"; };
+		0056D9E11FC01FAC00E38E30 /* RxFetchResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxFetchResultsController.swift; sourceTree = "<group>"; };
 		0079193B1FB530D7009FFCB6 /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		007DB3631F866ECC0077F7A8 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		007DB3641F866ECC0077F7A8 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 				00A206491F9F9AF40086B4CE /* String+Emoticon.swift */,
 				00A2064B1F9FAAC80086B4CE /* NSAttributedString+FrameSize.swift */,
 				00A2064D1F9FAFE00086B4CE /* UIImage+Resize.swift */,
-				0056D9E11FC01FAC00E38E30 /* RxFetchResultController.swift */,
+				0056D9E11FC01FAC00E38E30 /* RxFetchResultsController.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -468,7 +468,7 @@
 				0032F0671F59826200043E08 /* ChatCell.swift in Sources */,
 				A751E6901F361A2B0080DD35 /* MainTabBarController.swift in Sources */,
 				003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */,
-				0056D9E21FC01FAC00E38E30 /* RxFetchResultController.swift in Sources */,
+				0056D9E21FC01FAC00E38E30 /* RxFetchResultsController.swift in Sources */,
 				00A206481F9E0C510086B4CE /* SwiftyLRU.swift in Sources */,
 				A78084511F2E340A00EF07F9 /* ChatRoomViewController.swift in Sources */,
 				00DAC8EE1F6D971300A07930 /* Message+CoreDataClass.swift in Sources */,
