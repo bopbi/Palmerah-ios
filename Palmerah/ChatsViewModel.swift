@@ -9,54 +9,58 @@
 import Foundation
 import CoreData
 import RxSwift
+import RxBlocking
 
 class ChatsViewModel : NSObject, NSFetchedResultsControllerDelegate {
     
-    private let recentFetchResultController : NSFetchedResultsController<Friend>
-    let rowUpdateSubject = PublishSubject<ChatsRowUpdateEvent>()
-    let changeContentSubject = PublishSubject<Bool>()
+    let rxFetchRecentsResultController : RxFetchResultController<Friend>
     
     init(friendRepository : FriendRepository) {
-        self.recentFetchResultController = friendRepository.getRecentsFetchResultController()
+        rxFetchRecentsResultController = RxFetchResultController(fetchResultController: friendRepository.getRecentsFetchResultController())
     }
     
     func bind() {
-        self.recentFetchResultController.delegate = self
-        do {
-            try self.recentFetchResultController.performFetch()
-        } catch let err {
-            print(err)
-        }
+        rxFetchRecentsResultController.fetchRequest()
     }
     
     func numberOfItemInSection() ->Int {
-        if let count = self.recentFetchResultController.sections?[0].numberOfObjects {
-            return count
+        do {
+            return try self.rxFetchRecentsResultController
+                .sectionAt(sectionNumber: 0)
+                .map { (result) -> Int in
+                    result.numberOfObjects
+                }
+                .toBlocking()
+                .single()!
+        } catch let err {
+            print(err)
         }
         return 0
     }
     
-    func lastMessageAt(indexPath : IndexPath) -> Message {
-        return self.recentFetchResultController.object(at: indexPath).lastMessage!
+    func lastMessageAt(indexPath : IndexPath) -> Message? {
+        do {
+            return try self.rxFetchRecentsResultController.object(at: indexPath)
+                .toBlocking()
+                .single()?
+                .lastMessage
+        } catch let err {
+            print(err)
+        }
+        return nil
     }
     
-    func friendAt(indexPath: IndexPath) -> Friend {
-        return self.recentFetchResultController.object(at: indexPath)
+    func friendAt(indexPath: IndexPath) -> Friend? {
+        do {
+            return try self.rxFetchRecentsResultController
+                .object(at: indexPath)
+                .toBlocking()
+                .single()
+        } catch let err {
+            print(err)
+        }
+        return nil
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
-        self.rowUpdateSubject.onNext(ChatsRowUpdateEvent(indexPath: indexPath, type: type, newIndexPath: newIndexPath))
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.changeContentSubject.onNext(true)
-    }
-    
-    struct ChatsRowUpdateEvent {
-        var indexPath: IndexPath?
-        var type: NSFetchedResultsChangeType
-        var newIndexPath: IndexPath?
-    }
     
 }
