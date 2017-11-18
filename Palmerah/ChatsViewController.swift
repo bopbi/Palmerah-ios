@@ -125,10 +125,10 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         let composeViewController = ComposeViewController(collectionViewLayout: layout)
         let composeNavigationController = UINavigationController(rootViewController: composeViewController)
         let disposable = composeViewController.dismissSubject.subscribe(onNext: { [weak self] (friend) in
-            self?.navigationController?.dismiss(animated: false, completion: {
+            self?.navigationController?.dismiss(animated: true, completion: {
                 let controller = ChatRoomViewController()
                 controller.friend = friend
-                self?.navigationController?.pushViewController(controller, animated: false)
+                self?.navigationController?.pushViewController(controller, animated: true)
             })
         })
         disposeBag.insert(disposable)
