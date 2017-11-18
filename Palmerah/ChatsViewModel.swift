@@ -9,14 +9,13 @@
 import Foundation
 import CoreData
 import RxSwift
-import RxBlocking
 
 class ChatsViewModel {
     
     let rxFetchRecentsResultController : RxFetchResultsController<Friend>
     
     init(friendRepository : FriendRepository) {
-        rxFetchRecentsResultController = RxFetchResultsController(fetchResultController: friendRepository.getRecentsFetchResultController())
+        rxFetchRecentsResultController = RxFetchResultsController(fetchResultController: friendRepository.getFriendWithLastMessageFetchResultController())
     }
     
     func bind() {

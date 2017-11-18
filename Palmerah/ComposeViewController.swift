@@ -6,8 +6,14 @@
 //  Copyright © 2017 Bobby Adi Prabowo. All rights reserved.
 //
 import UIKit
+import RxSwift
 
-class ComposeViewController: UICollectionViewController {
+class ComposeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    private let cellId = "cellId"
+    var composeViewModel : ComposeViewModel?
+    private var disposeBag = CompositeDisposable()
+    var dismissSubject = PublishSubject<Friend>()
     
     override func viewDidLoad() {
         title = "Create Chat"
@@ -16,9 +22,18 @@ class ComposeViewController: UICollectionViewController {
         let closeButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(close))
         navigationItem.leftBarButtonItem = closeButtonItem
         
-        let createChatButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(createChat))
-        // TODO : HANDLE SELECT CONTACT
-        // navigationItem.rightBarButtonItem = createChatButtonItem
+        
+        collectionView?.backgroundColor = UIColor.white
+        collectionView?.alwaysBounceVertical = true
+        
+        collectionView?.register(FriendCell.self, forCellWithReuseIdentifier: cellId)
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        let context = delegate?.persistentContainer.viewContext
+        let friendRepository = FriendRepository(context: context!)
+        self.composeViewModel = ComposeViewModel(friendRepository: friendRepository)
+        subscribeToChangeContent()
+        subscribeToRowEvent()
+        self.composeViewModel?.bind()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,10 +44,77 @@ class ComposeViewController: UICollectionViewController {
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    @objc
-    func createChat() {
-        let controller = ChatRoomViewController()
-        controller.friend = nil
-        navigationController?.pushViewController(controller, animated: true)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.dismissSubject.onNext((self.composeViewModel?.friendAt(indexPath: indexPath))!)
+        
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return (self.composeViewModel?.numberOfItemInSection())!
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellheight = 86 * (UIFont.preferredFont(forTextStyle: .headline).pointSize / 17)
+        return CGSize(width: view.frame.width, height: cellheight)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FriendCell
+        
+        if let friend = self.composeViewModel?.friendAt(indexPath: indexPath) {
+            cell.bindMessage(friend: friend, emojiImage: ChatsViewController.smileEmoji)
+        }
+        
+        return cell
+    }
+    
+    var blockOperations = [BlockOperation]()
+    
+    func subscribeToRowEvent() {
+        let disposable = self.composeViewModel?
+            .rxFetchFriendsResultController
+            .rowUpdateSubject
+            .subscribe(onNext: { [weak self] (event) in
+                switch event.type {
+                case .insert:
+                    self?.blockOperations.append(BlockOperation(block: {
+                        (self?.collectionView?.insertItems(at: [event.newIndexPath!]))!
+                    }))
+                    break
+                case .delete:
+                    self?.blockOperations.append(BlockOperation(block: {
+                        (self?.collectionView?.deleteItems(at: [event.newIndexPath!]))!
+                    }))
+                    break
+                case .update:
+                    self?.blockOperations.append(BlockOperation(block: {
+                        (self?.collectionView?.reloadItems(at: [event.newIndexPath!]))!
+                    }))
+                    break
+                default:
+                    break
+                }
+                
+            })
+        disposeBag.insert(disposable!)
+        
+    }
+    
+    func subscribeToChangeContent() {
+        let disposable = self.composeViewModel?
+            .rxFetchFriendsResultController
+            .changeContentSubject
+            .subscribe({ [weak self] (event) in
+                DispatchQueue.main.async {
+                    self?.collectionView?.performBatchUpdates({
+                        for operation in (self?.blockOperations)! {
+                            operation.start()
+                        }
+                    }, completion: { (completed) in
+                        
+                    })
+                }
+            })
+        disposeBag.insert(disposable!)
     }
 }

@@ -17,12 +17,22 @@ class FriendRepository {
         self.context = context
     }
     
-    func getRecentsFetchResultController() -> NSFetchedResultsController<Friend> {
+    func getFriendWithLastMessageFetchResultController() -> NSFetchedResultsController<Friend> {
         let friendFetchRequest : NSFetchRequest<Friend> = Friend.fetchRequest()
         friendFetchRequest.sortDescriptors = [
             NSSortDescriptor(key: "lastMessage.date", ascending: false)
         ]
         friendFetchRequest.predicate = NSPredicate(format: "lastMessage != nil")
+        
+        let fetchRequestController = NSFetchedResultsController(fetchRequest: friendFetchRequest, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchRequestController
+    }
+    
+    func getFriendsFetchResultController() -> NSFetchedResultsController<Friend> {
+        let friendFetchRequest : NSFetchRequest<Friend> = Friend.fetchRequest()
+        friendFetchRequest.sortDescriptors = [
+            NSSortDescriptor(key: "name", ascending: true)
+        ]
         
         let fetchRequestController = NSFetchedResultsController(fetchRequest: friendFetchRequest, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
         return fetchRequestController

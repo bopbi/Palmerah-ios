@@ -49,6 +49,18 @@ class Seeder {
             createMessageForFriend(messageText: "All by myself", friend: friend3, date: NSDate().addingTimeInterval(-2 * 60 * 60 * 24), isSender: false, context: context)
             createMessageForFriend(messageText: "Galau eh?", friend: friend3, date: NSDate().addingTimeInterval(-2 * 60 * 60 * 24), isSender: true, context: context)
             
+            let friend4 = Friend(context: context)
+            friend4.name = "Ujang Malam"
+            friend4.profileImageNamed = "sample_user_1"
+            
+            let friend5 = Friend(context: context)
+            friend5.name = "Abdi Malam"
+            friend5.profileImageNamed = "sample_user_1"
+            
+            let friend6 = Friend(context: context)
+            friend6.name = "Abdi Siang"
+            friend6.profileImageNamed = "sample_user_1"
+            
             do {
                 try context.save()
             } catch let err {

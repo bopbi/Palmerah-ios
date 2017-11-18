@@ -13,7 +13,7 @@ import RxCocoa
 
 class ChatRoomViewController: UIViewController {
     
-    var viewModel : ChatRoomViewModel? = nil
+    private var viewModel : ChatRoomViewModel? = nil
     
     var friend: Friend? {
         didSet {

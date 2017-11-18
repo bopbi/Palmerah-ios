@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 import RxSwift
-import RxBlocking
 
 class ChatRoomViewModel : NSObject, NSFetchedResultsControllerDelegate {
     

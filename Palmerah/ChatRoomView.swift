@@ -109,6 +109,9 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
     }
     
     func scrollToBottom(animated: Bool) {
+        if (self.viewModel?.messagesCount() == 0) {
+            return
+        }
         let lastMessageIndexPath = IndexPath(item: (self.viewModel?.messagesCount())! - 1, section: 0)
         self.scrollToItem(at: lastMessageIndexPath, at: .bottom, animated: animated)
         

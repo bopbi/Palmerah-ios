@@ -12,17 +12,24 @@ import RxSwift
 
 class ComposeViewModel : NSObject, NSFetchedResultsControllerDelegate {
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
+    let rxFetchFriendsResultController : RxFetchResultsController<Friend>
+    
+    init(friendRepository : FriendRepository) {
+        rxFetchFriendsResultController = RxFetchResultsController(fetchResultController: friendRepository.getFriendsFetchResultController())
     }
     
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
+    func bind() {
+        rxFetchFriendsResultController.fetchRequest()
     }
     
-    struct ComposeRowUpdateEvent {
-        var indexPath: IndexPath?
-        var type: NSFetchedResultsChangeType
-        var newIndexPath: IndexPath?
+    func numberOfItemInSection() ->Int {
+        return self.rxFetchFriendsResultController
+            .sectionAt(sectionNumber: 0)
+            .numberOfObjects
+    }
+    
+    func friendAt(indexPath: IndexPath) -> Friend? {
+        return self.rxFetchFriendsResultController
+            .object(at: indexPath)
     }
 }
