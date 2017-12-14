@@ -59,15 +59,10 @@ class MessageInputView: UIView, UITextViewDelegate {
         inputTextView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(sendMessageButton)
         
-        let bottomBorderView = UIView()
-        bottomBorderView.backgroundColor = UIColor.init(white: 0.69, alpha: 1)
         
-        addSubview(bottomBorderView)
-        
-        addConstraintWithFormat(format: "H:|[v0]|", views: bottomBorderView)
         addConstraintWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextView, sendMessageButton)
-        addConstraintWithFormat(format: "V:|-4-[v0]-4-[v1]-|", views: inputTextView, bottomBorderView)
-        addConstraintWithFormat(format: "V:|-4-[v0]-4-[v1]-|", views: sendMessageButton, bottomBorderView)
+        addConstraintWithFormat(format: "V:|-4-[v0]-|", views: inputTextView)
+        addConstraintWithFormat(format: "V:|-4-[v0]-|", views: sendMessageButton)
         
         inputTextView.topAnchor.constraint(equalTo: self.topAnchor, constant: 6).isActive = true
         inputTextView.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor, constant: -6).isActive = true
