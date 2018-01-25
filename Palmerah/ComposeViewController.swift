@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class ComposeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ComposeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
     
     private let cellId = "cellId"
     var composeViewModel : ComposeViewModel?
@@ -27,6 +27,14 @@ class ComposeViewController: UICollectionViewController, UICollectionViewDelegat
         collectionView?.alwaysBounceVertical = true
         
         collectionView?.register(FriendCell.self, forCellWithReuseIdentifier: cellId)
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Contact"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
         let delegate = UIApplication.shared.delegate as? AppDelegate
         let context = delegate?.persistentContainer.viewContext
         let friendRepository = FriendRepository(context: context!)
@@ -116,5 +124,9 @@ class ComposeViewController: UICollectionViewController, UICollectionViewDelegat
                 }
             })
         disposeBag.insert(disposable!)
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        // TODO
     }
 }
