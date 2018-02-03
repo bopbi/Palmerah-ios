@@ -10,7 +10,8 @@ import UIKit
 import CoreData
 import RxSwift
 
-class ChatsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ChatsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
+    
     
     private let cellId = "cellId"
     private var viewModel : ChatsViewModel? = nil
@@ -21,11 +22,18 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.title = "Chats"
-        let barButtonItem : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(newChat))
-        navigationItem.rightBarButtonItem = barButtonItem
-        
+        let composeBarButtonItem : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(composeChat))
+        navigationItem.rightBarButtonItem = composeBarButtonItem
+
         collectionView?.backgroundColor = UIColor.white
         collectionView?.alwaysBounceVertical = true
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Chats"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
         
         collectionView?.register(LastMessageCell.self, forCellWithReuseIdentifier: cellId)
         let delegate = UIApplication.shared.delegate as? AppDelegate
@@ -118,7 +126,7 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         
     }
 
-    @objc func newChat(_ sender:UIBarButtonItem!) {
+    @objc func composeChat(_ sender:UIBarButtonItem!) {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
@@ -133,6 +141,10 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         })
         disposeBag.insert(disposable)
         navigationController?.present(composeNavigationController, animated: true, completion: nil)
+        
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
         
     }
 }
