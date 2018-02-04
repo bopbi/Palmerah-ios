@@ -48,6 +48,8 @@ class ChatRoomView : UICollectionView, UICollectionViewDataSource, UICollectionV
         self.delegate = self
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardEvent), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        
+        contentInsetAdjustmentBehavior = .automatic
     }
     
     deinit {

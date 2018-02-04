@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FriendCell: UICollectionViewCell {
+class FriendCell: UITableViewCell {
     
     var friend: Friend?
     
@@ -66,8 +66,8 @@ class FriendCell: UICollectionViewCell {
         return imageView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
     
@@ -79,18 +79,14 @@ class FriendCell: UICollectionViewCell {
         addSubview(profileImageView)
         
         profileImageView.image = UIImage(named:"sample_user_1")
-        addConstraintWithFormat(format: "H:|-12-[v0(68)]", views: profileImageView)
+        addConstraintWithFormat(format: "H:|-[v0(68)]", views: profileImageView)
         addConstraintWithFormat(format: "V:[v0(68)]", views: profileImageView)
         addCenterYConstraintToParent(view: profileImageView)
-        
-        addSubview(dividerLine)
-        addConstraintWithFormat(format: "H:|-82-[v0]|", views: dividerLine)
-        addConstraintWithFormat(format: "V:[v0(0.5)]|", views: dividerLine)
         
         let containerView = UIView()
         
         addSubview(containerView)
-        addConstraintWithFormat(format: "H:|-90-[v0]|", views: containerView)
+        addConstraintWithFormat(format: "H:[v0]-[v1]|", views: profileImageView, containerView)
         addConstraintWithFormat(format: "V:[v0(50)]", views: containerView)
         addCenterYConstraintToParent(view: containerView)
         
@@ -102,7 +98,7 @@ class FriendCell: UICollectionViewCell {
         
         addConstraintWithFormat(format: "H:|[v0]|", views: nameLabel)
         addConstraintWithFormat(format: "V:|[v0][v1(24)]|", views: nameLabel, messageLabel)
-        addConstraintWithFormat(format: "H:|[v0][v1(12)]-12-|", views: messageLabel, readMessageStatusImageView)
+        addConstraintWithFormat(format: "H:|[v0][v1(12)]-|", views: messageLabel, readMessageStatusImageView)
         addConstraintWithFormat(format: "V:[v0(12)]|", views: readMessageStatusImageView)
     }
 }

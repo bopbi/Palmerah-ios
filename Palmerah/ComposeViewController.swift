@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class ComposeViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
+class ComposeViewController: UITableViewController, UISearchResultsUpdating {
     
     private let cellId = "cellId"
     var composeViewModel : ComposeViewModel?
@@ -17,16 +17,16 @@ class ComposeViewController: UICollectionViewController, UICollectionViewDelegat
     
     override func viewDidLoad() {
         title = "Create Chat"
-        collectionView?.backgroundColor = .white
+        tableView?.backgroundColor = .white
         
         let closeButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(close))
         navigationItem.leftBarButtonItem = closeButtonItem
         
         
-        collectionView?.backgroundColor = UIColor.white
-        collectionView?.alwaysBounceVertical = true
+        tableView?.backgroundColor = UIColor.white
+        tableView?.alwaysBounceVertical = true
         
-        collectionView?.register(FriendCell.self, forCellWithReuseIdentifier: cellId)
+        tableView?.register(FriendCell.self, forCellReuseIdentifier: cellId)
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -52,22 +52,21 @@ class ComposeViewController: UICollectionViewController, UICollectionViewDelegat
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.dismissSubject.onNext((self.composeViewModel?.friendAt(indexPath: indexPath))!)
-        
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (self.composeViewModel?.numberOfItemInSection())!
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellheight = 86 * (UIFont.preferredFont(forTextStyle: .headline).pointSize / 17)
-        return CGSize(width: view.frame.width, height: cellheight)
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 86 * (UIFont.preferredFont(forTextStyle: .headline).pointSize / 17)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FriendCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! FriendCell
         
         if let friend = self.composeViewModel?.friendAt(indexPath: indexPath) {
             cell.bindMessage(friend: friend, emojiImage: ChatsViewController.smileEmoji)
@@ -86,17 +85,17 @@ class ComposeViewController: UICollectionViewController, UICollectionViewDelegat
                 switch event.type {
                 case .insert:
                     self?.blockOperations.append(BlockOperation(block: {
-                        (self?.collectionView?.insertItems(at: [event.newIndexPath!]))!
+                        (self?.tableView?.insertRows(at: [event.newIndexPath!], with: .automatic))!
                     }))
                     break
                 case .delete:
                     self?.blockOperations.append(BlockOperation(block: {
-                        (self?.collectionView?.deleteItems(at: [event.newIndexPath!]))!
+                        (self?.tableView?.deleteRows(at: [event.newIndexPath!], with: .automatic))!
                     }))
                     break
                 case .update:
                     self?.blockOperations.append(BlockOperation(block: {
-                        (self?.collectionView?.reloadItems(at: [event.newIndexPath!]))!
+                        (self?.tableView?.reloadRows(at: [event.newIndexPath!], with: .automatic))!
                     }))
                     break
                 default:
@@ -114,7 +113,7 @@ class ComposeViewController: UICollectionViewController, UICollectionViewDelegat
             .changeContentSubject
             .subscribe({ [weak self] (event) in
                 DispatchQueue.main.async {
-                    self?.collectionView?.performBatchUpdates({
+                    self?.tableView?.performBatchUpdates({
                         for operation in (self?.blockOperations)! {
                             operation.start()
                         }

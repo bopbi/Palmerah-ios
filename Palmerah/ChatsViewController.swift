@@ -131,7 +131,7 @@ class ChatsViewController: UITableViewController, UISearchResultsUpdating {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        let composeViewController = ComposeViewController(collectionViewLayout: layout)
+        let composeViewController = ComposeViewController()
         let composeNavigationController = UINavigationController(rootViewController: composeViewController)
         let disposable = composeViewController.dismissSubject.subscribe(onNext: { [weak self] (friend) in
             self?.navigationController?.dismiss(animated: true, completion: {
@@ -147,7 +147,7 @@ class ChatsViewController: UITableViewController, UISearchResultsUpdating {
     
     @objc func editChat(_ sender:UIBarButtonItem!) {
         self.tableView.setEditing(true, animated: true);
-        
+        self.tableView.beginUpdates()
     }
     
     func updateSearchResults(for searchController: UISearchController) {
