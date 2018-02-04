@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LastMessageCell : UICollectionViewCell {
+class LastMessageCell : UITableViewCell {
     
     var message: Message?
     
@@ -92,8 +92,8 @@ class LastMessageCell : UICollectionViewCell {
         return imageView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
     }
     

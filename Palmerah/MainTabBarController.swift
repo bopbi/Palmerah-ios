@@ -16,10 +16,7 @@ class MainTabBarController: UITabBarController {
         let seeder = Seeder()
         seeder.setupData()
         
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        let chatsViewController = ChatsViewController(collectionViewLayout: layout)
+        let chatsViewController = ChatsViewController()
         let chatsNavigationController = UINavigationController(rootViewController: chatsViewController)
         chatsNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.recents, tag: 0)
         

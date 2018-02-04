@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import RxSwift
 
-class ChatsViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating {
+class ChatsViewController: UITableViewController, UISearchResultsUpdating {
     
     
     private let cellId = "cellId"
@@ -24,9 +24,12 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         navigationItem.title = "Chats"
         let composeBarButtonItem : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.compose, target: self, action: #selector(composeChat))
         navigationItem.rightBarButtonItem = composeBarButtonItem
+        
+        let editBarButtonItem : UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action: #selector(editChat))
+        navigationItem.leftBarButtonItem = editBarButtonItem
 
-        collectionView?.backgroundColor = UIColor.white
-        collectionView?.alwaysBounceVertical = true
+        tableView?.backgroundColor = UIColor.white
+        tableView?.alwaysBounceVertical = true
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -35,7 +38,7 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        collectionView?.register(LastMessageCell.self, forCellWithReuseIdentifier: cellId)
+        tableView.register(LastMessageCell.self, forCellReuseIdentifier: cellId)
         let delegate = UIApplication.shared.delegate as? AppDelegate
         let context = delegate?.persistentContainer.viewContext
         let friendRepository = FriendRepository(context: context!)
@@ -55,17 +58,17 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
             switch event.type {
             case .insert:
                 self?.blockOperations.append(BlockOperation(block: {
-                    (self?.collectionView?.insertItems(at: [event.newIndexPath!]))!
+                    (self?.tableView.insertRows(at: [event.newIndexPath!], with: .automatic))
                 }))
                 break
             case .delete:
                 self?.blockOperations.append(BlockOperation(block: {
-                    (self?.collectionView?.deleteItems(at: [event.newIndexPath!]))!
+                    (self?.tableView.deleteRows(at: [event.newIndexPath!], with: .automatic))
                 }))
                 break
             case .update:
                 self?.blockOperations.append(BlockOperation(block: {
-                    (self?.collectionView?.reloadItems(at: [event.newIndexPath!]))!
+                    (self?.tableView.reloadRows(at: [event.newIndexPath!], with: .automatic))
                 }))
                 break
             default:
@@ -83,7 +86,7 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
             .changeContentSubject
             .subscribe({ [weak self] (event) in
             DispatchQueue.main.async {
-                self?.collectionView?.performBatchUpdates({
+                self?.tableView?.performBatchUpdates({
                     for operation in (self?.blockOperations)! {
                         operation.start()
                     }
@@ -100,12 +103,12 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         tabBarController?.tabBar.isHidden = false
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (self.viewModel?.numberOfItemInSection())!
     }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LastMessageCell
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! LastMessageCell
         
         if let message = self.viewModel?.lastMessageAt(indexPath: indexPath) {
             cell.bindMessage(message: message, emojiImage: ChatsViewController.smileEmoji)
@@ -114,16 +117,14 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellheight = 86 * (UIFont.preferredFont(forTextStyle: .headline).pointSize / 17)
-        return CGSize(width: view.frame.width, height: cellheight)
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 86 * (UIFont.preferredFont(forTextStyle: .headline).pointSize / 17)
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = ChatRoomViewController()
         controller.friend = self.viewModel?.friendAt(indexPath: indexPath)
         navigationController?.pushViewController(controller, animated: true)
-        
     }
 
     @objc func composeChat(_ sender:UIBarButtonItem!) {
@@ -141,6 +142,11 @@ class ChatsViewController: UICollectionViewController, UICollectionViewDelegateF
         })
         disposeBag.insert(disposable)
         navigationController?.present(composeNavigationController, animated: true, completion: nil)
+        
+    }
+    
+    @objc func editChat(_ sender:UIBarButtonItem!) {
+        self.tableView.setEditing(true, animated: true);
         
     }
     
