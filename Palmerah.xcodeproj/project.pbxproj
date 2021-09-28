@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,11 +20,12 @@
 		003F243B1F40A944000F7F0F /* UIColor+ChatColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003F243A1F40A944000F7F0F /* UIColor+ChatColor.swift */; };
 		004369771F9CE7180076CC38 /* ChatMessageWithTimestampView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004369761F9CE7180076CC38 /* ChatMessageWithTimestampView.swift */; };
 		0056D9E21FC01FAC00E38E30 /* RxFetchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056D9E11FC01FAC00E38E30 /* RxFetchResultsController.swift */; };
-		0056D9E31FC031FD00E38E30 /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007DB3631F866ECC0077F7A8 /* RxBlocking.framework */; };
 		0056D9E51FC061B400E38E30 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0056D9E41FC061B300E38E30 /* FriendCell.swift */; };
 		0079193C1FB530D7009FFCB6 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0079193B1FB530D7009FFCB6 /* ComposeViewController.swift */; };
-		007DB36B1F866ECC0077F7A8 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007DB3661F866ECC0077F7A8 /* RxCocoa.framework */; };
-		007DB36C1F866ECC0077F7A8 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007DB3671F866ECC0077F7A8 /* RxSwift.framework */; };
+		009E979E2703018F00D8ED09 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 009E979D2703018F00D8ED09 /* RxSwift */; };
+		009E97A22703018F00D8ED09 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 009E97A12703018F00D8ED09 /* RxRelay */; };
+		009E97A42703018F00D8ED09 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 009E97A32703018F00D8ED09 /* RxCocoa */; };
+		009E97A62703018F00D8ED09 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 009E97A52703018F00D8ED09 /* RxBlocking */; };
 		00A206481F9E0C510086B4CE /* SwiftyLRU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A206471F9E0C510086B4CE /* SwiftyLRU.swift */; };
 		00A2064A1F9F9AF40086B4CE /* String+Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A206491F9F9AF40086B4CE /* String+Emoticon.swift */; };
 		00A2064C1F9FAAC80086B4CE /* NSAttributedString+FrameSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A2064B1F9FAAC80086B4CE /* NSAttributedString+FrameSize.swift */; };
@@ -88,6 +89,11 @@
 		007DB3651F866ECC0077F7A8 /* Starscream.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Starscream.framework; path = Carthage/Build/iOS/Starscream.framework; sourceTree = "<group>"; };
 		007DB3661F866ECC0077F7A8 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		007DB3671F866ECC0077F7A8 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		009E97862702FB8D00D8ED09 /* RxBlocking.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxBlocking.xcframework; path = Carthage/Build/RxBlocking.xcframework; sourceTree = "<group>"; };
+		009E978D2702FF7900D8ED09 /* RxSwift.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxSwift.xcframework; path = Carthage/Build/RxSwift.xcframework; sourceTree = "<group>"; };
+		009E97912702FF7B00D8ED09 /* RxCocoa.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoa.xcframework; path = Carthage/Build/RxCocoa.xcframework; sourceTree = "<group>"; };
+		009E97942702FF7F00D8ED09 /* RxCocoaRuntime.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxCocoaRuntime.xcframework; path = Carthage/Build/RxCocoaRuntime.xcframework; sourceTree = "<group>"; };
+		009E97972702FF9A00D8ED09 /* RxRelay.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RxRelay.xcframework; path = Carthage/Build/RxRelay.xcframework; sourceTree = "<group>"; };
 		00A206471F9E0C510086B4CE /* SwiftyLRU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyLRU.swift; sourceTree = "<group>"; };
 		00A206491F9F9AF40086B4CE /* String+Emoticon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoticon.swift"; sourceTree = "<group>"; };
 		00A2064B1F9FAAC80086B4CE /* NSAttributedString+FrameSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+FrameSize.swift"; sourceTree = "<group>"; };
@@ -124,9 +130,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0056D9E31FC031FD00E38E30 /* RxBlocking.framework in Frameworks */,
-				007DB36B1F866ECC0077F7A8 /* RxCocoa.framework in Frameworks */,
-				007DB36C1F866ECC0077F7A8 /* RxSwift.framework in Frameworks */,
+				009E97A22703018F00D8ED09 /* RxRelay in Frameworks */,
+				009E97A42703018F00D8ED09 /* RxCocoa in Frameworks */,
+				009E979E2703018F00D8ED09 /* RxSwift in Frameworks */,
+				009E97A62703018F00D8ED09 /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +235,11 @@
 		007DB3621F866ECB0077F7A8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				009E97972702FF9A00D8ED09 /* RxRelay.xcframework */,
+				009E97942702FF7F00D8ED09 /* RxCocoaRuntime.xcframework */,
+				009E97912702FF7B00D8ED09 /* RxCocoa.xcframework */,
+				009E978D2702FF7900D8ED09 /* RxSwift.xcframework */,
+				009E97862702FB8D00D8ED09 /* RxBlocking.xcframework */,
 				007DB3631F866ECC0077F7A8 /* RxBlocking.framework */,
 				007DB3661F866ECC0077F7A8 /* RxCocoa.framework */,
 				007DB3671F866ECC0077F7A8 /* RxSwift.framework */,
@@ -315,6 +327,12 @@
 			dependencies = (
 			);
 			name = Palmerah;
+			packageProductDependencies = (
+				009E979D2703018F00D8ED09 /* RxSwift */,
+				009E97A12703018F00D8ED09 /* RxRelay */,
+				009E97A32703018F00D8ED09 /* RxCocoa */,
+				009E97A52703018F00D8ED09 /* RxBlocking */,
+			);
 			productName = Palmerah;
 			productReference = A72A23C81F0DBA6000D1F4CB /* Palmerah.app */;
 			productType = "com.apple.product-type.application";
@@ -367,7 +385,6 @@
 				TargetAttributes = {
 					A72A23C71F0DBA6000D1F4CB = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 3T7K23P798;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -392,10 +409,14 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
 			mainGroup = A72A23BF1F0DBA6000D1F4CB;
+			packageReferences = (
+				009E979C2703018F00D8ED09 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = A72A23C91F0DBA6000D1F4CB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -441,18 +462,13 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxBlocking.framework",
 			);
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxBlocking.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -643,7 +659,8 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "";
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -653,14 +670,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3T7K23P798;
+				DEVELOPMENT_TEAM = 86N3QF294F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Palmerah/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.Palmerah;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -672,14 +692,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3T7K23P798;
+				DEVELOPMENT_TEAM = 86N3QF294F;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Palmerah/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.Palmerah;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -694,7 +717,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 3T7K23P798;
 				INFOPLIST_FILE = PalmerahTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -710,7 +737,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 3T7K23P798;
 				INFOPLIST_FILE = PalmerahTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -725,7 +756,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 3T7K23P798;
 				INFOPLIST_FILE = PalmerahUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -740,7 +775,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 3T7K23P798;
 				INFOPLIST_FILE = PalmerahUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.arjunalabs.PalmerahUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -789,6 +828,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		009E979C2703018F00D8ED09 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		009E979D2703018F00D8ED09 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 009E979C2703018F00D8ED09 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		009E97A12703018F00D8ED09 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 009E979C2703018F00D8ED09 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		009E97A32703018F00D8ED09 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 009E979C2703018F00D8ED09 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		009E97A52703018F00D8ED09 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 009E979C2703018F00D8ED09 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		A72A23D21F0DBA6100D1F4CB /* Palmerah.xcdatamodeld */ = {
